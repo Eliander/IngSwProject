@@ -66,6 +66,7 @@ public class View_Login extends JFrame{
         setResizable(false);
 
         panel.setPreferredSize(new Dimension(400, 300));
+        //to do: mettere il focus al pannello
         textField_username.addFocusListener(listener_CapsLock);
         passwordField_password.addFocusListener(listener_CapsLock);
         
