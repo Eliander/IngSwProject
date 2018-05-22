@@ -10,56 +10,56 @@ import org.apache.logging.log4j.Logger;
 public class Posizione {
 
     //bisogna trovare un nome migliore, saffale, piano, posizione?
-    private int x;
-    private int y;
-    private int z;
+    private int scaffale;
+    private int ripiano;
+    private int posizione;
     private final static Logger log = LogManager.getLogger(Posizione.class);
 
     public Posizione(int x, int y, int z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.scaffale = x;
+        this.ripiano = y;
+        this.posizione = z;
     }
 
     public Posizione() {
     }
 
-    public int getX() {
-        return x;
+    public int getScaffale() {
+        return scaffale;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setScaffale(int scaffale) {
+        this.scaffale = scaffale;
     }
 
-    public int getY() {
-        return y;
+    public int getRipiano() {
+        return ripiano;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setRipiano(int ripiano) {
+        this.ripiano = ripiano;
     }
 
-    public int getZ() {
-        return z;
+    public int getPosizione() {
+        return posizione;
     }
 
-    public void setZ(int z) {
-        this.z = z;
+    public void setPosizione(int posizione) {
+        this.posizione = posizione;
     }
 
     @Override
     public int hashCode() {
-        return x ^ y ^ z;
+        return scaffale ^ ripiano ^ posizione;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Posizione) {
             Posizione other = (Posizione) obj;
-            if (this.x == other.x) {
-                if (this.y == other.y) {
-                    if (this.z == other.z) {
+            if (this.scaffale == other.scaffale) {
+                if (this.ripiano == other.ripiano) {
+                    if (this.posizione == other.posizione) {
                         return true;
                     }
                 }
