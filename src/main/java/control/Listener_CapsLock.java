@@ -1,5 +1,6 @@
 package control;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,7 @@ public class Listener_CapsLock extends AbstractAction {
     private JLabel caps = new JLabel("Bloc Maiusc attivato");
 
     public Listener_CapsLock() {
-        
+        caps.setForeground(Color.red);
     }
 
     public JLabel getCaps() {
