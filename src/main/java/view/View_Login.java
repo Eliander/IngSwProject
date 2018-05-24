@@ -3,6 +3,8 @@ package view;
 import control.Listener_CapsLock;
 import control.Listener_LoginButton;
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
@@ -13,6 +15,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import javax.swing.InputMap;
+import javax.swing.ActionMap;
+import static javax.swing.JComponent.WHEN_FOCUSED;
+import javax.swing.KeyStroke;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,9 +63,9 @@ public class View_Login extends JFrame{
         passwordField_password = new JPasswordField(10);
         textField_username = new JTextField();
         label_titolo = new JLabel();
-        label_capsLock = listener_CapsLock.getCapsLock();
+        label_capsLock = listener_CapsLock.getCaps();
         
-        label_capsLock.setVisible(false);
+        label_capsLock.setVisible(Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK));
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(400, 300));
@@ -67,8 +73,8 @@ public class View_Login extends JFrame{
 
         panel.setPreferredSize(new Dimension(400, 300));
         //to do: mettere il focus al pannello
-        textField_username.addFocusListener(listener_CapsLock);
-        passwordField_password.addFocusListener(listener_CapsLock);
+        panel.getInputMap(WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_CAPS_LOCK, 0), "caps");
+        panel.getActionMap().put("caps", listener_CapsLock);
         
         button_login.setText("Login");
         button_login.addActionListener(listener_loginButton);
