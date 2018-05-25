@@ -2,6 +2,7 @@ package view;
 
 import control.Listener_CapsLock;
 import control.Listener_LoginButton;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -41,6 +42,8 @@ public class View_Login extends JFrame {
     private JTextField textField_username;
     //scritta capsLock
     private JLabel label_capsLock;
+    //scritta errore nel login
+    private JLabel label_loginError;
 
     private final Listener_CapsLock listener_CapsLock = new Listener_CapsLock();
     private final static Logger log = LogManager.getLogger(View_Login.class);
@@ -59,14 +62,15 @@ public class View_Login extends JFrame {
         textField_username = new JTextField();
         label_titolo = new JLabel();
         label_capsLock = listener_CapsLock.getCaps();
+        label_loginError = new JLabel();
 
         label_capsLock.setVisible(Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK));
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 300));
+        setPreferredSize(new Dimension(400, 400));
         setResizable(false);
 
-        panel.setPreferredSize(new Dimension(400, 300));
+        panel.setPreferredSize(new Dimension(400, 400));
         //to do: mettere il focus al pannello
         panel.getInputMap(WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_CAPS_LOCK, 0), "caps");
         panel.getActionMap().put("caps", listener_CapsLock);
@@ -81,6 +85,10 @@ public class View_Login extends JFrame {
         passwordField_password.setText("");
 
         textField_username.setText("");
+        
+        label_loginError.setText("Username o password non corretti");
+        label_loginError.setForeground(Color.red);
+        label_loginError.setVisible(false);
 
         label_titolo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         label_titolo.setText("NOME APPLICAZIONE");
@@ -93,6 +101,7 @@ public class View_Login extends JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(label_capsLock)
+                                .addComponent(label_loginError)
                                 .addComponent(button_login)
                                 .addGap(64, 64, 64))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -126,6 +135,8 @@ public class View_Login extends JFrame {
                                         .addComponent(passwordField_password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addGap(15, 15, 15)
                                 .addComponent(label_capsLock)
+                                .addGap(21, 21, 21)
+                                .addComponent(label_loginError)
                                 .addGap(21, 21, 21)
                                 //.addGap(41, 41, 41)
                                 .addComponent(button_login)
@@ -163,6 +174,21 @@ public class View_Login extends JFrame {
     public void setTextField_username(JTextField textField_username) {
         this.textField_username = textField_username;
     }
-    
+
+    public JLabel getLabel_capsLock() {
+        return label_capsLock;
+    }
+
+    public void setLabel_capsLock(JLabel label_capsLock) {
+        this.label_capsLock = label_capsLock;
+    }
+
+    public JLabel getLabel_loginError() {
+        return label_loginError;
+    }
+
+    public void setLabel_loginError(JLabel label_loginError) {
+        this.label_loginError = label_loginError;
+    }
     
 }

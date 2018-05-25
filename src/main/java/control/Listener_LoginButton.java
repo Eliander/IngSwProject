@@ -7,7 +7,6 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_HomeMagazziniere;
@@ -40,6 +39,7 @@ public class Listener_LoginButton implements ActionListener {
         }else{
             frame.dispose();
             this.frame = new View_Login();
+            this.frame.getLabel_loginError().setVisible(true);
             frame.setVisible(true);
             System.out.println("errore");
         }
