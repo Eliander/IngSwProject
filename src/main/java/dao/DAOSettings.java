@@ -23,6 +23,8 @@ public class DAOSettings {
 
     private static BasicDataSource ds;
 
+    private static final UtenteDAO utenteDAO = new UtenteDAO();
+
     /*
     
     TO DO:
@@ -55,5 +57,9 @@ public class DAOSettings {
             log.error(ex.toString());
         }
         return con;
+    }
+
+    public UtenteDAO getUtenteDAO() {
+        return utenteDAO;
     }
 }

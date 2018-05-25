@@ -5,6 +5,7 @@
  */
 package control;
 
+import dao.DAOSettings;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,8 @@ public class Listener_LoginButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String username = frame.getTextField_username().getText();
         String password = new String(frame.getPasswordField_password().getPassword());
+        DAOSettings DAO = Main.getDAO();
+        //to do: prendere da db
         if (username.equals("user") && password.equals("pw")) {
             frame.dispose();
             log.info("Hai premuto login");
