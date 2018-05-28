@@ -2,29 +2,59 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.Magazziniere;
 import model.Utente;
+import org.apache.logging.log4j.LogManager;
 
 /**
  *
  * @author Eliander
  */
 public class UtenteDAO {
-    
+
+    private static org.apache.logging.log4j.Logger log = LogManager.getLogger(UtenteDAO.class);
+
     private final String LOGIN = "SELECT * FROM UTENTI WHERE USERNAME = ? AND PASSWORD = ?";
-    /*
+
     public Utente login(String username, String password) {
+        Utente user = null;
         try {
             Connection con = DAOSettings.getConnection();
             PreparedStatement pst = con.prepareStatement(LOGIN);
             pst.setString(1, username);
             pst.setString(2, password);
-            pst.executeUpdate();
+            ResultSet resultset = pst.executeQuery();
+            user = mapRowToUtente(resultset);
             con.close();
-        } catch (SQLException ex) {
-            System.out.println(ex);
+        } catch (Exception ex) {
+            log.error(ex);
         }
-        return result;
-    }*/
-    
-    //to do: private mapRowToUtente
+        return user;
+    }
+
+    private Utente mapRowToUtente(ResultSet resultset) {
+        Utente user = null;
+        try {
+            if (resultset.next()) {
+                int ruolo = resultset.getInt("ruolo");
+                switch (ruolo) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        user = new Magazziniere(resultset.getString("nome"),
+                                resultset.getString("cognome"),
+                                resultset.getString("username"));
+                        break;
+                }
+            }
+
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return user;
+    }
 }

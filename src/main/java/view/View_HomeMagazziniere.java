@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.WindowConstants;
+import model.Utente;
 
 /**
  *
@@ -27,14 +28,16 @@ public class View_HomeMagazziniere extends JFrame{
     //bottone per il logout
     private JButton button_logout;
     //nome preso da db
-    private String nomeUtente = "";
-
+    private Utente user = null;
+    
+    //non posso vedere se non sono loggato
+    /*
     public View_HomeMagazziniere() {
         initComponents();
-    }
+    }*/
     
-    public View_HomeMagazziniere(String nome) {
-        this.nomeUtente = nome;
+    public View_HomeMagazziniere(Utente user) {
+        this.user = user;
         initComponents();
     }
                      
@@ -51,7 +54,7 @@ public class View_HomeMagazziniere extends JFrame{
         setPreferredSize(new Dimension(400, 300));
         setResizable(false);
 
-        label_nome.setText("Ciao " + nomeUtente);
+        label_nome.setText("Ciao " + user.getNome());
 
         button_ingresso.setText("Ingresso in magazzino");
         button_ingresso.addActionListener(new java.awt.event.ActionListener() {

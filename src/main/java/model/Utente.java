@@ -9,21 +9,30 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Utente {
+public abstract class Utente {
 
     private String nome;
     private String cognome;
     private String username;
     private String password;
+    private int ruolo;
     private final static Logger log = LogManager.getLogger(Utente.class);
 
     public Utente() {
     }
     
-    public Utente(String nome, String cognome, String username, String password) {
+    public Utente(String nome, String cognome, String username, int ruolo){
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
+        this.ruolo = ruolo;
+    }
+    
+    public Utente(String nome, String cognome, String username, int ruolo, String password) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.username = username;
+        this.ruolo = ruolo;
         //creo un MessageDigest per poter cifrare la password
         MessageDigest messageDigest;
         try {
@@ -67,6 +76,14 @@ public class Utente {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRuolo() {
+        return ruolo;
+    }
+
+    public void setRuolo(int ruolo) {
+        this.ruolo = ruolo;
     }
 
     @Override
