@@ -38,10 +38,13 @@ public class Listener_LoginButton implements ActionListener {
             frame.dispose();
             log.info("Login effettuato con successo - username: " + username);
             switch (user.getRuolo()) {
+                //segretario
                 case 0:
                     break;
+                //responsabile
                 case 1:
                     break;
+                //magazziniere
                 case 2:
                     View_HomeMagazziniere view_HomeMagazziniere = new View_HomeMagazziniere(user);
                     view_HomeMagazziniere.setVisible(true);

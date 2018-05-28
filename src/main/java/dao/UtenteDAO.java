@@ -3,8 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import model.Magazziniere;
+import model.Responsabile;
+import model.Segretario;
 import model.Utente;
 import org.apache.logging.log4j.LogManager;
 
@@ -41,8 +42,14 @@ public class UtenteDAO {
                 int ruolo = resultset.getInt("ruolo");
                 switch (ruolo) {
                     case 0:
+                        user = new Segretario(resultset.getString("nome"),
+                                resultset.getString("cognome"),
+                                resultset.getString("username"));
                         break;
                     case 1:
+                        user = new Responsabile(resultset.getString("nome"),
+                                resultset.getString("cognome"),
+                                resultset.getString("username"));
                         break;
                     case 2:
                         user = new Magazziniere(resultset.getString("nome"),

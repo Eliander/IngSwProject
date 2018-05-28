@@ -7,4 +7,6 @@ create table UTENTI(
     /*0 segreteria, 1 responsabile, 2 magazziniere*/
     ruolo int);
 
-INSERT INTO UTENTI (username, nome, cognome, password ruolo) VALUES ('MagazziniereA', 'Elia', 'Piacentini', 'pw', 2);
+INSERT INTO UTENTI (username, nome, cognome, password, ruolo) VALUES ('MagazziniereA', 'Elia', 'Piacentini', 'pw', 2);
+INSERT INTO UTENTI (username, nome, cognome, password, ruolo) VALUES ('ResponsabileA', 'Elia', 'Piacentini', 'pw', 1);
+INSERT INTO UTENTI (username, nome, cognome, password, ruolo) VALUES ('SegretarioA', 'Elia', 'Piacentini', 'pw', 0);
