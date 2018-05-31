@@ -14,6 +14,7 @@ public abstract class Utente {
     private String nome;
     private String cognome;
     private String username;
+    //non necessaria ai fini dell'applicativo
     private String password;
     private int ruolo;
     private final static Logger log = LogManager.getLogger(Utente.class);
