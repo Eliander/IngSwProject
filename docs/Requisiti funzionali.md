@@ -33,6 +33,7 @@
   - Selezionare un ordine da evadere
   - Selezionare un prodotto alla volta da aggiungere all'ordine di uscita
   - Una volta coperti tutti i prodotti dell'ordine, confermare dopo una rapida preview
+  - Salvare un report con tutte le informazioni
 - Spostare un articolo in magazzino
   - Selezionare un articolo
   - Selezionare un posto libero
