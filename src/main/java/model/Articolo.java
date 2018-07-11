@@ -10,35 +10,21 @@ import org.apache.logging.log4j.Logger;
  */
 public class Articolo {
     
-    private Tipo tipo;
     private String nome;
     private String descrizione;
-    //che sia il caso di inserire una classe sport?
-    private Sport sport;
+    private String sport;
+    private String categoria;
     private ArrayList<String> materiali;
     private double prezzo;
     private final static Logger log = LogManager.getLogger(Articolo.class);
-
-    public Articolo() {
-        this.tipo = new Tipo();
-        this.materiali = new ArrayList();
-    }
     
-    public Articolo(Tipo tipo, String nome, String descrizione, Sport sport, ArrayList<String> materiali, double prezzo) {
-        this.tipo = tipo;
+    public Articolo(String nome, String descrizione, String sport, String categoria, ArrayList<String> materiali, double prezzo) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.sport = sport;
+        this.categoria = categoria;
         this.materiali = materiali;
         this.prezzo = prezzo;
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
     }
 
     public String getNome() {
@@ -57,12 +43,20 @@ public class Articolo {
         this.descrizione = descrizione;
     }
 
-    public Sport getSport() {
+    public String getSport() {
         return sport;
     }
 
-    public void setSport(Sport sport) {
+    public void setSport(String sport) {
         this.sport = sport;
+    }
+    
+    public String getCategoria() {
+        return categoria;
+    }
+    
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public ArrayList<String> getMateriali() {
@@ -87,17 +81,17 @@ public class Articolo {
         for(String materiale : materiali){
             hashMateriali += materiale.hashCode();
         }
-        return tipo.hashCode() ^ nome.hashCode() ^ descrizione.hashCode() ^ hashMateriali;
+        return categoria.hashCode() ^ nome.hashCode() ^ descrizione.hashCode() ^ hashMateriali;
     }
 
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Articolo){
             Articolo other = (Articolo)obj;
-            if(this.nome.equals(other.nome)){
-                if(this.tipo.equals(other.tipo)){
-                    if(this.descrizione.equals(other.descrizione)){
-                        if(this.materiali.equals(other.materiali)){
+            if(this.nome.equals(other.getNome())){
+                if(this.categoria.equals(other.getCategoria())){
+                    if(this.descrizione.equals(other.getDescrizione())){
+                        if(this.materiali.equals(other.getMateriali())){
                             return true;
                         }
                     }
