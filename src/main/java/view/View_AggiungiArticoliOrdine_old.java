@@ -22,8 +22,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Eliander
  */
-public class View_AggiungiArticoliOrdine extends JFrame {
-
+public class View_AggiungiArticoliOrdine_old extends JFrame {
+    //to do: prendere l'immagine anche
+    //to do: visualizzare i campi appena premuto un articolo
     private JButton button_confermaOrdine;
     private JLabel label_ID_info;
     private JLabel label_nome_info;
@@ -48,7 +49,7 @@ public class View_AggiungiArticoliOrdine extends JFrame {
     /**
      * Creates new form ProductInfo
      */
-    public View_AggiungiArticoliOrdine() {
+    public View_AggiungiArticoliOrdine_old() {
         initComponents();
     }
 
@@ -289,7 +290,7 @@ public class View_AggiungiArticoliOrdine extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new View_AggiungiArticoliOrdine().setVisible(true);
+                new View_AggiungiArticoliOrdine_old().setVisible(true);
             }
         });
     }

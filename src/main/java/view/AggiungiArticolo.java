@@ -185,8 +185,6 @@ public class AggiungiArticolo extends javax.swing.JFrame {
                 .addGap(63, 63, 63))
         );
 
-        jButton2.getAccessibleContext().setAccessibleDescription("");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
