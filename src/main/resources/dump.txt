@@ -3,7 +3,7 @@ create table UTENTI(
     nome varchar(20),
     cognome varchar(20),
     /*in MD5*/
-    password varchar(32)
+    password varchar(32),
     /*0 segreteria, 1 responsabile, 2 magazziniere*/
     ruolo int);
 
