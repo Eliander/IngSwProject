@@ -11,7 +11,10 @@ public class Magazziniere extends Utente{
 
     public Magazziniere(String nome, String cognome, String username) {
         //il ruolo e cablato
-        super(nome, cognome, username, 2);
+        this.nome = nome;
+        this.cognome = cognome;
+        this.username = username;
+        this.ruolo = 2;
     }
     
 }

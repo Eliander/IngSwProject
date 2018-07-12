@@ -10,7 +10,10 @@ public class Responsabile extends Utente{
     }
 
     public Responsabile(String nome, String cognome, String username) {
-        super(nome, cognome, username, 1);
+        this.nome = nome;
+        this.cognome = cognome;
+        this.username = username;
+        this.ruolo = 1;
     }
 
 }
