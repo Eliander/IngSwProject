@@ -13,7 +13,6 @@ public class Responsabile extends Utente{
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
-        this.ruolo = 1;
     }
 
 }

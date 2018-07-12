@@ -8,6 +8,9 @@ package control;
 import dao.DAOSettings;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import model.Magazziniere;
+import model.Responsabile;
+import model.Segretario;
 import model.Utente;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,18 +40,13 @@ public class Listener_LoginButton implements ActionListener {
         if (!(user == null)) {
             frame.dispose();
             log.info("Login effettuato con successo - username: " + username);
-            switch (user.getRuolo()) {
+            if (user instanceof Segretario) {
                 //segretario
-                case 0:
-                    break;
-                //responsabile
-                case 1:
-                    break;
-                //magazziniere
-                case 2:
-                    View_HomeMagazziniere view_HomeMagazziniere = new View_HomeMagazziniere(user);
-                    view_HomeMagazziniere.setVisible(true);
-                    break;
+            } else if (user instanceof Responsabile) {
+
+            } else if (user instanceof Magazziniere) {
+                View_HomeMagazziniere view_HomeMagazziniere = new View_HomeMagazziniere(user);
+                view_HomeMagazziniere.setVisible(true);
             }
         } else {
             frame.dispose();

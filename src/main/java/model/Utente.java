@@ -13,7 +13,6 @@ public abstract class Utente {
     protected String nome;
     protected String cognome;
     protected String username;
-    protected int ruolo;
     protected final static Logger log = LogManager.getLogger(Utente.class);
 
     public String getNome() {
@@ -38,14 +37,6 @@ public abstract class Utente {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public int getRuolo() {
-        return ruolo;
-    }
-
-    public void setRuolo(int ruolo) {
-        this.ruolo = ruolo;
     }
 
     @Override
