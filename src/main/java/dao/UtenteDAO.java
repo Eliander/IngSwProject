@@ -17,7 +17,7 @@ public class UtenteDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(UtenteDAO.class);
 
-    private final String LOGIN = "SELECT * FROM UTENTI WHERE USERNAME = ? AND PASSWORD = ?";
+    private final String LOGIN = "SELECT * FROM UTENTE WHERE USERNAME = ? AND PASSWORD = ?";
 
     public Utente login(String username, String password) {
         Utente user = null;

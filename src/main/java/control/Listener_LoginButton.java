@@ -55,20 +55,6 @@ public class Listener_LoginButton implements ActionListener {
             frame.setVisible(true);
             log.error("Errore nel login - username: " + username);
         }
-        /*
-        if (username.equals("user") && password.equals("pw")) {
-        frame.dispose();
-        log.info("Hai premuto login");
-        System.out.println("Hai premuto login");
-        View_HomeMagazziniere view_HomeMagazziniere = new View_HomeMagazziniere(username);
-        view_HomeMagazziniere.setVisible(true);
-        }else{
-        frame.dispose();
-        this.frame = new View_Login();
-        this.frame.getLabel_loginError().setVisible(true);
-        frame.setVisible(true);
-        System.out.println("errore");
-        }*/
     }
 
 }
