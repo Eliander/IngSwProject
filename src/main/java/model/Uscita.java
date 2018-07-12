@@ -61,4 +61,20 @@ public class Uscita {
     public void setSpedizioniere(Spedizioniere spedizioniere) {
         this.spedizioniere = spedizioniere;
     }
+    
+    //controlla che gli articoli in uscita rispecchiano gli articoli dell'ordine e le quantita
+    public boolean checkUscita() {
+        for(ArticoloOrdinato artord : this.ordine.getArticoli()){
+            int qty = artord.getQuantita();
+            for(ArticoloMagazzino artmag : this.articoli){
+                if(((Articolo)artmag).equals(((Articolo)artord))){
+                    qty--;
+                }
+            }
+            if(qty != 0){
+                return false;
+            }
+        }
+        return true;
+    }
 }
