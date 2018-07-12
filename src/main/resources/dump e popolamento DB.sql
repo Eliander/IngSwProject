@@ -53,33 +53,6 @@ create table INGRESSO(
     PRIMARY KEY (bolla)
 );
 
-create table ARTICOLOMAGAZZINO(
-    nome varchar(100),
-    /* UID prodotto, to do decidere quanto lungo */
-    codice varchar(15),
-    dataProduzione timestamp,
-    scaffale int,
-    livello int,
-    /* to do mettiamo qui il codice ingresso*/
-    codiceIngresso int,
-    PRIMARY KEY (codice),
-    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome),
-    FOREIGN KEY (codiceIngresso) REFERENCES INGRESSO(bolla)
-);
-
-create table NEGOZIO(
-    /* Lunghezza cf non persona */
-    codiceFiscale varchar(11),
-    nome varchar(50),
-    /* indirizzo */
-    via varchar(20),
-    nuemro int,
-    citta varchar(20), 
-    responsabile varchar(20),
-    PRIMARY KEY (codiceFiscale),
-    FOREIGN KEY (responsabile) REFERENCES UTENTE(username)
-);
-
 create table SPEDIZIONIERE(
     nome varchar(20),
     telefono varchar(9),
@@ -96,6 +69,35 @@ create table USCITA(
     spedizioniere varchar(20),
     PRIMARY KEY(bolla),
     FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome)
+);
+
+create table ARTICOLOMAGAZZINO(
+    nome varchar(100),
+    /* UID prodotto, to do decidere quanto lungo */
+    codice varchar(15),
+    dataProduzione timestamp,
+    scaffale int,
+    livello int,
+    /* to do mettiamo qui il codice ingresso*/
+    codiceIngresso int,
+    codiceUscita int,
+    PRIMARY KEY (codice),
+    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome),
+    FOREIGN KEY (codiceIngresso) REFERENCES INGRESSO(bolla),
+    FOREIGN KEY (codiceUscita) REFERENCES USCITA(bolla)
+);
+
+create table NEGOZIO(
+    /* Lunghezza cf non persona */
+    codiceFiscale varchar(11),
+    nome varchar(50),
+    /* indirizzo */
+    via varchar(20),
+    nuemro int,
+    citta varchar(20), 
+    responsabile varchar(20),
+    PRIMARY KEY (codiceFiscale),
+    FOREIGN KEY (responsabile) REFERENCES UTENTE(username)
 );
 
 create table ORDINE(
