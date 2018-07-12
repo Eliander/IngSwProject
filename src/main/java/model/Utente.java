@@ -4,48 +4,17 @@ package model;
  *
  * @author Eliander
  */
-import java.security.MessageDigest;
 import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public abstract class Utente {
 
-    private String nome;
-    private String cognome;
-    private String username;
-    //non necessaria ai fini dell'applicativo
-    private String password;
-    private int ruolo;
-    private final static Logger log = LogManager.getLogger(Utente.class);
-
-    public Utente() {
-    }
-    
-    public Utente(String nome, String cognome, String username, int ruolo){
-        this.nome = nome;
-        this.cognome = cognome;
-        this.username = username;
-        this.ruolo = ruolo;
-    }
-    
-    public Utente(String nome, String cognome, String username, int ruolo, String password) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.username = username;
-        this.ruolo = ruolo;
-        //creo un MessageDigest per poter cifrare la password
-        MessageDigest messageDigest;
-        try {
-            //se non trova l'algoritmo md5 va in catch
-            messageDigest = MessageDigest.getInstance("MD5");
-            byte[] digest = messageDigest.digest(password.getBytes());
-            //setto la nuova password sull'utente
-            this.password = new String(digest);
-        } catch (Exception ex) {
-            log.error(ex);
-        }
-    }
+    protected String nome;
+    protected String cognome;
+    protected String username;
+    protected int ruolo;
+    protected final static Logger log = LogManager.getLogger(Utente.class);
 
     public String getNome() {
         return nome;
@@ -69,14 +38,6 @@ public abstract class Utente {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public int getRuolo() {
