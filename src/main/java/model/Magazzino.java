@@ -153,4 +153,14 @@ public class Magazzino {
             }
         }
     }
+    
+    public int getQuantitaArticolo(Articolo articolo) {
+        int qty = 0;
+        for(ArticoloMagazzino artmag : this.articoli){
+            if(((Articolo)artmag).equals(articolo)){
+                qty++;
+            }
+        }
+        return qty;
+    }
 }
