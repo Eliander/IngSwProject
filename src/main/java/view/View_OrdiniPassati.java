@@ -2,6 +2,7 @@ package view;
 
 import control.Listener_BackToHomeResponsabileButton;
 import control.Listener_DettagliOrdineButton;
+import dao.DAOSettings;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -39,6 +40,8 @@ public class View_OrdiniPassati extends JFrame{
     private JList list;
     private JScrollPane list_scroller;
     
+    private static DAOSettings DAO = new DAOSettings();
+    
     public View_OrdiniPassati(Utente user) {
         this.user = user;
         initComponents();
@@ -73,7 +76,11 @@ public class View_OrdiniPassati extends JFrame{
         //ricavo da DAO la lista di Ordini del Negozio
         Ordine o1 = new Ordine(2345, new Date(),new ArrayList<ArticoloOrdinato>(), new Negozio("DJBKFK23","Bricoman",new Indirizzo("vr","via cc",4),(Responsabile)user));
         Ordine o2 = new Ordine(6364, new Date(),new ArrayList<ArticoloOrdinato>(), new Negozio("DJBKFK23","Bricoman",new Indirizzo("vr","via cc",4),(Responsabile)user));
-        Ordine[] ordini = {o1,o2};
+        ArrayList<Ordine> ord = new ArrayList<>();
+        ord.add(o1);
+        ord.add(o2);
+        Ordine[] ordini = new Ordine[ord.size()];
+        ordini = ord.toArray(ordini);
         list = new JList(ordini); //passare come parametro l'array di oggetti da DB
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
