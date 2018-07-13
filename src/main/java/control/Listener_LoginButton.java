@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package control;
 
 import dao.DAOSettings;
@@ -15,6 +10,7 @@ import model.Utente;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_HomeMagazziniere;
+import view.View_HomeResponsabile;
 import view.View_Login;
 
 /**
@@ -37,13 +33,15 @@ public class Listener_LoginButton implements ActionListener {
         DAOSettings DAO = Main.getDAO();
         //to do: prendere da db
         Utente user = Main.getDAO().getUtenteDAO().login(username, password);
+        //Utente user = new Responsabile("fede","bos","fider97");
         if (!(user == null)) {
             frame.dispose();
             log.info("Login effettuato con successo - username: " + username);
             if (user instanceof Segretario) {
                 //segretario
             } else if (user instanceof Responsabile) {
-
+                View_HomeResponsabile view_HomeResponsabile = new View_HomeResponsabile(user);
+                view_HomeResponsabile.setVisible(true);
             } else if (user instanceof Magazziniere) {
                 View_HomeMagazziniere view_HomeMagazziniere = new View_HomeMagazziniere(user);
                 view_HomeMagazziniere.setVisible(true);
