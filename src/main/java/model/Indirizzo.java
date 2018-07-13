@@ -40,5 +40,8 @@ public class Indirizzo {
         this.civico = civico;
     }
     
-    
+    @Override
+    public String toString(){
+        return this.via + ", " + this.civico + ", " + this.citta;
+    }
 }

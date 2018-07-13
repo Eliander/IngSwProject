@@ -9,23 +9,23 @@ import java.util.Date;
  */
 public class Ordine {
     
-    private String codice;
+    private int codice;
     private Date data;
     private ArrayList<ArticoloOrdinato> articoli;
     private Negozio negozio;
 
-    public Ordine(String codice, Date data, ArrayList<ArticoloOrdinato> articoli, Negozio negozio) {
+    public Ordine(int codice, Date data, ArrayList<ArticoloOrdinato> articoli, Negozio negozio) {
         this.codice = codice;
         this.data = data;
         this.articoli = articoli;
         this.negozio = negozio;
     }
 
-    public String getCodice() {
+    public int getCodice() {
         return codice;
     }
 
-    public void setCodice(String codice) {
+    public void setCodice(int codice) {
         this.codice = codice;
     }
 
@@ -59,5 +59,10 @@ public class Ordine {
             tot += (art.getPrezzo()*art.getQuantita());
         }
         return tot;
+    }
+    
+    @Override
+    public String toString(){
+        return "" + this.codice + " - " + this.data.toString();
     }
 }
