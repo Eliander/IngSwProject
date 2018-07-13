@@ -24,6 +24,9 @@ public class DAOSettings {
     private static BasicDataSource ds;
 
     private static final UtenteDAO utenteDAO = new UtenteDAO();
+    private static final ArticoloDAO articoloDAO = new ArticoloDAO();
+    private static final MaterialiPerArticoloDAO materialiPerArticoloDAO = new MaterialiPerArticoloDAO();
+    private static final ArticoloMagazzinoDAO articoloMagazzinoDAO = new ArticoloMagazzinoDAO();
 
     /*
     
@@ -61,5 +64,17 @@ public class DAOSettings {
 
     public UtenteDAO getUtenteDAO() {
         return utenteDAO;
+    }
+    
+    public ArticoloDAO getArticoloDAO(){
+        return articoloDAO;
+    }
+    
+    public MaterialiPerArticoloDAO getMaterialiPerArticoloDAO(){
+        return materialiPerArticoloDAO;
+    }
+    
+    public ArticoloMagazzinoDAO getArticoloMagazzinoDAO(){
+        return articoloMagazzinoDAO;
     }
 }
