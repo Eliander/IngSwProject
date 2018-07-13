@@ -53,6 +53,10 @@ public class Ordine {
         this.negozio = negozio;
     }
     
+    public boolean addArticolo(ArticoloOrdinato art){
+        return this.articoli.add(art);
+    }
+    
     public double getPrezzoTot() {
         double tot = 0;
         for(ArticoloOrdinato art : this.articoli){

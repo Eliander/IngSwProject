@@ -1,5 +1,6 @@
 package view;
 
+import control.Listener_AddArticoloOrdineButton;
 import control.Listener_BackToHomeResponsabileButton;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -45,8 +46,14 @@ public class View_CreaOrdine extends JFrame{
     private JSpinner spinner_qty;
     private JLabel label_qty;
     
+    private Ordine ordine;
+    
     public View_CreaOrdine(Utente user) {
         this.user = user;
+        //TO DO
+        //ricavo dal DAO il negozio dell'utente
+        Negozio negozio = new Negozio("XFGS","Bricoman",new Indirizzo("vr","via ...",4),(Responsabile)user);
+        ordine = new Ordine(0, new Date(), new ArrayList<ArticoloOrdinato>(), negozio);
         initComponents();
     }
     
@@ -99,7 +106,7 @@ public class View_CreaOrdine extends JFrame{
         
         button_add = new JButton();
         button_add.setText("Aggiungi");
-        //button_add.addActionListener(new Listener_AddArticoloOrdineButton(this));
+        button_add.addActionListener(new Listener_AddArticoloOrdineButton(this));
         
         button_confirm = new JButton();
         button_confirm.setText("Conferma");
@@ -118,5 +125,21 @@ public class View_CreaOrdine extends JFrame{
     
     public Utente getUser(){
         return this.user;
+    }
+    
+    public Ordine getOrdine(){
+        return this.ordine;
+    }
+    
+    public void addArticoloOrdine(ArticoloOrdinato art){
+        this.ordine.addArticolo(art);
+    }
+    
+    public Articolo getSelectedArticolo(){
+        return (Articolo)this.list.getSelectedValue();
+    }
+    
+    public int getQuantity(){
+        return (Integer)this.spinner_qty.getValue();
     }
 }
