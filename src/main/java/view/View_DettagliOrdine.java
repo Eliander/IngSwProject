@@ -1,5 +1,6 @@
 package view;
 
+import control.Listener_BackToOrdiniPassati;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
+import model.ArticoloOrdinato;
 import model.Ordine;
 
 /**
@@ -49,8 +51,7 @@ public class View_DettagliOrdine extends JFrame{
         
         button_back = new JButton();
         button_back.setText("INDIETRO");
-        //TO DO
-        //button_back.addActionListener(new Listener_BackToOrdiniPassati(this));
+        button_back.addActionListener(new Listener_BackToOrdiniPassati(this));
         
         label_title = new JLabel();
         label_title.setText("DETTAGLI ORDINE");
@@ -82,7 +83,10 @@ public class View_DettagliOrdine extends JFrame{
         label_articoliOrdinati = new JLabel();
         label_articoliOrdinati.setText("Articoli ordinati:");
         
-        list = new JList(); //passare come parametro l'array di ArticoloOrdinato
+        //ottengo la lista di ArticoloOrdinato
+        ArticoloOrdinato[] articoli = new ArticoloOrdinato[ordine.getArticoli().size()];
+        articoli = ordine.getArticoli().toArray(articoli);
+        list = new JList(articoli);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(10);
@@ -96,5 +100,9 @@ public class View_DettagliOrdine extends JFrame{
         contentPane.add(lista_panel);
         
         this.pack();
+    }
+    
+    public Ordine getOrdine(){
+        return this.ordine;
     }
 }

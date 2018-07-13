@@ -27,4 +27,9 @@ public class ArticoloOrdinato extends Articolo{
     public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
+    
+    @Override
+    public String toString(){
+        return nome + ", " + descrizione + ", " + sport + ", " + categoria + ", " + prezzo + " euro, " + quantita + " pezzi";
+    }
 }

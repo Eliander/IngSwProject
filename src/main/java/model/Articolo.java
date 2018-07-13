@@ -10,12 +10,12 @@ import org.apache.logging.log4j.Logger;
  */
 public class Articolo {
     
-    private String nome;
-    private String descrizione;
-    private String sport;
-    private String categoria;
-    private ArrayList<String> materiali;
-    private double prezzo;
+    protected String nome;
+    protected String descrizione;
+    protected String sport;
+    protected String categoria;
+    protected ArrayList<String> materiali;
+    protected double prezzo;
     private final static Logger log = LogManager.getLogger(Articolo.class);
     
     public Articolo(String nome, String descrizione, String sport, String categoria, ArrayList<String> materiali, double prezzo) {
@@ -101,8 +101,9 @@ public class Articolo {
         return false;
     }
     
+    @Override
     public String toString(){
-        return nome + ", " + descrizione + ", " + categoria + ", " + sport;
+        return nome + ", " + descrizione + ", " + sport + ", " + categoria + ", " + prezzo + " euro";
     }
     
 }
