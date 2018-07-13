@@ -36,9 +36,8 @@ public class MaterialiPerArticoloDAO {
         ArrayList<String> materiali = new ArrayList();
         try {
             while (resultset.next()) {
-                //istanzio l'oggetto articolo
+                //Aggiungo se presenti alla lista i materiali
                 materiali.add(resultset.getString("nomeMateriale"));
-                //chiamo per materiali
             }
 
         } catch (Exception ex) {

@@ -9,16 +9,14 @@ import org.apache.logging.log4j.Logger;
  */
 public class Posizione {
 
-    //bisogna trovare un nome migliore, saffale, piano, posizione?
+    //Per semplicita, saffale, piano e assumiamo che un piano puo contenere un oggetto
     private int scaffale;
     private int ripiano;
-    private int posizione;
     private final static Logger log = LogManager.getLogger(Posizione.class);
 
-    public Posizione(int x, int y, int z) {
+    public Posizione(int x, int y) {
         this.scaffale = x;
         this.ripiano = y;
-        this.posizione = z;
     }
 
     public Posizione() {
@@ -40,17 +38,9 @@ public class Posizione {
         this.ripiano = ripiano;
     }
 
-    public int getPosizione() {
-        return posizione;
-    }
-
-    public void setPosizione(int posizione) {
-        this.posizione = posizione;
-    }
-
     @Override
     public int hashCode() {
-        return scaffale ^ ripiano ^ posizione;
+        return scaffale ^ ripiano;
     }
 
     @Override
@@ -59,9 +49,7 @@ public class Posizione {
             Posizione other = (Posizione) obj;
             if (this.scaffale == other.scaffale) {
                 if (this.ripiano == other.ripiano) {
-                    if (this.posizione == other.posizione) {
-                        return true;
-                    }
+                    return true;
                 }
             }
         }

@@ -50,7 +50,7 @@ create table MATERIALIPERARTICOLO(
 
 create table INGRESSO(
     bolla int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    dataIngresso timestamp,
+    dataIngresso date,
     /* to do o mettiamo qui il coidce prodotto*/
     PRIMARY KEY (bolla)
 );
@@ -67,7 +67,7 @@ create table SPEDIZIONIERE(
 
 create table USCITA(
     bolla int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    dataUscita timestamp,
+    dataUscita date,
     spedizioniere varchar(20),
     PRIMARY KEY(bolla),
     FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome)
@@ -77,7 +77,7 @@ create table ARTICOLOMAGAZZINO(
     nome varchar(100),
     /* UID prodotto, to do decidere quanto lungo */
     codice varchar(15),
-    dataProduzione timestamp,
+    dataProduzione date,
     scaffale int,
     livello int,
     /* to do mettiamo qui il codice ingresso*/
@@ -104,7 +104,7 @@ create table NEGOZIO(
 
 create table ORDINE(
     id int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    dataOrdine timestamp,
+    dataOrdine date,
     negozio varchar(11),
     idUscita int,
     PRIMARY KEY (id),
@@ -173,3 +173,10 @@ INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Maglia r
 INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Legno');
 INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Acciaio');
 INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Plastica');
+/* POPOLAMENTO INGRESSO */
+INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-08-13');
+INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-07-13');
+/* POPOLAMENTO USCITA */
+/* POPOLAMENTO ARTICOLOMAGAZZINO */
+INSERT INTO ARTICOLOMAGAZZINO (nome, codice, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', 'ADIDASMGL001', '2018-08-13', 1, 5, 1, null);
+INSERT INTO ARTICOLOMAGAZZINO (nome, codice, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', 'ADIDASMGL002', '2018-07-13', 1, 5, 1, null);
