@@ -26,13 +26,6 @@ create table MATERIALE(
     PRIMARY KEY (nome)
 );
 
-/* TABELLA N a N ARTICOLO - MATERIALI */
-create table MATERIALIPERARTICOLO(
-    nomeArticolo varchar(100),
-    nomeMateriale varchar(100),
-    PRIMARY KEY (nomeArticolo, nomeMateriale)
-);
-
 create table ARTICOLO(
     nome varchar(100),
     descrizione varchar(200),
@@ -44,6 +37,15 @@ create table ARTICOLO(
     PRIMARY KEY (nome),
     FOREIGN KEY (categoria) REFERENCES CATEGORIA(nome),
     FOREIGN KEY (sport) REFERENCES SPORT(nome)
+);
+
+/* TABELLA N a N ARTICOLO - MATERIALI */
+create table MATERIALIPERARTICOLO(
+    nomeArticolo varchar(100),
+    nomeMateriale varchar(100),
+    PRIMARY KEY (nomeArticolo, nomeMateriale),
+    FOREIGN KEY (nomeArticolo) REFERENCES ARTICOLO(nome),
+    FOREIGN KEY (nomeMateriale) REFERENCES MATERIALE(nome)
 );
 
 create table INGRESSO(
@@ -142,7 +144,32 @@ INSERT INTO CATEGORIA (nome) VALUES ('Scarpe');
 INSERT INTO CATEGORIA (nome) VALUES ('Abbigliamento');
 INSERT INTO CATEGORIA (nome) VALUES ('Accessori');
 INSERT INTO CATEGORIA (nome) VALUES ('Attrezzatura');
+/* POPOLAMENTO SPORT */
+INSERT INTO SPORT (nome) VALUES ('Calcio');
+INSERT INTO SPORT (nome) VALUES ('Pallavolo');
+INSERT INTO SPORT (nome) VALUES ('Baseball');
+INSERT INTO SPORT (nome) VALUES ('Basket');
+INSERT INTO SPORT (nome) VALUES ('Nuoto');
+INSERT INTO SPORT (nome) VALUES ('Karate');
+INSERT INTO SPORT (nome) VALUES ('Running');
+/* POPOLAMENTO MATERIALE */
+INSERT INTO MATERIALE (nome) VALUES ('Poliestere');
+INSERT INTO MATERIALE (nome) VALUES ('Legno');
+INSERT INTO MATERIALE (nome) VALUES ('Gomma');
+INSERT INTO MATERIALE (nome) VALUES ('Plastica');
+INSERT INTO MATERIALE (nome) VALUES ('Tessuto traspirante');
+INSERT INTO MATERIALE (nome) VALUES ('Acciaio');
 /* POPOLAMENTO UTENTE */
-INSERT INTO UTENTE (username, nome, cognome, password, ruolo) VALUES ('MagazziniereA', 'Elia', 'Piacentini', 'pw', 2);
-INSERT INTO UTENTE (username, nome, cognome, password, ruolo) VALUES ('ResponsabileA', 'Elia', 'Piacentini', 'pw', 1);
-INSERT INTO UTENTE (username, nome, cognome, password, ruolo) VALUES ('SegretarioA', 'Elia', 'Piacentini', 'pw', 0);
+INSERT INTO UTENTE (username, nome, cognome, password, ruolo) VALUES ('magazziniere1', 'Elia', 'Piacentini', 'pw', 2);
+INSERT INTO UTENTE (username, nome, cognome, password, ruolo) VALUES ('responsabile2', 'Elia', 'Piacentini', 'pw', 1);
+INSERT INTO UTENTE (username, nome, cognome, password, ruolo) VALUES ('segretario3', 'Elia', 'Piacentini', 'pw', 0);
+/* POPOLAMENTO ARTICOLO */
+INSERT INTO ARTICOLO (nome, descrizione, prezzo, categoria, sport) VALUES ('Maglia gialla ADIDAS', 'Maglia con le bande nere laterali', 35.50, 'Abbigliamento', 'Running');
+INSERT INTO ARTICOLO (nome, descrizione, prezzo, categoria, sport) VALUES ('Maglia rossa NIKE', 'Maglia con le bande bianche laterali', 37.20, 'Abbigliamento', 'Basket');
+INSERT INTO ARTICOLO (nome, descrizione, prezzo, categoria, sport) VALUES ('Mazza da baseball', 'Con rinforzo in acciaio', 56.50, 'Attrezzatura', 'Baseball');
+/* POPOLAMENTO MATERIALIPERARTICOLO */
+INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Maglia gialla ADIDAS', 'Poliestere');
+INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Maglia rossa NIKE', 'Tessuto traspirante');
+INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Legno');
+INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Acciaio');
+INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Plastica');

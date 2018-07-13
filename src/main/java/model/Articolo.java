@@ -101,4 +101,8 @@ public class Articolo {
         return false;
     }
     
+    public String toString(){
+        return nome + ", " + descrizione + ", " + categoria + ", " + sport;
+    }
+    
 }
