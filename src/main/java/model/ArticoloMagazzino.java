@@ -11,14 +11,14 @@ import org.apache.logging.log4j.Logger;
  */
 public class ArticoloMagazzino extends Articolo{
 
-    private String codice;
+    private int codice;
     private Date data;
     private Posizione posizione;
     private final static Logger log = LogManager.getLogger(ArticoloMagazzino.class);
     private int codiceIngresso;
     private int codiceUscita;
 
-    public ArticoloMagazzino(String nome, String descrizione, String sport, String categoria, ArrayList<String> materiali, double prezzo, String codice, Date data, Posizione posizione, int codiceIngresso, int codiceUscita) {
+    public ArticoloMagazzino(String nome, String descrizione, String sport, String categoria, ArrayList<String> materiali, double prezzo, int codice, Date data, Posizione posizione, int codiceIngresso, int codiceUscita) {
         super(nome, descrizione, sport, categoria, materiali, prezzo);
         this.codice = codice;
         this.data = data;
@@ -27,7 +27,7 @@ public class ArticoloMagazzino extends Articolo{
         this.codiceUscita = codiceUscita;
     }
     
-    public ArticoloMagazzino(Articolo articolo, String codice, Date data, Posizione posizione, int codiceIngresso, int codiceUscita) {
+    public ArticoloMagazzino(Articolo articolo, int codice, Date data, Posizione posizione, int codiceIngresso, int codiceUscita) {
         super(articolo.getNome(), articolo.getDescrizione(), articolo.getSport(), articolo.getCategoria(), articolo.getMateriali(), articolo.getPrezzo());
         this.codice = codice;
         this.data = data;
@@ -36,11 +36,11 @@ public class ArticoloMagazzino extends Articolo{
         this.codiceUscita = codiceUscita;
     }
 
-    public String getCodice() {
+    public int getCodice() {
         return codice;
     }
 
-    public void setCodice(String codice) {
+    public void setCodice(int codice) {
         this.codice = codice;
     }
 
@@ -80,14 +80,14 @@ public class ArticoloMagazzino extends Articolo{
 
     @Override
     public int hashCode() {
-        return codice.hashCode() ^ data.hashCode() ^ posizione.hashCode();
+        return codice ^ data.hashCode() ^ posizione.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof ArticoloMagazzino){
             ArticoloMagazzino other = (ArticoloMagazzino)obj;
-            if(other.codice.equals(this.codice)){
+            if(other.codice == (this.codice)){
                 if(other.posizione.equals(this.posizione)){
                     if(other.data.equals(this.data)){
                         return true && super.equals(obj);

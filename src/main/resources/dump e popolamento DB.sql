@@ -60,23 +60,46 @@ create table SPEDIZIONIERE(
     telefono varchar(9),
     /* indirizzo */
     via varchar(20),
-    nuemro int,
+    numero int,
     citta varchar(20),
     PRIMARY KEY(nome)
+);
+
+create table NEGOZIO(
+    /* Lunghezza cf non persona */
+    codiceFiscale varchar(11),
+    nome varchar(50),
+    /* indirizzo */
+    via varchar(20),
+    numero int,
+    citta varchar(20), 
+    responsabile varchar(20),
+    PRIMARY KEY (codiceFiscale),
+    FOREIGN KEY (responsabile) REFERENCES UTENTE(username)
+);
+
+create table ORDINE(
+    id int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    dataOrdine date,
+    negozio varchar(11),
+    PRIMARY KEY (id),
+    FOREIGN KEY (negozio) REFERENCES NEGOZIO(codiceFiscale) 
 );
 
 create table USCITA(
     bolla int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     dataUscita date,
     spedizioniere varchar(20),
+    idOrdine int,
     PRIMARY KEY(bolla),
-    FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome)
+    FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome),
+    FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)
 );
 
 create table ARTICOLOMAGAZZINO(
     nome varchar(100),
     /* UID prodotto, to do decidere quanto lungo */
-    codice varchar(15),
+    codice int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     dataProduzione date,
     scaffale int,
     livello int,
@@ -89,42 +112,12 @@ create table ARTICOLOMAGAZZINO(
     FOREIGN KEY (codiceUscita) REFERENCES USCITA(bolla)
 );
 
-create table NEGOZIO(
-    /* Lunghezza cf non persona */
-    codiceFiscale varchar(11),
-    nome varchar(50),
-    /* indirizzo */
-    via varchar(20),
-    nuemro int,
-    citta varchar(20), 
-    responsabile varchar(20),
-    PRIMARY KEY (codiceFiscale),
-    FOREIGN KEY (responsabile) REFERENCES UTENTE(username)
-);
-
-create table ORDINE(
-    id int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    dataOrdine date,
-    negozio varchar(11),
-    idUscita int,
-    PRIMARY KEY (id),
-    FOREIGN KEY (negozio) REFERENCES NEGOZIO(codiceFiscale),
-    FOREIGN KEY (idUscita) REFERENCES USCITA(bolla)
-);
-
-create table ARTICOLORDINATO(
+create table ARTICOLOORDINATO(
     nome varchar(100),
     quantita int,
-    PRIMARY KEY (nome),
-    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome)
-);
-
-create table ARTICOLIPERORDINE(
     idOrdine int,
-    nomeArticolo varchar(100),
-    quantita int,
-    PRIMARY KEY (idOrdine, nomeArticolo),
-    FOREIGN KEY (nomeArticolo) REFERENCES ARTICOLO(nome),
+    PRIMARY KEY (nome),
+    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome),
     FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)
 );
 
@@ -178,5 +171,10 @@ INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-08-13');
 INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-07-13');
 /* POPOLAMENTO USCITA */
 /* POPOLAMENTO ARTICOLOMAGAZZINO */
-INSERT INTO ARTICOLOMAGAZZINO (nome, codice, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', 'ADIDASMGL001', '2018-08-13', 1, 5, 1, null);
-INSERT INTO ARTICOLOMAGAZZINO (nome, codice, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', 'ADIDASMGL002', '2018-07-13', 1, 5, 1, null);
+INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-08-13', 1, 5, 1, null);
+INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-07-13', 1, 5, 1, null);
+/* POPOLAMENTO NEGOZIO */
+INSERT INTO NEGOZIO (codiceFiscale, nome, via, numero, citta, responsabile) VALUES ('NGZ001', 'Masport', 'trota', 23, 'verona', 'responsabile2');
+/* POPOLAMENTO ORDINE */ 
+INSERT INTO ORDINE (dataOrdine, negozio) VALUES ('2018-07-13', 'NGZ001');
+INSERT INTO ORDINE (dataOrdine, negozio) VALUES ('2018-05-10', 'NGZ001');

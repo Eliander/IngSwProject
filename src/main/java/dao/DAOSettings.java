@@ -27,6 +27,9 @@ public class DAOSettings {
     private static final ArticoloDAO articoloDAO = new ArticoloDAO();
     private static final MaterialiPerArticoloDAO materialiPerArticoloDAO = new MaterialiPerArticoloDAO();
     private static final ArticoloMagazzinoDAO articoloMagazzinoDAO = new ArticoloMagazzinoDAO();
+    private static final ArticoloOrdinatoDAO articoloOrdinatoDAO = new ArticoloOrdinatoDAO();
+    private static final NegozioDAO negozioDAO = new NegozioDAO();
+    private static final OrdineDAO ordineDAO = new OrdineDAO();
 
     /*
     
@@ -77,4 +80,16 @@ public class DAOSettings {
     public ArticoloMagazzinoDAO getArticoloMagazzinoDAO(){
         return articoloMagazzinoDAO;
     }
+
+    public ArticoloOrdinatoDAO getArticoloOrdinatoDAO() {
+        return articoloOrdinatoDAO;
+    }
+
+    public NegozioDAO getNegozioDAO() {
+        return negozioDAO;
+    }
+
+    public static OrdineDAO getOrdineDAO() {
+        return ordineDAO;
+    }  
 }
