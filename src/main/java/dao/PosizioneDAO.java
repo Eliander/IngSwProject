@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
  * @author Eliander
  */
 public class PosizioneDAO {
-    
+
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(PosizioneDAO.class);
 
     private final String CHEKFREE = "SELECT LIBERA FROM POSTI WHERE RIPIANO = ? AND SCAFFALE = ?";
@@ -21,8 +21,7 @@ public class PosizioneDAO {
     //query per metodo che restituisce un numero n di posti liberi
     private final String SELECTNFREE = "SELECT * FROM POSTI WHERE LIBERA = true FETCH FIRST ? ROWS ONLY";
     private final String UPDATESTATUS = "UPDATE POSTI SET LIBERA = ? WHERE SCAFFALE = ? AND RIPIANO = ?";
-    
-    
+
     public Posizione getPosizioneLibera() {
         Posizione posizione = null;
         try {
@@ -36,7 +35,7 @@ public class PosizioneDAO {
         }
         return posizione;
     }
-    
+
     public ArrayList<Posizione> getArrayPosizioniLibere(int n) {
         ArrayList<Posizione> posizioni = new ArrayList();
         try {
@@ -44,7 +43,7 @@ public class PosizioneDAO {
             PreparedStatement pst = con.prepareStatement(SELECTNFREE);
             pst.setInt(1, n);
             ResultSet resultset = pst.executeQuery();
-            while (resultset.next()){
+            while (resultset.next()) {
                 posizioni.add(mapRowToPosizione(resultset));
             }
             con.close();
@@ -53,9 +52,9 @@ public class PosizioneDAO {
         }
         return posizioni;
     }
-    
+
     //to do: volendo si puo fare con un oggetto posizione
-    public boolean updateStatus (boolean free, Posizione posizione){
+    public boolean updateStatus(boolean free, Posizione posizione) {
         boolean esito = true;
         try {
             Connection con = DAOSettings.getConnection();
@@ -71,7 +70,7 @@ public class PosizioneDAO {
         }
         return esito;
     }
-    
+
     public boolean checkPosizioneLibera(Posizione posizione) {
         boolean isFree = true;
         try {
@@ -80,7 +79,7 @@ public class PosizioneDAO {
             pst.setInt(1, posizione.getRipiano());
             pst.setInt(2, posizione.getScaffale());
             ResultSet resultset = pst.executeQuery();
-            if(resultset.next()){
+            if (resultset.next()) {
                 isFree = resultset.getBoolean("libera");
             }
             con.close();
@@ -90,7 +89,7 @@ public class PosizioneDAO {
         }
         return isFree;
     }
-    
+
     private Posizione mapRowToPosizione(ResultSet resultset) {
         Posizione posizione = null;
         try {
@@ -102,6 +101,5 @@ public class PosizioneDAO {
         }
         return posizione;
     }
-    
-    
+
 }

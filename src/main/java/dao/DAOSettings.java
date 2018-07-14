@@ -34,6 +34,7 @@ public class DAOSettings {
     private static final PosizioneDAO posizioneDAO = new PosizioneDAO();
     private static final StatisticaDAO statisticaDAO = new StatisticaDAO();
     private static final UscitaDAO uscitaDAO = new UscitaDAO();
+    private static final SpedizioniereDAO spedizioniereDAO = new SpedizioniereDAO();
 
     /*
     
@@ -112,4 +113,9 @@ public class DAOSettings {
     public UscitaDAO getUscitaDAO() {
         return uscitaDAO;
     }
+
+    public SpedizioniereDAO getSpedizioniereDAO() {
+        return spedizioniereDAO;
+    }
+    
 }

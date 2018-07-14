@@ -14,5 +14,11 @@ public class Responsabile extends Utente{
         this.cognome = cognome;
         this.username = username;
     }
+    
+    public Responsabile(Utente user) {
+        this.nome = user.getNome();
+        this.cognome = user.getCognome();
+        this.username = user.getUsername();
+    }
 
 }

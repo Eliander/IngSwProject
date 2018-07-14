@@ -18,6 +18,7 @@ public class UtenteDAO {
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(UtenteDAO.class);
 
     private final String LOGIN = "SELECT * FROM UTENTE WHERE USERNAME = ? AND PASSWORD = ?";
+    private final String SELECTBYNAME = "SELECT * FROM UTENTE WHERE USERNAME = ?";
 
     public Utente login(String username, String password) {
         Utente user = null;
@@ -35,6 +36,21 @@ public class UtenteDAO {
         return user;
     }
 
+    public Utente getUtenteByUsername(String username) {
+        Utente user = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECTBYNAME);
+            pst.setString(1, username);
+            ResultSet resultset = pst.executeQuery();
+            user = mapRowToUtente(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return user;
+    }
+    
     private Utente mapRowToUtente(ResultSet resultset) {
         Utente user = null;
         try {
