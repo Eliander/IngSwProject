@@ -23,7 +23,9 @@ public class ArticoloMagazzinoDAO {
     private final String SELECTBYCODICE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     private final String SELECTBYCODICEINGRESSO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEINGRESSO = ?";
     private final String SELECTBYCODICEUSCITA = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
-
+    private final String INSERT = "INSERT INTO ARTICOLOMAGAZZINO(nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES(?, ?, ?, ?, ?, ?)";
+    private final String DELETE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
+    
     public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByNome(String nome) {
         ArrayList<ArticoloMagazzino> articoli = null;
         try {
@@ -39,7 +41,7 @@ public class ArticoloMagazzinoDAO {
         return articoli;
     }
     
-    public ArticoloMagazzino getArticoliMagazzinoByCodice(int codice) {
+    public ArticoloMagazzino getArticoloMagazzinoByCodice(int codice) {
         ArticoloMagazzino articolo = null;
         try {
             Connection con = DAOSettings.getConnection();
@@ -84,6 +86,26 @@ public class ArticoloMagazzinoDAO {
         return articoli;
     }
     
+    public boolean addArticoloMagazzino(ArticoloMagazzino articoloMagazzino){
+        boolean esito = true;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(INSERT);
+            pst.setDate(1, new java.sql.Date(articoloMagazzino.getData().getTime()));
+            pst.setInt(2, articoloMagazzino.getPosizione().getScaffale());
+            pst.setInt(3, articoloMagazzino.getPosizione().getRipiano());
+            pst.setInt(4, articoloMagazzino.getCodiceIngresso());
+            //to do: assicurarsi che sia 0
+            pst.setInt(5, articoloMagazzino.getCodiceUscita());
+            pst.executeQuery();
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+            esito = false;
+        }
+        return esito;
+    }
+    
     private ArrayList<ArticoloMagazzino> mapRowToArrayListArticoloMagazzino(ResultSet resultset){
         ArrayList<ArticoloMagazzino> articoli = new ArrayList();
         ArticoloMagazzino artMagazzino = null;
@@ -121,7 +143,7 @@ public class ArticoloMagazzinoDAO {
         ArticoloMagazzino artMagazzino = null;
         try {
             artMagazzino = new ArticoloMagazzino(articolo, resultset.getInt("codice"), new Date((resultset.getDate("dataProduzione")).getTime()), new Posizione(
-                    resultset.getInt("scaffale"), resultset.getInt("livello")), resultset.getInt("codiceIngresso"), resultset.getInt("codiceUscita"));
+                    resultset.getInt("scaffale"), resultset.getInt("ripiano")), resultset.getInt("codiceIngresso"), resultset.getInt("codiceUscita"));
         } catch (Exception ex) {
             log.error(ex);
         }

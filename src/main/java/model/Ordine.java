@@ -9,13 +9,19 @@ import java.util.Date;
  */
 public class Ordine {
     
-    private int codice;
+    private int codice = 0;
     private Date data;
     private ArrayList<ArticoloOrdinato> articoli;
     private Negozio negozio;
 
     public Ordine(int codice, Date data, ArrayList<ArticoloOrdinato> articoli, Negozio negozio) {
         this.codice = codice;
+        this.data = data;
+        this.articoli = articoli;
+        this.negozio = negozio;
+    }
+    
+    public Ordine(Date data, ArrayList<ArticoloOrdinato> articoli, Negozio negozio) {
         this.data = data;
         this.articoli = articoli;
         this.negozio = negozio;

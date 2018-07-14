@@ -102,8 +102,7 @@ create table ARTICOLOMAGAZZINO(
     codice int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     dataProduzione date,
     scaffale int,
-    livello int,
-    /* to do mettiamo qui il codice ingresso*/
+    ripiano int,
     codiceIngresso int,
     codiceUscita int,
     PRIMARY KEY (codice),
@@ -171,8 +170,8 @@ INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-08-13');
 INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-07-13');
 /* POPOLAMENTO USCITA */
 /* POPOLAMENTO ARTICOLOMAGAZZINO */
-INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-08-13', 1, 5, 1, null);
-INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, livello, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-07-13', 1, 5, 1, null);
+INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-08-13', 1, 5, 1, null);
+INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-07-13', 1, 5, 1, null);
 /* POPOLAMENTO NEGOZIO */
 INSERT INTO NEGOZIO (codiceFiscale, nome, via, numero, citta, responsabile) VALUES ('NGZ001', 'Masport', 'trota', 23, 'verona', 'responsabile2');
 /* POPOLAMENTO ORDINE */ 
