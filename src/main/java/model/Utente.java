@@ -62,5 +62,8 @@ public abstract class Utente {
         return hash;
     }
 
-    
+    @Override
+    public String toString(){
+        return this.cognome + " " + this.nome + ", " + this.username;
+    }
 }

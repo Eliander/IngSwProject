@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_HomeMagazziniere;
 import view.View_HomeResponsabile;
+import view.View_HomeSegretario;
 import view.View_Login;
 
 /**
@@ -33,12 +34,13 @@ public class Listener_LoginButton implements ActionListener {
         DAOSettings DAO = Main.getDAO();
         //to do: prendere da db
         Utente user = Main.getDAO().getUtenteDAO().login(username, password);
-        //Utente user = new Responsabile("fede","bos","fider97");
+        //Utente user = new Segretario("fede","bos","fider97");
         if (!(user == null)) {
             frame.dispose();
             log.info("Login effettuato con successo - username: " + username);
             if (user instanceof Segretario) {
-                //segretario
+                View_HomeSegretario view_HomeSegretario = new View_HomeSegretario(user);
+                view_HomeSegretario.setVisible(true);
             } else if (user instanceof Responsabile) {
                 View_HomeResponsabile view_HomeResponsabile = new View_HomeResponsabile(user);
                 view_HomeResponsabile.setVisible(true);

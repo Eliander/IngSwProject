@@ -77,4 +77,9 @@ public class Uscita {
         }
         return true;
     }
+    
+    @Override
+    public String toString(){
+        return this.numBolla + " - " + this.data.toString() + " - " + this.ordine.getCodice() + " - " + this.ordine.getNegozio().getNome();
+    }
 }

@@ -40,4 +40,8 @@ public class Spedizioniere {
         this.numeroTelefono = numeroTelefono;
     }
     
+    @Override
+    public String toString(){
+        return this.nome + ", " + this.numeroTelefono;
+    }
 }
