@@ -30,6 +30,10 @@ public class DAOSettings {
     private static final ArticoloOrdinatoDAO articoloOrdinatoDAO = new ArticoloOrdinatoDAO();
     private static final NegozioDAO negozioDAO = new NegozioDAO();
     private static final OrdineDAO ordineDAO = new OrdineDAO();
+    private static final IngressoDAO ingressoDAO = new IngressoDAO();
+    private static final PosizioneDAO posizioneDAO = new PosizioneDAO();
+    private static final StatisticaDAO statisticaDAO = new StatisticaDAO();
+    private static final UscitaDAO uscitaDAO = new UscitaDAO();
 
     /*
     
@@ -92,4 +96,20 @@ public class DAOSettings {
     public OrdineDAO getOrdineDAO() {
         return ordineDAO;
     }  
+
+    public IngressoDAO getIngressoeDAO() {
+        return ingressoDAO;
+    }
+    
+    public PosizioneDAO getPosizioneDAO() {
+        return posizioneDAO;
+    }
+
+    public StatisticaDAO getStatisticaDAO() {
+        return statisticaDAO;
+    }
+
+    public UscitaDAO getUscitaDAO() {
+        return uscitaDAO;
+    }
 }

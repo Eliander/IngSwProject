@@ -107,8 +107,9 @@ create table ARTICOLOMAGAZZINO(
     codiceUscita int,
     PRIMARY KEY (codice),
     FOREIGN KEY (nome) REFERENCES ARTICOLO(nome),
-    FOREIGN KEY (codiceIngresso) REFERENCES INGRESSO(bolla),
-    FOREIGN KEY (codiceUscita) REFERENCES USCITA(bolla)
+    FOREIGN KEY (codiceIngresso) REFERENCES INGRESSO(bolla)
+    /* to do o lasciamo unuscita con id 0 sempre dentro, altrimenti bisogna toglierlo*/
+    /*,FOREIGN KEY (codiceUscita) REFERENCES USCITA(bolla)*/
 );
 
 create table ARTICOLOORDINATO(
@@ -171,7 +172,7 @@ INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-07-13');
 /* POPOLAMENTO USCITA */
 /* POPOLAMENTO ARTICOLOMAGAZZINO */
 INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-08-13', 1, 5, 1, null);
-INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-07-13', 1, 5, 1, null);
+INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-07-13', 1, 7, 1, null);
 /* POPOLAMENTO NEGOZIO */
 INSERT INTO NEGOZIO (codiceFiscale, nome, via, numero, citta, responsabile) VALUES ('NGZ001', 'Masport', 'trota', 23, 'verona', 'responsabile2');
 /* POPOLAMENTO ORDINE */ 
