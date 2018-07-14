@@ -9,21 +9,21 @@ import java.util.Date;
  */
 public class Ingresso {
     
-    private String codice;
+    private int codice;
     private Date data;
     private ArrayList<ArticoloMagazzino> articoli;
     
-    public Ingresso(String codice, Date data, ArrayList<ArticoloMagazzino> articoli) {
+    public Ingresso(int codice, Date data, ArrayList<ArticoloMagazzino> articoli) {
         this.codice = codice;
         this.data = data;
         this.articoli = articoli;
     }
     
-    public String getCodice() {
+    public int getCodice() {
         return this.codice;
     }
     
-    public void setCodice(String codice) {
+    public void setCodice(int codice) {
         this.codice = codice;
     }
     
