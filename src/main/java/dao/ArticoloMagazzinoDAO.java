@@ -23,8 +23,9 @@ public class ArticoloMagazzinoDAO {
     private final String SELECTBYCODICE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     private final String SELECTBYCODICEINGRESSO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEINGRESSO = ?";
     private final String SELECTBYCODICEUSCITA = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
+    private final String SELECTLASTADDED = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE =(SELECT MAX(CODICE) FROM ARTICOLOMAGAZZINO)";
     private final String INSERT = "INSERT INTO ARTICOLOMAGAZZINO(nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES(?, ?, ?, ?, ?, ?)";
-    private final String DELETE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
+    private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     
     public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByNome(String nome) {
         ArrayList<ArticoloMagazzino> articoli = null;
@@ -86,18 +87,36 @@ public class ArticoloMagazzinoDAO {
         return articoli;
     }
     
-    public boolean addArticoloMagazzino(ArticoloMagazzino articoloMagazzino){
-        boolean esito = true;
+    public ArticoloMagazzino addArticoloMagazzino(ArticoloMagazzino articoloMagazzino){
+        ArticoloMagazzino articolo = null;
         try {
             Connection con = DAOSettings.getConnection();
             PreparedStatement pst = con.prepareStatement(INSERT);
-            pst.setDate(1, new java.sql.Date(articoloMagazzino.getData().getTime()));
-            pst.setInt(2, articoloMagazzino.getPosizione().getScaffale());
-            pst.setInt(3, articoloMagazzino.getPosizione().getRipiano());
-            pst.setInt(4, articoloMagazzino.getCodiceIngresso());
+            pst.setString(1, articoloMagazzino.getNome());
+            pst.setDate(2, new java.sql.Date(articoloMagazzino.getData().getTime()));
+            pst.setInt(3, articoloMagazzino.getPosizione().getScaffale());
+            pst.setInt(4, articoloMagazzino.getPosizione().getRipiano());
+            pst.setInt(5, articoloMagazzino.getCodiceIngresso());
             //to do: assicurarsi che sia 0
-            pst.setInt(5, articoloMagazzino.getCodiceUscita());
-            pst.executeQuery();
+            pst.setInt(6, articoloMagazzino.getCodiceUscita());
+            pst.executeUpdate();
+            //eseguita la query, restituisco l'oggetto salvato che ha anche l'ID
+            pst = con.prepareStatement(SELECTLASTADDED);
+            ResultSet resultset = pst.executeQuery();
+            articolo = mapRowToArticoloMagazzino(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articolo;
+    }
+    public boolean removeArticoloMagazzino(ArticoloMagazzino articoloMagazzino){
+        boolean esito = true;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(DELETE);
+            pst.setInt(1, articoloMagazzino.getCodice());
+            pst.executeUpdate();
             con.close();
         } catch (Exception ex) {
             log.error(ex);
@@ -105,6 +124,24 @@ public class ArticoloMagazzinoDAO {
         }
         return esito;
     }
+    
+    /*public int getNumeroOrdineByOrdine(Ordine ordine) {
+        int numeroOrdine = 0;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECTCODICE);
+            pst.setDate(1, new java.sql.Date(ordine.getData().getTime()));
+            pst.setString(2, ordine.getNegozio().getCodiceFiscale());
+            ResultSet resultset = pst.executeQuery();
+            if (resultset.next()) {
+                numeroOrdine = resultset.getInt("id");
+            }
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return numeroOrdine;
+    }*/
     
     private ArrayList<ArticoloMagazzino> mapRowToArrayListArticoloMagazzino(ResultSet resultset){
         ArrayList<ArticoloMagazzino> articoli = new ArrayList();

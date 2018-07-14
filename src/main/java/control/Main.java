@@ -9,6 +9,7 @@ import model.ArticoloMagazzino;
 import model.ArticoloOrdinato;
 import model.Negozio;
 import model.Ordine;
+import model.Posizione;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_Login;
@@ -30,10 +31,12 @@ public class Main {
         ArrayList<ArticoloOrdinato> articoli = new ArrayList();
         Articolo art = new Articolo("Pantaloni di prova", "prova", "Calcio", "Abbigliamento", null, 15.5);
         Articolo art2 = new Articolo("Maglia di prova", "prova", "Basket", "Abbigliamento", null, 15.5);
-        articoli.add(new ArticoloOrdinato(art, 15));
-        articoli.add(new ArticoloOrdinato(art2, 30));
-        Ordine ordine = new Ordine(new Date(), articoli, new Negozio("NGZ001", "Masport", null, null));
-        DAO.getOrdineDAO().addOrdine(ordine);
+        DAO.getArticoloDAO().addArticolo(art2);
+        DAO.getArticoloDAO().addArticolo(art);
+        ArticoloMagazzino a = new ArticoloMagazzino(art2, 0, new Date(), new Posizione(5, 6), 1, 0);
+        
+        ArticoloMagazzino articolo = DAO.getArticoloMagazzinoDAO().addArticoloMagazzino(a);
+        DAO.getArticoloMagazzinoDAO().removeArticoloMagazzino(articolo);
         System.out.println("ok");
     }
 
