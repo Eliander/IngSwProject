@@ -3,6 +3,7 @@ package view;
 import control.Listener_AddArticoloOrdineButton;
 import control.Listener_BackToHomeResponsabileButton;
 import control.Listener_ConfermaOrdineButton;
+import dao.DAOSettings;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -51,13 +52,13 @@ public class View_CreaOrdine extends JFrame{
     private JScrollPane list_sel_articoli_scroller;
     
     private Ordine ordine;
+    private static DAOSettings DAO = new DAOSettings();
     
     public View_CreaOrdine(Utente user) {
         this.user = user;
-        //TO DO
         //ricavo dal DAO il negozio dell'utente
-        Negozio negozio = new Negozio("XFGS","Bricoman",new Indirizzo("vr","via ...",4),(Responsabile)user);
-        ordine = new Ordine(0, new Date(), new ArrayList<ArticoloOrdinato>(), negozio);
+        Negozio negozio = DAO.getNegozioDAO().getNegozioByResponsabile(user);
+        ordine = new Ordine(new Date(), new ArrayList<>(), negozio);
         initComponents();
     }
     
@@ -85,13 +86,8 @@ public class View_CreaOrdine extends JFrame{
         head_panel.add(label_title);
         contentPane.add(head_panel, BorderLayout.NORTH);
         
-        //TO DO
         //ricavo da DAO (tramite query) la lista di Articoli del catalogo
-        Articolo a1 = new Articolo("Scarpa ZX","Scarpa robusta","Running","Abbigliamento",new ArrayList<String>(),15);
-        Articolo a2 = new Articolo("Pallone JF3","Pallone taglia 5","Calcio","Accessori",new ArrayList<String>(),8);
-        ArrayList<Articolo> art = new ArrayList<>();
-        art.add(a1);
-        art.add(a2);
+        ArrayList<Articolo> art = DAO.getArticoloDAO().getAllArticoli();
         Articolo[] articoli = new Articolo[art.size()];
         articoli = art.toArray(articoli);
         list = new JList(articoli); //passare come parametro l'array di oggetti da DB

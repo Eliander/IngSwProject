@@ -9,7 +9,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,11 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
-import model.ArticoloOrdinato;
-import model.Indirizzo;
 import model.Negozio;
 import model.Ordine;
-import model.Responsabile;
 import model.Utente;
 
 /**
@@ -71,14 +67,10 @@ public class View_OrdiniPassati extends JFrame{
         head_panel.add(label_title);
         contentPane.add(head_panel, BorderLayout.NORTH);
         
-        //TO DO
         //ricavo da DAO (tramite query) il Negozio dell'utente
         //ricavo da DAO la lista di Ordini del Negozio
-        Ordine o1 = new Ordine(2345, new Date(),new ArrayList<ArticoloOrdinato>(), new Negozio("DJBKFK23","Bricoman",new Indirizzo("vr","via cc",4),(Responsabile)user));
-        Ordine o2 = new Ordine(6364, new Date(),new ArrayList<ArticoloOrdinato>(), new Negozio("DJBKFK23","Bricoman",new Indirizzo("vr","via cc",4),(Responsabile)user));
-        ArrayList<Ordine> ord = new ArrayList<>();
-        ord.add(o1);
-        ord.add(o2);
+        Negozio negozio = DAO.getNegozioDAO().getNegozioByResponsabile(user);
+        ArrayList<Ordine> ord = DAO.getOrdineDAO().getOrdiniByNegozio(negozio);
         Ordine[] ordini = new Ordine[ord.size()];
         ordini = ord.toArray(ordini);
         list = new JList(ordini); //passare come parametro l'array di oggetti da DB
