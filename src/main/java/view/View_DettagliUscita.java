@@ -40,6 +40,7 @@ public class View_DettagliUscita extends JFrame{
     private JLabel label_nomeNegozio;
     private JLabel label_indirizzoNegozio;
     private JLabel label_responsabileNegozio;
+    private JLabel label_prezzoOrdine;
     private JLabel label_articoliOrdinati;
     private JList list;
     private JScrollPane list_scroller;
@@ -85,9 +86,11 @@ public class View_DettagliUscita extends JFrame{
         label_indirizzoNegozio.setText("Indirizzo negozio: " + uscita.getOrdine().getNegozio().getIndirizzo().toString());
         label_responsabileNegozio = new JLabel();
         label_responsabileNegozio.setText("Responsabile negozio: " + uscita.getOrdine().getNegozio().getResponsabile().toString());
+        label_prezzoOrdine = new JLabel();
+        label_prezzoOrdine.setText("Prezzo totale: " + uscita.getOrdine().getPrezzoTot());
         
         dati_panel = new JPanel();
-        dati_panel.setLayout(new GridLayout(11,1));
+        dati_panel.setLayout(new GridLayout(12,1));
         btn_panel = new JPanel();
         btn_panel.add(button_back);
         btn_panel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -102,6 +105,7 @@ public class View_DettagliUscita extends JFrame{
         dati_panel.add(label_nomeNegozio);
         dati_panel.add(label_indirizzoNegozio);
         dati_panel.add(label_responsabileNegozio);
+        dati_panel.add(label_prezzoOrdine);
         contentPane.add(dati_panel);
         
         label_articoliOrdinati = new JLabel();
