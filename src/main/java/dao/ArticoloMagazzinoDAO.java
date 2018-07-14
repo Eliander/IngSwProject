@@ -26,7 +26,8 @@ public class ArticoloMagazzinoDAO {
     private final String SELECTLASTADDED = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE =(SELECT MAX(CODICE) FROM ARTICOLOMAGAZZINO)";
     private final String INSERT = "INSERT INTO ARTICOLOMAGAZZINO(nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES(?, ?, ?, ?, ?, ?)";
     private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
-    
+    private final String MOVE = "UPDATE ARTICOLOMAGAZZINO SET scaffale = ?, ripiano = ? WHERE codice = ?";
+
     public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByNome(String nome) {
         ArrayList<ArticoloMagazzino> articoli = null;
         try {
@@ -41,7 +42,7 @@ public class ArticoloMagazzinoDAO {
         }
         return articoli;
     }
-    
+
     public ArticoloMagazzino getArticoloMagazzinoByCodice(int codice) {
         ArticoloMagazzino articolo = null;
         try {
@@ -56,7 +57,7 @@ public class ArticoloMagazzinoDAO {
         }
         return articolo;
     }
-    
+
     public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByCodiceIngresso(int codiceIngresso) {
         ArrayList<ArticoloMagazzino> articoli = null;
         try {
@@ -86,8 +87,8 @@ public class ArticoloMagazzinoDAO {
         }
         return articoli;
     }
-    
-    public ArticoloMagazzino addArticoloMagazzino(ArticoloMagazzino articoloMagazzino){
+
+    public ArticoloMagazzino addArticoloMagazzino(ArticoloMagazzino articoloMagazzino) {
         ArticoloMagazzino articolo = null;
         try {
             Connection con = DAOSettings.getConnection();
@@ -110,7 +111,8 @@ public class ArticoloMagazzinoDAO {
         }
         return articolo;
     }
-    public boolean removeArticoloMagazzino(ArticoloMagazzino articoloMagazzino){
+
+    public boolean removeArticoloMagazzino(ArticoloMagazzino articoloMagazzino) {
         boolean esito = true;
         try {
             Connection con = DAOSettings.getConnection();
@@ -124,26 +126,37 @@ public class ArticoloMagazzinoDAO {
         }
         return esito;
     }
-    
-    /*public int getNumeroOrdineByOrdine(Ordine ordine) {
-        int numeroOrdine = 0;
+
+    public ArticoloMagazzino moveArticoloMagazzino(ArticoloMagazzino articoloMagazzino, Posizione nuovaPosizione) {
         try {
             Connection con = DAOSettings.getConnection();
-            PreparedStatement pst = con.prepareStatement(SELECTCODICE);
-            pst.setDate(1, new java.sql.Date(ordine.getData().getTime()));
-            pst.setString(2, ordine.getNegozio().getCodiceFiscale());
-            ResultSet resultset = pst.executeQuery();
-            if (resultset.next()) {
-                numeroOrdine = resultset.getInt("id");
+            //controllo se la posizione e libera
+            boolean checkPosizioneLibera = Main.getDAO().getPosizioneDAO().checkPosizioneLibera(nuovaPosizione);
+            if (checkPosizioneLibera) {
+                //salvo la vecchia posizione
+                Posizione vecchiaPosizione = articoloMagazzino.getPosizione();
+                //libera, muovo
+                PreparedStatement pst = con.prepareStatement(MOVE);
+                pst.setInt(1, nuovaPosizione.getScaffale());
+                pst.setInt(2, nuovaPosizione.getRipiano());
+                pst.setInt(3, articoloMagazzino.getCodice());
+                pst.executeUpdate();
+                //setto la vecchia posizione libera
+                Main.getDAO().getPosizioneDAO().updateStatus(true, vecchiaPosizione);
+                //setto la nuova posizione occupata
+                Main.getDAO().getPosizioneDAO().updateStatus(false, nuovaPosizione);
+                //sostituisco la posizione nell'oggetto
+                articoloMagazzino.setPosizione(nuovaPosizione);
+                con.close();
             }
-            con.close();
         } catch (Exception ex) {
             log.error(ex);
+            articoloMagazzino = null;
         }
-        return numeroOrdine;
-    }*/
-    
-    private ArrayList<ArticoloMagazzino> mapRowToArrayListArticoloMagazzino(ResultSet resultset){
+        return articoloMagazzino;
+    }
+
+    private ArrayList<ArticoloMagazzino> mapRowToArrayListArticoloMagazzino(ResultSet resultset) {
         ArrayList<ArticoloMagazzino> articoli = new ArrayList();
         ArticoloMagazzino artMagazzino = null;
         try {
@@ -161,7 +174,7 @@ public class ArticoloMagazzinoDAO {
         }
         return articoli;
     }
-    
+
     private ArticoloMagazzino mapRowToArticoloMagazzino(ResultSet resultset) {
         ArticoloMagazzino artMagazzino = null;
         try {

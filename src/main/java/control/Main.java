@@ -28,7 +28,7 @@ public class Main {
         
         /*View_Login login = new View_Login();
         login.setVisible(true);*/
-        ArrayList<ArticoloOrdinato> articoli = new ArrayList();
+        /*ArrayList<ArticoloOrdinato> articoli = new ArrayList();
         Articolo art = new Articolo("Pantaloni di prova", "prova", "Calcio", "Abbigliamento", null, 15.5);
         Articolo art2 = new Articolo("Maglia di prova", "prova", "Basket", "Abbigliamento", null, 15.5);
         DAO.getArticoloDAO().addArticolo(art2);
@@ -37,7 +37,13 @@ public class Main {
         
         ArticoloMagazzino articolo = DAO.getArticoloMagazzinoDAO().addArticoloMagazzino(a);
         DAO.getArticoloMagazzinoDAO().removeArticoloMagazzino(articolo);
-        System.out.println("ok");
+        System.out.println("ok");*/
+        
+        ArticoloMagazzino art = DAO.getArticoloMagazzinoDAO().getArticoloMagazzinoByCodice(1);
+        System.out.println("OLD position: " + art.getPosizione().getScaffale() + ", " + art.getPosizione().getRipiano());
+        art = DAO.getArticoloMagazzinoDAO().moveArticoloMagazzino(art, new Posizione(1,9));
+        System.out.println("NEW position: " + art.getPosizione().getScaffale() + ", " + art.getPosizione().getRipiano());
+        System.out.println(" end ");
     }
 
     public static DAOSettings getDAO() {
