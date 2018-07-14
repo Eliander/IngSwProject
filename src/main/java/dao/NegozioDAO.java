@@ -1,5 +1,6 @@
 package dao;
 
+import control.Main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,8 +50,6 @@ public class NegozioDAO {
             pst.setString(1, codicefiscale);
             ResultSet resultset = pst.executeQuery();
             negozio = mapRowToNegozio(resultset);
-            //to do implementare responsabile DAO
-            negozio.setResponsabile(null);
             con.close();
         } catch (Exception ex) {
             log.error(ex);
@@ -80,6 +79,7 @@ public class NegozioDAO {
             if (resultset.next()) {
                 negozio = new Negozio(resultset.getString("codiceFiscale"), resultset.getString("nome"), 
                         new Indirizzo(resultset.getString("citta"), resultset.getString("via"), resultset.getInt("numero")), null);
+                negozio.setResponsabile(new Responsabile(Main.getDAO().getUtenteDAO().getUtenteByUsername(resultset.getString("responsabile"))));
             }
         } catch (Exception ex) {
             log.error(ex);

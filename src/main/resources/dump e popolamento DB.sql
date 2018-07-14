@@ -184,6 +184,9 @@ INSERT INTO NEGOZIO (codiceFiscale, nome, via, numero, citta, responsabile) VALU
 /* POPOLAMENTO ORDINE */ 
 INSERT INTO ORDINE (dataOrdine, negozio) VALUES ('2018-07-13', 'NGZ001');
 INSERT INTO ORDINE (dataOrdine, negozio) VALUES ('2018-05-10', 'NGZ001');
+/* POPOLAMENTO SPEDIZIONIERE */
+INSERT INTO SPEDIZIONIERE (nome, telefono, via, numero, citta) VALUES ('Bartolini', '045963152', 'del pacco', 15, 'Verona');
+INSERT INTO SPEDIZIONIERE (nome, telefono, via, numero, citta) VALUES ('DHL', '045781236', 'della lettera', 92, 'Milano');
 /* POPOLAMENTO POSTI */
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 1, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 2, true);

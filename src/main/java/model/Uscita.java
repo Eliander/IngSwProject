@@ -8,13 +8,13 @@ import java.util.Date;
  * @author Bosky
  */
 public class Uscita {
-    private String numBolla;
+    private int numBolla;
     private Date data;
     private ArrayList<ArticoloMagazzino> articoli;
     private Ordine ordine;
     private Spedizioniere spedizioniere;
     
-    public Uscita(String numBolla, Date data, ArrayList<ArticoloMagazzino> articoli, Ordine ordine, Spedizioniere spedizioniere) {
+    public Uscita(int numBolla, Date data, ArrayList<ArticoloMagazzino> articoli, Ordine ordine, Spedizioniere spedizioniere) {
         this.numBolla = numBolla;
         this.data = data;
         this.articoli = articoli;
@@ -22,11 +22,19 @@ public class Uscita {
         this.spedizioniere = spedizioniere;
     }
     
-    public String getNumBolla() {
+    public Uscita(Date data, ArrayList<ArticoloMagazzino> articoli, Ordine ordine, Spedizioniere spedizioniere) {
+        this.numBolla = 0;
+        this.data = data;
+        this.articoli = articoli;
+        this.ordine = ordine;
+        this.spedizioniere = spedizioniere;
+    }
+    
+    public int getNumBolla() {
         return this.numBolla;
     }
     
-    public void setNumBolla(String numBolla) {
+    public void setNumBolla(int numBolla) {
         this.numBolla = numBolla;
     }
     
