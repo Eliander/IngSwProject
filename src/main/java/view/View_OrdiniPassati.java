@@ -2,6 +2,7 @@ package view;
 
 import control.Listener_BackToHomeResponsabileButton;
 import control.Listener_DettagliOrdineButton;
+import control.Main;
 import dao.DAOSettings;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -36,7 +37,7 @@ public class View_OrdiniPassati extends JFrame{
     private JList list;
     private JScrollPane list_scroller;
     
-    private static DAOSettings DAO = new DAOSettings();
+    private static DAOSettings DAO = Main.getDAO();
     
     public View_OrdiniPassati(Utente user) {
         this.user = user;

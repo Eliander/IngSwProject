@@ -3,6 +3,7 @@ package view;
 import control.Listener_AddArticoloOrdineButton;
 import control.Listener_BackToHomeResponsabileButton;
 import control.Listener_ConfermaOrdineButton;
+import control.Main;
 import dao.DAOSettings;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -52,7 +53,7 @@ public class View_CreaOrdine extends JFrame{
     private JScrollPane list_sel_articoli_scroller;
     
     private Ordine ordine;
-    private static DAOSettings DAO = new DAOSettings();
+    private static DAOSettings DAO = Main.getDAO();
     
     public View_CreaOrdine(Utente user) {
         this.user = user;

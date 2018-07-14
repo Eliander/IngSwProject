@@ -17,7 +17,7 @@ public class Listener_ConfermaOrdineButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_ConfermaOrdineButton.class);
     private View_CreaOrdine frame;
     
-    private static DAOSettings DAO = new DAOSettings();
+    private static DAOSettings DAO = Main.getDAO();
 
     public Listener_ConfermaOrdineButton(View_CreaOrdine frame) {
         this.frame = frame;
