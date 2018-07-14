@@ -74,6 +74,10 @@ public class Articolo {
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
+    
+    public boolean addMateriale(String materiale){
+        return this.materiali.add(materiale);
+    }
 
     @Override
     public int hashCode() {
