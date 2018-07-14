@@ -40,7 +40,7 @@ public class View_HomeResponsabile extends JFrame{
                      
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 300));
+        setPreferredSize(new Dimension(600, 500));
         setResizable(false);
         
         head_panel = new JPanel();

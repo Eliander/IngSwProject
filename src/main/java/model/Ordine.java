@@ -57,6 +57,10 @@ public class Ordine {
         return this.articoli.add(art);
     }
     
+    public boolean removeArticolo(ArticoloOrdinato art){
+        return this.articoli.remove(art);
+    }
+    
     public double getPrezzoTot() {
         double tot = 0;
         for(ArticoloOrdinato art : this.articoli){
