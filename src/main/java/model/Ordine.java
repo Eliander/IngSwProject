@@ -20,6 +20,13 @@ public class Ordine {
         this.articoli = articoli;
         this.negozio = negozio;
     }
+    
+    public Ordine(Date data, ArrayList<ArticoloOrdinato> articoli, Negozio negozio) {
+        this.codice = 0;
+        this.data = data;
+        this.articoli = articoli;
+        this.negozio = negozio;
+    }
 
     public int getCodice() {
         return codice;

@@ -19,6 +19,7 @@ public class ArticoloOrdinatoDAO {
 
     private final String SELECTBYARTICOLO = "SELECT * FROM ARTICOLOORDINATO WHERE NOME = ?";
     private final String SELECTBYORDINE = "SELECT * FROM ARTICOLOORDINATO WHERE IDORDINE = ?";
+    private final String INSERT = "INSERT INTO ARTICOLOORDINATO(nome, quantita, idOrdine) VALUES(?, ?, ?)";
 
     public Articolo getArticoloOrdinatoByNome(String nome) {
         ArticoloOrdinato articolo = null;
@@ -48,6 +49,23 @@ public class ArticoloOrdinatoDAO {
             log.error(ex);
         }
         return articoli;
+    }
+    
+    public boolean addArticoloOrdinato(ArticoloOrdinato articoloOrdinato, int numOrdine) {
+        boolean esito = true;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(INSERT);
+            pst.setString(1, articoloOrdinato.getNome());
+            pst.setInt(2, articoloOrdinato.getQuantita());
+            pst.setInt(3, numOrdine);
+            pst.executeUpdate();
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+            esito = false;
+        }
+        return esito;
     }
 
     private ArticoloOrdinato mapRowToArticoloOrdinato(ResultSet resultset) {

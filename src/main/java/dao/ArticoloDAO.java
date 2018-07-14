@@ -19,6 +19,7 @@ public class ArticoloDAO {
     private final String SELECT = "SELECT * FROM ARTICOLO WHERE NOME = ?";
     private final String INSERT = "INSERT INTO ARTICOLO (nome, descrizione, prezzo, categoria, sport) VALUES (?, ?, ?, ?, ?)";
     private final String DELETE = "DELETE * FROM ARTICOLO WHERE NOME = ?";
+    private final String SELECTALL = "SELECT * FROM ARTICOLO";
 
     public Articolo getArticolo(String nome) {
         Articolo articolo = null;
@@ -34,25 +35,8 @@ public class ArticoloDAO {
         }
         return articolo;
     }
+   
 
-    private Articolo mapRowToArticolo(ResultSet resultset) {
-        Articolo articolo = null;
-        try {
-            if (resultset.next()) {
-                //istanzio l'oggetto articolo
-                articolo = new Articolo(resultset.getString("nome"), resultset.getString("descrizione"), resultset.getString("sport"), 
-                        resultset.getString("categoria"), new ArrayList<String>(), resultset.getDouble("prezzo"));
-                //cquery a db per materiali
-                ArrayList<String> materialiFromArticolo = Main.getDAO().getMaterialiPerArticoloDAO().getMaterialiByArticolo(articolo.getNome());
-                articolo.setMateriali(materialiFromArticolo);
-            }
-
-        } catch (Exception ex) {
-            log.error(ex);
-        }
-        return articolo;
-    }
-    
     public boolean addArticolo(Articolo articolo) {
         boolean esito = true;
         boolean insertMateriali = true;
@@ -75,6 +59,20 @@ public class ArticoloDAO {
         return esito && insertMateriali;
     }
 
+    public ArrayList<Articolo> getAllArticoli() {
+        ArrayList<Articolo> articoli = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECTALL);
+            ResultSet resultset = pst.executeQuery();
+            articoli = mapRowToArrayArticoli(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articoli;
+    }
+
     public boolean delArticolo(Articolo articolo) {
         boolean esito = false;
         try {
@@ -89,5 +87,42 @@ public class ArticoloDAO {
         }
         return esito;
     }
+
+    private Articolo mapRowToArticolo(ResultSet resultset) {
+        Articolo articolo = null;
+        try {
+            if (resultset.next()) {
+                //istanzio l'oggetto articolo
+                articolo = new Articolo(resultset.getString("nome"), resultset.getString("descrizione"), resultset.getString("sport"),
+                        resultset.getString("categoria"), new ArrayList<String>(), resultset.getDouble("prezzo"));
+                //cquery a db per materiali
+                ArrayList<String> materialiFromArticolo = Main.getDAO().getMaterialiPerArticoloDAO().getMaterialiByArticolo(articolo.getNome());
+                articolo.setMateriali(materialiFromArticolo);
+            }
+
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articolo;
+    }
     
+    private ArrayList<Articolo> mapRowToArrayArticoli(ResultSet resultset) {
+        ArrayList<Articolo> articoli = new ArrayList();
+        try {
+            while (resultset.next()) {
+                //istanzio l'oggetto articolo
+                Articolo articolo = new Articolo(resultset.getString("nome"), resultset.getString("descrizione"), resultset.getString("sport"),
+                        resultset.getString("categoria"), new ArrayList<String>(), resultset.getDouble("prezzo"));
+                //cquery a db per materiali
+                ArrayList<String> materialiFromArticolo = Main.getDAO().getMaterialiPerArticoloDAO().getMaterialiByArticolo(articolo.getNome());
+                articolo.setMateriali(materialiFromArticolo);
+                articoli.add(articolo);
+            }
+
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articoli;
+    }
+
 }

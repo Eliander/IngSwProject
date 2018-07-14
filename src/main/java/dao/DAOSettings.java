@@ -89,7 +89,7 @@ public class DAOSettings {
         return negozioDAO;
     }
 
-    public static OrdineDAO getOrdineDAO() {
+    public OrdineDAO getOrdineDAO() {
         return ordineDAO;
     }  
 }
