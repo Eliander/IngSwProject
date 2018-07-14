@@ -1,5 +1,6 @@
 package view;
 
+import control.Listener_AddArticoloIngressoButton;
 import control.Listener_BackToHomeMagazziniereButton;
 import control.Main;
 import dao.DAOSettings;
@@ -24,7 +25,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
+import javax.swing.text.DateFormatter;
 import model.Articolo;
+import model.ArticoloMagazzino;
 import model.Ingresso;
 import model.Utente;
 
@@ -105,8 +108,13 @@ public class View_RegistraIngresso extends JFrame{
         label_data = new JLabel();
         label_data.setText("Data di produzione:");
         contentPane.add(label_data);
-        DateFormat format = new SimpleDateFormat("yyyy--MMMM--dd");
-        text_data = new JFormattedTextField(format);
+        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        DateFormatter formatter = new DateFormatter(format);
+        format.setLenient(false);
+        formatter.setAllowsInvalid(false);
+        formatter.setOverwriteMode(true);
+        text_data = new JFormattedTextField(formatter);
+        text_data.setValue(new Date());
         contentPane.add(text_data);
         
         label_scaffale = new JLabel();
@@ -125,7 +133,7 @@ public class View_RegistraIngresso extends JFrame{
         
         button_addArticolo = new JButton();
         button_addArticolo.setText("Aggiungi articolo");
-        //button_addArticolo.addActionListener(new Listener_AddArticoloIngressoButton(this));
+        button_addArticolo.addActionListener(new Listener_AddArticoloIngressoButton(this));
         btn_panel2 = new JPanel();
         btn_panel2.add(button_addArticolo);
         btn_panel2.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -152,5 +160,47 @@ public class View_RegistraIngresso extends JFrame{
     
     public Utente getUser(){
         return this.user;
+    }
+    
+    public Articolo getSelectedArticolo(){
+        return (Articolo)this.list_articoli.getSelectedValue();
+    }
+    
+    public int getSelectedCodice(){
+        try{
+            return Integer.parseInt(this.text_codice.getText());
+        }
+        catch(Exception ex){
+            return -1;
+        }
+    }
+    
+    public Date getSelectedData(){
+        try{
+            DateFormat format = new SimpleDateFormat("dd/MM/yy");
+            Date data = format.parse(this.text_data.getText());
+            return data;
+        }
+        catch(Exception ex){
+            return new Date();
+        }
+    }
+    
+    public int getSelectedScaffale(){
+        return (Integer)this.text_scaffale.getValue();
+    }
+    
+    public int getSelectedRipiano(){
+        return (Integer)this.text_ripiano.getValue();
+    }
+    
+    public void addArticolo(ArticoloMagazzino artmag){
+        if(!this.ingresso.getArticoli().contains(artmag)){
+            this.ingresso.addArticolo(artmag);
+        }
+        //aggiorno la lista degli articoli aggiunti
+        ArticoloMagazzino[] articoli_sel = new ArticoloMagazzino[this.ingresso.getArticoli().size()];
+        articoli_sel = this.ingresso.getArticoli().toArray(articoli_sel);
+        this.list_articoli_aggiunti.setListData(articoli_sel);
     }
 }

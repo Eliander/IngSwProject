@@ -42,4 +42,8 @@ public class Ingresso {
     public void setArticoli(ArrayList<ArticoloMagazzino> articoli) {
         this.articoli = articoli;
     }
+    
+    public boolean addArticolo(ArticoloMagazzino art){
+        return this.articoli.add(art);
+    }
 }
