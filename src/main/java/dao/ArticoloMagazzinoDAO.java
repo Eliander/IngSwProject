@@ -19,8 +19,13 @@ public class ArticoloMagazzinoDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(ArticoloMagazzinoDAO.class);
 
+    //select by articolo
+    private final String SELECT = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = 0";
     private final String SELECTBYNOME = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ?";
+    private final String SELECTBYNOMEINMAGAZZINO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ? AND CODICEUSCITA = 0";
+    //select by codice
     private final String SELECTBYCODICE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
+    
     private final String SELECTBYCODICEINGRESSO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEINGRESSO = ?";
     private final String SELECTBYCODICEUSCITA = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
     private final String SELECTLASTADDED = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE =(SELECT MAX(CODICE) FROM ARTICOLOMAGAZZINO)";
@@ -31,6 +36,20 @@ public class ArticoloMagazzinoDAO {
     private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     private final String MOVE = "UPDATE ARTICOLOMAGAZZINO SET scaffale = ?, ripiano = ? WHERE codice = ?";
 
+    public ArrayList<ArticoloMagazzino> getAllArticoliMagazzino() {
+        ArrayList<ArticoloMagazzino> articoli = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECT);
+            ResultSet resultset = pst.executeQuery();
+            articoli = mapRowToArrayListArticoloMagazzino(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articoli;
+    }
+    
     public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByNome(String nome) {
         ArrayList<ArticoloMagazzino> articoli = null;
         try {
@@ -194,14 +213,11 @@ public class ArticoloMagazzinoDAO {
         ArrayList<ArticoloMagazzino> articoli = new ArrayList();
         ArticoloMagazzino artMagazzino = null;
         try {
-            if (resultset.next()) {
+            Articolo articolo = null;
+            while (resultset.next()) {
                 //mi genero l'articolo
-                Articolo articolo = Main.getDAO().getArticoloDAO().getArticolo(resultset.getString("nome"));
+                articolo = Main.getDAO().getArticoloDAO().getArticolo(resultset.getString("nome"));
                 articoli.add(getArtMagazzino(articolo, resultset));
-                while (resultset.next()) {
-                    artMagazzino = getArtMagazzino(articolo, resultset);
-                    articoli.add(artMagazzino);
-                }
             }
         } catch (Exception ex) {
             log.error(ex);
