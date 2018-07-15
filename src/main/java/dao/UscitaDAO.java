@@ -5,9 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
-import model.Indirizzo;
-import model.Ordine;
-import model.Spedizioniere;
 import model.Uscita;
 import org.apache.logging.log4j.LogManager;
 

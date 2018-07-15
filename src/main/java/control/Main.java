@@ -27,11 +27,23 @@ public class Main {
 
     public static void main(String[] args) {
         
-        /*View_Login login = new View_Login();
-        login.setVisible(true);*/
-        Negozio negozio = DAO.getNegozioDAO().getNegozioByCodiceFiscale("NGZ001");
+        View_Login login = new View_Login();
+        login.setVisible(true);
+        /*Negozio negozio = DAO.getNegozioDAO().getNegozioByCodiceFiscale("NGZ001");
         ArrayList<Ordine> ordiniByNegozio = DAO.getOrdineDAO().getOrdiniByNegozio(negozio);
-        System.out.println("end");
+        System.out.println("end");*/
+        /*String[] materiali = DAO.getMaterialiDAO().getMateriali();
+        String[] sport = DAO.getSportDAO().getSport();
+        String[] categorie = DAO.getCategoriaDAO().getCategorie();
+        for (String s : materiali){
+            System.out.println(s);
+        }
+        for (String s : sport){
+            System.out.println(s);
+        }
+        for (String s : categorie){
+            System.out.println(s);
+        }*/
     }
 
     public static DAOSettings getDAO() {

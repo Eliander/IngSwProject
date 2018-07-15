@@ -1,3 +1,8 @@
+/**
+ * Author:  Elia
+ * Created: Jul 15, 2018
+ */
+
 /* CREAZIONE DB*/
 
 create table UTENTE(
@@ -92,8 +97,8 @@ create table USCITA(
     spedizioniere varchar(20),
     idOrdine int,
     PRIMARY KEY(bolla),
-    FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome),
-    FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)
+    FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome)
+    /*, FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)*/
 );
 
 create table ARTICOLOMAGAZZINO(
@@ -117,8 +122,8 @@ create table ARTICOLOORDINATO(
     quantita int,
     idOrdine int,
     PRIMARY KEY (nome),
-    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome),
-    FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)
+    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome)
+    /*, FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)*/
 );
 
 create table STATISTICA(

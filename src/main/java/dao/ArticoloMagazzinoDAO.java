@@ -88,7 +88,7 @@ public class ArticoloMagazzinoDAO {
         return articoli;
     }
 
-    public ArticoloMagazzino addArticoloMagazzino(ArticoloMagazzino articoloMagazzino) {
+    public ArticoloMagazzino addArticoloMagazzino(ArticoloMagazzino articoloMagazzino, int codiceIngresso) {
         ArticoloMagazzino articolo = null;
         try {
             Connection con = DAOSettings.getConnection();
@@ -97,9 +97,9 @@ public class ArticoloMagazzinoDAO {
             pst.setDate(2, new java.sql.Date(articoloMagazzino.getData().getTime()));
             pst.setInt(3, articoloMagazzino.getPosizione().getScaffale());
             pst.setInt(4, articoloMagazzino.getPosizione().getRipiano());
-            pst.setInt(5, articoloMagazzino.getCodiceIngresso());
+            pst.setInt(5, codiceIngresso);
             //to do: assicurarsi che sia 0
-            pst.setInt(6, articoloMagazzino.getCodiceUscita());
+            pst.setInt(6, 0);
             pst.executeUpdate();
             //eseguita la query, restituisco l'oggetto salvato che ha anche l'ID
             pst = con.prepareStatement(SELECTLASTADDED);
@@ -193,7 +193,7 @@ public class ArticoloMagazzinoDAO {
         ArticoloMagazzino artMagazzino = null;
         try {
             artMagazzino = new ArticoloMagazzino(articolo, resultset.getInt("codice"), new Date((resultset.getDate("dataProduzione")).getTime()), new Posizione(
-                    resultset.getInt("scaffale"), resultset.getInt("ripiano")), resultset.getInt("codiceIngresso"), resultset.getInt("codiceUscita"));
+                    resultset.getInt("scaffale"), resultset.getInt("ripiano")));
         } catch (Exception ex) {
             log.error(ex);
         }

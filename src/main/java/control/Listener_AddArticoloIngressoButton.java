@@ -31,7 +31,7 @@ public class Listener_AddArticoloIngressoButton implements ActionListener{
         int scaffale = this.frame.getSelectedScaffale();
         int ripiano = this.frame.getSelectedRipiano();
         if(art != null && codice>0){
-            ArticoloMagazzino artmag = new ArticoloMagazzino(art,codice,data,new Posizione(scaffale,ripiano),-1,-1);
+            ArticoloMagazzino artmag = new ArticoloMagazzino(art,codice,data,new Posizione(scaffale,ripiano));
             this.frame.addArticolo(artmag);
             System.out.println("Articolo aggiunto");
         }
