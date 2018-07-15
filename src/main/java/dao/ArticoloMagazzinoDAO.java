@@ -24,6 +24,7 @@ public class ArticoloMagazzinoDAO {
     private final String SELECTBYCODICEINGRESSO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEINGRESSO = ?";
     private final String SELECTBYCODICEUSCITA = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
     private final String SELECTLASTADDED = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE =(SELECT MAX(CODICE) FROM ARTICOLOMAGAZZINO)";
+    private final String COUNT = "SELECT COUNT(CODICE) AS COUNT FROM ARTICOLOMAGAZZINO WHERE NOME = ?";
     private final String UPDATEUSCITA = "UPDATE ARTICOLOMAGAZZINO SET codiceUscita = ? WHERE CODICE = ?";
     private final String INSERT = "INSERT INTO ARTICOLOMAGAZZINO(nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES(?, ?, ?, ?, ?, ?)";
     private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
@@ -111,6 +112,21 @@ public class ArticoloMagazzinoDAO {
             log.error(ex);
         }
         return articolo;
+    }
+    
+    public int countArticoloMagazzino(Articolo articolo) {
+        int count = 0;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(COUNT);
+            pst.setString(1, articolo.getNome());
+            ResultSet resultset = pst.executeQuery();
+            count = resultset.getInt("COUNT");
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return count;
     }
 
     public boolean removeArticoloMagazzino(ArticoloMagazzino articoloMagazzino) {
