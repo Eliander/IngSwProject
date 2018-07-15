@@ -29,6 +29,13 @@ public class ArticoloMagazzino extends Articolo{
         this.data = data;
         this.posizione = posizione;
     }
+    
+    public ArticoloMagazzino(Articolo articolo, int codice, Date data, int x, int y) {
+        super(articolo.getNome(), articolo.getDescrizione(), articolo.getSport(), articolo.getCategoria(), articolo.getMateriali(), articolo.getPrezzo());
+        this.codice = codice;
+        this.data = data;
+        this.posizione = new Posizione(x, y);
+    }
 
     public int getCodice() {
         return codice;
