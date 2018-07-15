@@ -1,6 +1,7 @@
 package view;
 
 import control.Listener_AddArticoloIngressoButton;
+import control.Listener_AddIngressoButton;
 import control.Listener_BackToHomeMagazziniereButton;
 import control.Main;
 import dao.DAOSettings;
@@ -149,7 +150,7 @@ public class View_RegistraIngresso extends JFrame{
         
         button_addIngresso = new JButton();
         button_addIngresso.setText("Crea ingresso");
-        //button_addIngresso.addActionListener(new Listener_AddIngressoButton(this));
+        button_addIngresso.addActionListener(new Listener_AddIngressoButton(this));
         btn_panel3 = new JPanel();
         btn_panel3.add(button_addIngresso);
         btn_panel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -160,6 +161,10 @@ public class View_RegistraIngresso extends JFrame{
     
     public Utente getUser(){
         return this.user;
+    }
+    
+    public Ingresso getIngresso(){
+        return this.ingresso;
     }
     
     public Articolo getSelectedArticolo(){

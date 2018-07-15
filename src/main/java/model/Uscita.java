@@ -70,6 +70,10 @@ public class Uscita {
         this.spedizioniere = spedizioniere;
     }
     
+    public boolean addArticolo(ArticoloMagazzino art){
+        return this.articoli.add(art);
+    }
+    
     //controlla che gli articoli in uscita rispecchiano gli articoli dell'ordine e le quantita
     public boolean checkUscita() {
         for(ArticoloOrdinato artord : this.ordine.getArticoli()){
