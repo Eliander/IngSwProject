@@ -2,10 +2,13 @@ package view;
 
 import control.Listener_BackToHomeMagazziniereButton;
 import control.Listener_SpostaButton;
+import control.Main;
+import dao.DAOSettings;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,6 +43,8 @@ public class View_SpostaArticoli extends JFrame{
     private JButton button_sposta;
     private JPanel btn_panel2;
     
+    private static DAOSettings DAO = Main.getDAO();
+    
     public View_SpostaArticoli(Utente user) {
         this.user = user;
         initComponents();
@@ -69,12 +74,11 @@ public class View_SpostaArticoli extends JFrame{
         label_sel_articolo.setText("Seleziona articolo:");
         contentPane.add(label_sel_articolo);
         
-        //TO DO
         //ricavo da DAO (tramite query) la lista di tutti gli ArticoloMagazzino
-        //ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getAllArticoloMagazzino();
-        //ArticoloMagazzino[] articoli_mag = new ArticoloMagazzino[artmag.size()];
-        //articoli_mag = artmag.toArray(articoli_mag);
-        list_articoli = new JList(); //passare come parametro l'array articoli_mag
+        ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getAllArticoliMagazzino();
+        ArticoloMagazzino[] articoli_mag = new ArticoloMagazzino[artmag.size()];
+        articoli_mag = artmag.toArray(articoli_mag);
+        list_articoli = new JList(articoli_mag);
         list_articoli.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list_articoli.setLayoutOrientation(JList.VERTICAL);
         list_articoli.setVisibleRowCount(10);
