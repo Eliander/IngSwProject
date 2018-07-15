@@ -19,12 +19,13 @@ public class ArticoloMagazzinoDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(ArticoloMagazzinoDAO.class);
 
-    private final String SELECTBYNOME = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ? ";
+    private final String SELECTBYNOME = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ?";
     private final String SELECTBYCODICE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     private final String SELECTBYCODICEINGRESSO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEINGRESSO = ?";
     private final String SELECTBYCODICEUSCITA = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
     private final String SELECTLASTADDED = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE =(SELECT MAX(CODICE) FROM ARTICOLOMAGAZZINO)";
-    private final String COUNT = "SELECT COUNT(CODICE) AS COUNT FROM ARTICOLOMAGAZZINO WHERE NOME = ?";
+    //devo usare codiceuscita = 0 altrimenti prende anche quelli gia usciti
+    private final String COUNT = "SELECT COUNT(CODICE) AS COUNT FROM ARTICOLOMAGAZZINO WHERE NOME = ? AND CODICEUSCITA = 0";
     private final String UPDATEUSCITA = "UPDATE ARTICOLOMAGAZZINO SET codiceUscita = ? WHERE CODICE = ?";
     private final String INSERT = "INSERT INTO ARTICOLOMAGAZZINO(nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES(?, ?, ?, ?, ?, ?)";
     private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
