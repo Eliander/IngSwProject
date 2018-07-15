@@ -84,12 +84,11 @@ public class View_RegistraUscita extends JFrame{
         label_sel_ordine.setText("Seleziona ordine:");
         contentPane.add(label_sel_ordine);
         
-        //TO DO
         //ricavo da DAO (tramite query) la lista di tutti gli Ordini
-        //ArrayList<Ordine> ord = DAO.getOrdineDAO().getAllOrdini();
-        //Ordine[] ordini = new Ordine[ord.size()];
-        //ordini = ord.toArray(ordini);
-        list_ordini = new JList(); //passare come parametro l'array ordini
+        ArrayList<Ordine> ord = DAO.getOrdineDAO().getOrdini();
+        Ordine[] ordini = new Ordine[ord.size()];
+        ordini = ord.toArray(ordini);
+        list_ordini = new JList(ordini);
         list_ordini.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list_ordini.setLayoutOrientation(JList.VERTICAL);
         list_ordini.setVisibleRowCount(10);

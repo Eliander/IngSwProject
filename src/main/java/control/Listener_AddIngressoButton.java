@@ -27,15 +27,14 @@ public class Listener_AddIngressoButton implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Ingresso ing = this.frame.getIngresso();
         if(ing.getArticoli().size() > 0){
-            //TO DO
             //aggiungere da DAO l'ingresso alla lista ingressi
-            //if(DAO.getIngressoDAO().addIngresso(ing)){
+            if(DAO.getIngressoeDAO().addIngresso(ing)){
                 Utente user = this.frame.getUser();
                 this.frame.dispose();
                 View_RegistraIngresso view_RegistraIngresso = new View_RegistraIngresso(user);
                 view_RegistraIngresso.setVisible(true);
                 System.out.println("Ingresso creato");
-            //}
+            }
         }
     }
 }

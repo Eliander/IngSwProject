@@ -33,15 +33,14 @@ public class Listener_AddUscitaButton implements ActionListener{
         Spedizioniere spedizioniere = this.frame.getSelectedSpedizioniere();
         usc.setSpedizioniere(spedizioniere);
         if(usc.getArticoli().size()>0 && usc.getOrdine()!=null && usc.getSpedizioniere()!=null){
-            //TO DO
             //aggiungere da DAO l'uscita alla lista uscite
-            //if(DAO.getUscitaDAO().addUscita(usc)){
+            if(DAO.getUscitaDAO().addUscita(usc)){
                 Utente user = this.frame.getUser();
                 this.frame.dispose();
                 View_RegistraUscita view_RegistraUscita = new View_RegistraUscita(user);
                 view_RegistraUscita.setVisible(true);
-                System.out.println("Uscita creato");
-            //}
+                System.out.println("Uscita creata");
+            }
         }
     }
 }

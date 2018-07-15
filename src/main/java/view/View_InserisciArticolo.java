@@ -3,6 +3,8 @@ package view;
 import control.Listener_AddArticoloButton;
 import control.Listener_AddMaterialeButton;
 import control.Listener_BackToHomeSegretarioButton;
+import control.Main;
+import dao.DAOSettings;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -51,6 +53,8 @@ public class View_InserisciArticolo extends JFrame{
     private JButton button_add;
     private JPanel btn_panel2;
     
+    private static DAOSettings DAO = Main.getDAO();
+    
     public View_InserisciArticolo(Utente user) {
         this.user = user;
         articolo = new Articolo("","","","",new ArrayList<>(),0);
@@ -92,18 +96,16 @@ public class View_InserisciArticolo extends JFrame{
         label_sport = new JLabel();
         label_sport.setText("Sport: ");
         contentPane.add(label_sport);
-        //TO DO
         //ricavo da DAO la lista degli sport
-        String[] sports = {"Basket","Calcio"};
+        String[] sports = DAO.getSportDAO().getSport();
         text_sport = new JComboBox(sports);
         contentPane.add(text_sport);
         
         label_categoria = new JLabel();
         label_categoria.setText("Categoria: ");
         contentPane.add(label_categoria);
-        //TO DO
         //ricavo da DAO la lista delle categorie
-        String[] categorie = {"Abbigliamento","Accessori"};
+        String[] categorie = DAO.getCategoriaDAO().getCategorie();
         text_categoria = new JComboBox(categorie);
         contentPane.add(text_categoria);
         
@@ -112,9 +114,8 @@ public class View_InserisciArticolo extends JFrame{
         contentPane.add(label_materiali);
         materiali_panel = new JPanel();
         materiali_panel.setLayout(new GridLayout(3,1));
-        //TO DO
         //ricavo da DAO la lista dei materiali
-        String[] mats = {"Cotone","Poliestero"};
+        String[] mats = DAO.getMaterialiDAO().getMateriali();
         text_materiale = new JComboBox(mats);
         materiali_panel.add(text_materiale);
         button_add_materiale = new JButton();
