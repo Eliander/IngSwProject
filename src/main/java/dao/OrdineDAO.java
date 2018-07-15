@@ -62,21 +62,21 @@ public class OrdineDAO {
         boolean esito = false;
         try {
             //controllo se e il primo ordine della giornata
-            if (checkDailyOrder(ordine)) {
-                Connection con = DAOSettings.getConnection();
-                PreparedStatement pst = con.prepareStatement(INSERT);
-                pst.setDate(1, new java.sql.Date(ordine.getData().getTime()));
-                pst.setString(2, ordine.getNegozio().getCodiceFiscale());
-                pst.executeUpdate();
-                con.close();
-                //mi prendo il codice appena generato
-                int codice = getNumeroOrdineByOrdine(ordine);
-                //aggiungo gli articoliOrdinati nel db
-                for (ArticoloOrdinato articolo : ordine.getArticoli()) {
-                    Main.getDAO().getArticoloOrdinatoDAO().addArticoloOrdinato(articolo, codice);
-                }
-                esito = true;
+            //con le chiavi referenziate era necessario
+            //if (checkDailyOrder(ordine)) {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(INSERT);
+            pst.setDate(1, new java.sql.Date(ordine.getData().getTime()));
+            pst.setString(2, ordine.getNegozio().getCodiceFiscale());
+            pst.executeUpdate();
+            con.close();
+            //mi prendo il codice appena generato
+            int codice = getNumeroOrdineByOrdine(ordine);
+            //aggiungo gli articoliOrdinati nel db
+            for (ArticoloOrdinato articolo : ordine.getArticoli()) {
+                Main.getDAO().getArticoloOrdinatoDAO().addArticoloOrdinato(articolo, codice);
             }
+            esito = true;
         } catch (Exception ex) {
             log.error(ex);
         }
