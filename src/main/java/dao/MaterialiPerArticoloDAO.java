@@ -25,7 +25,7 @@ public class MaterialiPerArticoloDAO {
             PreparedStatement pst = con.prepareStatement(SELECT);
             pst.setString(1, nomeArticolo);
             ResultSet resultset = pst.executeQuery();
-            materiali = mapRowToMaterialiPerArticolo(resultset);
+            materiali = mapRowToArrayListMaterialiPerArticolo(resultset);
             con.close();
         } catch (Exception ex) {
             log.error(ex);
@@ -53,7 +53,7 @@ public class MaterialiPerArticoloDAO {
     
     }
 
-    private ArrayList<String> mapRowToMaterialiPerArticolo(ResultSet resultset) {
+    private ArrayList<String> mapRowToArrayListMaterialiPerArticolo(ResultSet resultset) {
         ArrayList<String> materiali = new ArrayList();
         try {
             while (resultset.next()) {

@@ -19,6 +19,7 @@ public class ArticoloOrdinatoDAO {
 
     private final String SELECTBYARTICOLO = "SELECT * FROM ARTICOLOORDINATO WHERE NOME = ?";
     private final String SELECTBYORDINE = "SELECT * FROM ARTICOLOORDINATO WHERE IDORDINE = ?";
+    private final String SELECT = "SELECT * FROM ARTICOLOORDINATO";
     private final String INSERT = "INSERT INTO ARTICOLOORDINATO(nome, quantita, idOrdine) VALUES(?, ?, ?)";
 
     public Articolo getArticoloOrdinatoByNome(String nome) {
@@ -50,7 +51,21 @@ public class ArticoloOrdinatoDAO {
         }
         return articoli;
     }
-    
+
+    public ArrayList<ArticoloOrdinato> getArticoliOrdinati() {
+        ArrayList<ArticoloOrdinato> articoli = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECT);
+            ResultSet resultset = pst.executeQuery();
+            articoli = mapRowToArrayList(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articoli;
+    }
+
     public boolean addArticoloOrdinato(ArticoloOrdinato articoloOrdinato, int numOrdine) {
         boolean esito = true;
         try {
@@ -82,6 +97,7 @@ public class ArticoloOrdinatoDAO {
         return articolo;
     }
 
+    //per limitare accessi a db
     private ArrayList<ArticoloOrdinato> mapRowToArrayListArticoloOrdinato(ResultSet resultset) {
         ArrayList<ArticoloOrdinato> articoli = new ArrayList();
         ArticoloOrdinato artMagazzino = null;
@@ -94,6 +110,23 @@ public class ArticoloOrdinatoDAO {
                     artMagazzino = getArticoloOrdinato(articolo, resultset);
                     articoli.add(artMagazzino);
                 }
+            }
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articoli;
+    }
+
+    //non ho sempre lo stesso articolo, devo cambairlo qui
+    private ArrayList<ArticoloOrdinato> mapRowToArrayList(ResultSet resultset) {
+        ArrayList<ArticoloOrdinato> articoli = new ArrayList();
+        ArticoloOrdinato artMagazzino = null;
+        try {
+            while (resultset.next()) {
+                //mi genero l'articolo
+                Articolo articolo = Main.getDAO().getArticoloDAO().getArticolo(resultset.getString("nome"));
+                artMagazzino = getArticoloOrdinato(articolo, resultset);
+                articoli.add(artMagazzino);
             }
         } catch (Exception ex) {
             log.error(ex);

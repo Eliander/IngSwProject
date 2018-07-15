@@ -23,6 +23,7 @@ public class OrdineDAO {
     private final String SELECTBYID = "SELECT * FROM ORDINE WHERE ID = ?";
     private final String SELECTBYNEGOZIO = "SELECT * FROM ORDINE WHERE NEGOZIO = ?";
     private final String SELECTCODICE = "SELECT ID FROM ORDINE WHERE DATAORDINE = ? AND NEGOZIO = ?";
+    private final String SELECT = "SELECT * FROM ORDINE";
     private final String INSERT = "INSERT INTO ORDINE(dataOrdine, negozio) values (?, ?)";
     private final String CHECKDAILY = "SELECT * FROM ORDINE WHERE DATAORDINE = ? AND NEGOZIO = ?";
 
@@ -39,6 +40,20 @@ public class OrdineDAO {
             log.error(ex);
         }
         return ordine;
+    }
+    
+    public ArrayList<Ordine> getOrdini() {
+        ArrayList<Ordine> ordini = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECT);
+            ResultSet resultset = pst.executeQuery();
+            ordini = mapRowToArrayListOrdine(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return ordini;
     }
 
     public ArrayList<Ordine> getOrdiniByNegozio(Negozio negozio) {

@@ -24,6 +24,7 @@ public class ArticoloMagazzinoDAO {
     private final String SELECTBYCODICEINGRESSO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEINGRESSO = ?";
     private final String SELECTBYCODICEUSCITA = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
     private final String SELECTLASTADDED = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE =(SELECT MAX(CODICE) FROM ARTICOLOMAGAZZINO)";
+    private final String UPDATEUSCITA = "UPDATE ARTICOLOMAGAZZINO SET codiceUscita = ? WHERE CODICE = ?";
     private final String INSERT = "INSERT INTO ARTICOLOMAGAZZINO(nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES(?, ?, ?, ?, ?, ?)";
     private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     private final String MOVE = "UPDATE ARTICOLOMAGAZZINO SET scaffale = ?, ripiano = ? WHERE codice = ?";
@@ -118,6 +119,22 @@ public class ArticoloMagazzinoDAO {
             Connection con = DAOSettings.getConnection();
             PreparedStatement pst = con.prepareStatement(DELETE);
             pst.setInt(1, articoloMagazzino.getCodice());
+            pst.executeUpdate();
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+            esito = false;
+        }
+        return esito;
+    }
+    
+    public boolean updateUscita(ArticoloMagazzino articoloMagazzino, int codiceUscita) {
+        boolean esito = true;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(UPDATEUSCITA);
+            pst.setInt(1, codiceUscita);
+            pst.setInt(2, articoloMagazzino.getCodice());
             pst.executeUpdate();
             con.close();
         } catch (Exception ex) {

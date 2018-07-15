@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import model.ArticoloMagazzino;
 import model.Ordine;
 import model.Uscita;
 import org.apache.logging.log4j.LogManager;
@@ -20,6 +21,7 @@ public class UscitaDAO {
     private final String SELECTBYID = "SELECT * FROM USCITA WHERE ID = ?";
     private final String SELECTBYORDINE = "SELECT * FROM USCITA WHERE IDORDINE = ?";
     private final String INSERT = "INSERT INTO USCITA(dataUscita, spedizioniere, idOrdine) VALUES (?, ?, ?)";
+    private final String SELECTBOLLALASTADDED = "SELECT MAX(bolla) FROM USCITA";
     
 
     public Uscita getUscitaById(int id) {
@@ -60,7 +62,16 @@ public class UscitaDAO {
             pst.setDate(1, new java.sql.Date(uscita.getData().getTime()));
             pst.setString(2, uscita.getSpedizioniere().getNome());
             pst.setInt(3, uscita.getOrdine().getCodice());
+            pst.executeQuery();
+            //prendo da db il codice uscita appena inserito
+            pst = con.prepareStatement(SELECTBOLLALASTADDED);
             ResultSet resultset = pst.executeQuery();
+            resultset.next();
+            int codiceUscita = resultset.getInt("bolla");
+            //aggiorno campo in articoloMagazzino
+            for (ArticoloMagazzino articolo : uscita.getArticoli()){
+                Main.getDAO().getArticoloMagazzinoDAO().updateUscita(articolo, codiceUscita);
+            }
             con.close();
         } catch (Exception ex) {
             log.error(ex);
