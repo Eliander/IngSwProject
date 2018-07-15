@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import model.Ordine;
 import model.Uscita;
 import org.apache.logging.log4j.LogManager;
 
@@ -13,24 +14,13 @@ import org.apache.logging.log4j.LogManager;
  * @author Eliander
  */
 public class UscitaDAO {
-    
-    /*
-    
-    create table USCITA(
-    bolla int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    dataUscita date,
-    spedizioniere varchar(20),
-    idOrdine int,
-    PRIMARY KEY(bolla),
-    FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome),
-    FOREIGN KEY (idOrdine) REFERENCES ORDINE(id));
-    
-    */
-    
+
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(SpedizioniereDAO.class);
 
     private final String SELECTBYID = "SELECT * FROM USCITA WHERE ID = ?";
-    private final String SELECT = "SELECT * FROM USCITA";
+    private final String SELECTBYORDINE = "SELECT * FROM USCITA WHERE IDORDINE = ?";
+    private final String INSERT = "INSERT INTO USCITA(dataUscita, spedizioniere, idOrdine) VALUES (?, ?, ?)";
+    
 
     public Uscita getUscitaById(int id) {
         Uscita uscita = null;
@@ -45,6 +35,38 @@ public class UscitaDAO {
             log.error(ex);
         }
         return uscita;
+    }
+    
+    public Uscita getUscitaByOrdine(Ordine ordine) {
+        Uscita uscita = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECTBYORDINE);
+            pst.setInt(1, ordine.getCodice());
+            ResultSet resultset = pst.executeQuery();
+            uscita = mapRowToUscita(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return uscita;
+    }
+    
+    public boolean addUscita(Uscita uscita) {
+        boolean esito = true;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(INSERT);
+            pst.setDate(1, new java.sql.Date(uscita.getData().getTime()));
+            pst.setString(2, uscita.getSpedizioniere().getNome());
+            pst.setInt(3, uscita.getOrdine().getCodice());
+            ResultSet resultset = pst.executeQuery();
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+            esito = false;
+        }
+        return esito;
     }
 
     private Uscita mapRowToUscita(ResultSet resultset) {

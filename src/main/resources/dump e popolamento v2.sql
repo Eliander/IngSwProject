@@ -99,6 +99,7 @@ create table USCITA(
     PRIMARY KEY(bolla),
     FOREIGN KEY (spedizioniere) REFERENCES SPEDIZIONIERE(nome)
     /*, FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)*/
+    /* checkDaily */
 );
 
 create table ARTICOLOMAGAZZINO(
@@ -124,6 +125,7 @@ create table ARTICOLOORDINATO(
     PRIMARY KEY (nome),
     FOREIGN KEY (nome) REFERENCES ARTICOLO(nome)
     /*, FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)*/
+    /* RICORDA: se ripristinare devi ripristinare il checkDaily*/
 );
 
 create table STATISTICA(
