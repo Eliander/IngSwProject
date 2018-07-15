@@ -19,13 +19,10 @@ public class ArticoloMagazzinoDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(ArticoloMagazzinoDAO.class);
 
-    //select by articolo
     private final String SELECT = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = 0";
     private final String SELECTBYNOME = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ?";
     private final String SELECTBYNOMEINMAGAZZINO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ? AND CODICEUSCITA = 0";
-    //select by codice
     private final String SELECTBYCODICE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
-    
     private final String SELECTBYCODICEINGRESSO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEINGRESSO = ?";
     private final String SELECTBYCODICEUSCITA = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = ?";
     private final String SELECTLASTADDED = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE =(SELECT MAX(CODICE) FROM ARTICOLOMAGAZZINO)";
@@ -33,6 +30,7 @@ public class ArticoloMagazzinoDAO {
     private final String COUNT = "SELECT COUNT(CODICE) AS COUNT FROM ARTICOLOMAGAZZINO WHERE NOME = ? AND CODICEUSCITA = 0";
     private final String UPDATEUSCITA = "UPDATE ARTICOLOMAGAZZINO SET codiceUscita = ? WHERE CODICE = ?";
     private final String INSERT = "INSERT INTO ARTICOLOMAGAZZINO(nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES(?, ?, ?, ?, ?, ?)";
+    private final String ISINMAGAZZINO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ? AND CODICEUSCITA = 0";
     private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     private final String MOVE = "UPDATE ARTICOLOMAGAZZINO SET scaffale = ?, ripiano = ? WHERE codice = ?";
 
@@ -49,12 +47,27 @@ public class ArticoloMagazzinoDAO {
         }
         return articoli;
     }
-    
+
     public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByNome(String nome) {
         ArrayList<ArticoloMagazzino> articoli = null;
         try {
             Connection con = DAOSettings.getConnection();
             PreparedStatement pst = con.prepareStatement(SELECTBYNOME);
+            pst.setString(1, nome);
+            ResultSet resultset = pst.executeQuery();
+            articoli = mapRowToArrayListArticoloMagazzino(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articoli;
+    }
+
+    public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByNomeInMagazzino(String nome) {
+        ArrayList<ArticoloMagazzino> articoli = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECTBYNOMEINMAGAZZINO);
             pst.setString(1, nome);
             ResultSet resultset = pst.executeQuery();
             articoli = mapRowToArrayListArticoloMagazzino(resultset);
@@ -78,6 +91,24 @@ public class ArticoloMagazzinoDAO {
             log.error(ex);
         }
         return articolo;
+    }
+
+    public boolean isInMagazzinoByCodice(int codice) {
+        boolean esito = false;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(ISINMAGAZZINO);
+            pst.setInt(1, codice);
+            ResultSet resultset = pst.executeQuery();
+            //se ho trovato qualcosa
+            if (resultset.next()) {
+                esito = true;
+            }
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return esito;
     }
 
     public ArrayList<ArticoloMagazzino> getArticoliMagazzinoByCodiceIngresso(int codiceIngresso) {
@@ -133,7 +164,7 @@ public class ArticoloMagazzinoDAO {
         }
         return articolo;
     }
-    
+
     public int countArticoloMagazzino(Articolo articolo) {
         int count = 0;
         try {
@@ -163,7 +194,7 @@ public class ArticoloMagazzinoDAO {
         }
         return esito;
     }
-    
+
     public boolean updateUscita(ArticoloMagazzino articoloMagazzino, int codiceUscita) {
         boolean esito = true;
         try {
@@ -180,33 +211,37 @@ public class ArticoloMagazzinoDAO {
         return esito;
     }
 
-    public ArticoloMagazzino moveArticoloMagazzino(ArticoloMagazzino articoloMagazzino, Posizione nuovaPosizione) {
+    public boolean moveArticoloMagazzino(ArticoloMagazzino articoloMagazzino, Posizione nuovaPosizione) {
+        boolean esito = false;
         try {
             Connection con = DAOSettings.getConnection();
             //controllo se la posizione e libera
             boolean checkPosizioneLibera = Main.getDAO().getPosizioneDAO().checkPosizioneLibera(nuovaPosizione);
             if (checkPosizioneLibera) {
-                //salvo la vecchia posizione
-                Posizione vecchiaPosizione = articoloMagazzino.getPosizione();
-                //libera, muovo
-                PreparedStatement pst = con.prepareStatement(MOVE);
-                pst.setInt(1, nuovaPosizione.getScaffale());
-                pst.setInt(2, nuovaPosizione.getRipiano());
-                pst.setInt(3, articoloMagazzino.getCodice());
-                pst.executeUpdate();
-                //setto la vecchia posizione libera
-                Main.getDAO().getPosizioneDAO().updateStatus(true, vecchiaPosizione);
-                //setto la nuova posizione occupata
-                Main.getDAO().getPosizioneDAO().updateStatus(false, nuovaPosizione);
-                //sostituisco la posizione nell'oggetto
-                articoloMagazzino.setPosizione(nuovaPosizione);
-                con.close();
+                //controllo se e in magazzino
+                boolean isInMagazzino = Main.getDAO().getArticoloMagazzinoDAO().isInMagazzinoByCodice(articoloMagazzino.getCodice());
+                if (isInMagazzino) {
+                    //salvo la vecchia posizione
+                    Posizione vecchiaPosizione = articoloMagazzino.getPosizione();
+                    //libera, muovo
+                    PreparedStatement pst = con.prepareStatement(MOVE);
+                    pst.setInt(1, nuovaPosizione.getScaffale());
+                    pst.setInt(2, nuovaPosizione.getRipiano());
+                    pst.setInt(3, articoloMagazzino.getCodice());
+                    pst.executeUpdate();
+                    //setto la vecchia posizione libera
+                    Main.getDAO().getPosizioneDAO().updateStatus(true, vecchiaPosizione);
+                    //setto la nuova posizione occupata
+                    Main.getDAO().getPosizioneDAO().updateStatus(false, nuovaPosizione);
+                    con.close();
+                    esito = true;
+                }
             }
         } catch (Exception ex) {
             log.error(ex);
-            articoloMagazzino = null;
+            esito = false;
         }
-        return articoloMagazzino;
+        return esito;
     }
 
     private ArrayList<ArticoloMagazzino> mapRowToArrayListArticoloMagazzino(ResultSet resultset) {
