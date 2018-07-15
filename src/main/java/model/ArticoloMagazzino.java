@@ -70,17 +70,15 @@ public class ArticoloMagazzino extends Articolo{
     public boolean equals(Object obj) {
         if (obj instanceof ArticoloMagazzino){
             ArticoloMagazzino other = (ArticoloMagazzino)obj;
-            if(other.codice == (this.codice)){
-                if(other.posizione.equals(this.posizione)){
-                    if(other.data.equals(this.data)){
-                        return true && super.equals(obj);
-                    }
-                }
+            if(other.posizione.equals(this.posizione)){
+                return true;
             }
         }
         return false;
     }
     
-    
-    
+    @Override
+    public String toString(){
+        return nome + ", " + descrizione + ", " + sport + ", " + categoria + ", " + prezzo + " euro, " + codice + ", " + data.toString() + ", " + posizione.toString();
+    }
 }

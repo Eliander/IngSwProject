@@ -26,14 +26,12 @@ public class Listener_AddArticoloIngressoButton implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         Articolo art = this.frame.getSelectedArticolo();
-        int codice = this.frame.getSelectedCodice();
         Date data = this.frame.getSelectedData();
         int scaffale = this.frame.getSelectedScaffale();
         int ripiano = this.frame.getSelectedRipiano();
-        if(art != null && codice>0){
-            ArticoloMagazzino artmag = new ArticoloMagazzino(art,codice,data,new Posizione(scaffale,ripiano));
+        if(art != null){
+            ArticoloMagazzino artmag = new ArticoloMagazzino(art,0,data,new Posizione(scaffale,ripiano));
             this.frame.addArticolo(artmag);
-            System.out.println("Articolo aggiunto");
         }
     }
 }

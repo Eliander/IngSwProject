@@ -23,7 +23,7 @@ public class UscitaDAO {
     private final String SELECTBYID = "SELECT * FROM USCITA WHERE ID = ?";
     private final String SELECTBYORDINE = "SELECT * FROM USCITA WHERE IDORDINE = ?";
     private final String INSERT = "INSERT INTO USCITA(dataUscita, spedizioniere, idOrdine) VALUES (?, ?, ?)";
-    private final String SELECTBOLLALASTADDED = "SELECT MAX(bolla) FROM USCITA";
+    private final String SELECTBOLLALASTADDED = "SELECT * FROM INGRESSO WHERE bolla =(SELECT MAX(bolla) FROM USCITA)";
     
 
     public ArrayList<Uscita> getUscite() {
@@ -77,7 +77,7 @@ public class UscitaDAO {
             pst.setDate(1, new java.sql.Date(uscita.getData().getTime()));
             pst.setString(2, uscita.getSpedizioniere().getNome());
             pst.setInt(3, uscita.getOrdine().getCodice());
-            pst.executeQuery();
+            pst.executeUpdate();
             //prendo da db il codice uscita appena inserito
             pst = con.prepareStatement(SELECTBOLLALASTADDED);
             ResultSet resultset = pst.executeQuery();

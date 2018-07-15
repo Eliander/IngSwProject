@@ -179,13 +179,6 @@ INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Maglia r
 INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Legno');
 INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Acciaio');
 INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Plastica');
-/* POPOLAMENTO INGRESSO */
-INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-08-13');
-INSERT INTO INGRESSO (dataIngresso) VALUES ('2018-07-13');
-/* POPOLAMENTO USCITA */
-/* POPOLAMENTO ARTICOLOMAGAZZINO */
-INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-08-13', 1, 5, 1, null);
-INSERT INTO ARTICOLOMAGAZZINO (nome, dataProduzione, scaffale, ripiano, codiceIngresso, codiceUscita) VALUES ('Maglia gialla ADIDAS', '2018-07-13', 1, 7, 1, null);
 /* POPOLAMENTO NEGOZIO */
 INSERT INTO NEGOZIO (codiceFiscale, nome, via, numero, citta, responsabile) VALUES ('NGZ001', 'Masport', 'trota', 23, 'verona', 'responsabile2');
 /* POPOLAMENTO ORDINE */ 

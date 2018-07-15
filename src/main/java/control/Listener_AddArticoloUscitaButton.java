@@ -24,7 +24,6 @@ public class Listener_AddArticoloUscitaButton implements ActionListener{
         ArticoloMagazzino artmag = this.frame.getSelectedArticolo();
         if(artmag != null){
             this.frame.addArticolo(artmag);
-            System.out.println("Articolo aggiunto");
         }
     }
 }

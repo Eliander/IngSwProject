@@ -56,4 +56,8 @@ public class Posizione {
         return false;
     }
 
+    @Override
+    public String toString(){
+        return "scaffale n° " + scaffale + ", ripiano n° " + ripiano;
+    }
 }

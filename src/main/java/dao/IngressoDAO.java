@@ -44,7 +44,7 @@ public class IngressoDAO {
             Connection con = DAOSettings.getConnection();
             PreparedStatement pst = con.prepareStatement(INSERT);
             pst.setDate(1, new java.sql.Date(ingresso.getData().getTime()));
-            pst.executeQuery();
+            pst.executeUpdate();
             //prendo l'oggetto appena creato con il codice
             pst = con.prepareStatement(SELECTLASTADDED);
             ResultSet resultset = pst.executeQuery();

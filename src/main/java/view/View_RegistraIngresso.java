@@ -45,8 +45,6 @@ public class View_RegistraIngresso extends JFrame{
     private JButton button_back;
     private JList list_articoli;
     private JScrollPane list_articoli_scroller;
-    private JLabel label_codice;
-    private JTextField text_codice;
     private JLabel label_data;
     private JFormattedTextField text_data;
     private JLabel label_scaffale;
@@ -74,7 +72,7 @@ public class View_RegistraIngresso extends JFrame{
         setResizable(false);
         
         Container contentPane = this.getContentPane();
-        contentPane.setLayout(new GridLayout(14,1));
+        contentPane.setLayout(new GridLayout(12,1));
 
         button_back = new JButton();
         button_back.setText("INDIETRO");
@@ -99,12 +97,6 @@ public class View_RegistraIngresso extends JFrame{
         list_articoli_scroller = new JScrollPane(list_articoli);
         list_articoli_scroller.setPreferredSize(new Dimension(100,100));
         contentPane.add(list_articoli_scroller);
-        
-        label_codice = new JLabel();
-        label_codice.setText("Codice:");
-        contentPane.add(label_codice);
-        text_codice = new JTextField();
-        contentPane.add(text_codice);
         
         label_data = new JLabel();
         label_data.setText("Data di produzione:");
@@ -171,15 +163,6 @@ public class View_RegistraIngresso extends JFrame{
         return (Articolo)this.list_articoli.getSelectedValue();
     }
     
-    public int getSelectedCodice(){
-        try{
-            return Integer.parseInt(this.text_codice.getText());
-        }
-        catch(Exception ex){
-            return -1;
-        }
-    }
-    
     public Date getSelectedData(){
         try{
             DateFormat format = new SimpleDateFormat("dd/MM/yy");
@@ -200,8 +183,12 @@ public class View_RegistraIngresso extends JFrame{
     }
     
     public void addArticolo(ArticoloMagazzino artmag){
-        if(!this.ingresso.getArticoli().contains(artmag)){
+        if((!this.ingresso.getArticoli().contains(artmag)) && DAO.getPosizioneDAO().checkPosizioneLibera(artmag.getPosizione())){
             this.ingresso.addArticolo(artmag);
+            System.out.println("Articolo aggiunto");
+        }
+        else{
+            System.out.println("ERRORE: E' già presente un articolo in questa posizione!");
         }
         //aggiorno la lista degli articoli aggiunti
         ArticoloMagazzino[] articoli_sel = new ArticoloMagazzino[this.ingresso.getArticoli().size()];
