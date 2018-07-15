@@ -4,6 +4,7 @@ import control.Main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
 import model.ArticoloMagazzino;
 import model.Ordine;
@@ -18,12 +19,26 @@ public class UscitaDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(SpedizioniereDAO.class);
 
+    private final String SELECT = "SELECT * FROM USCITA";
     private final String SELECTBYID = "SELECT * FROM USCITA WHERE ID = ?";
     private final String SELECTBYORDINE = "SELECT * FROM USCITA WHERE IDORDINE = ?";
     private final String INSERT = "INSERT INTO USCITA(dataUscita, spedizioniere, idOrdine) VALUES (?, ?, ?)";
     private final String SELECTBOLLALASTADDED = "SELECT MAX(bolla) FROM USCITA";
     
 
+    public ArrayList<Uscita> getUscite() {
+        ArrayList<Uscita> uscita = new ArrayList();
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECT);
+            ResultSet resultset = pst.executeQuery();
+            uscita = mapRowToArrayListUscita(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return uscita;
+    }
     public Uscita getUscitaById(int id) {
         Uscita uscita = null;
         try {
@@ -96,6 +111,26 @@ public class UscitaDAO {
             log.error(ex);
         }
         return uscita;
+    }
+    
+    private ArrayList<Uscita> mapRowToArrayListUscita(ResultSet resultset) {
+        ArrayList<Uscita> uscite = new ArrayList();
+        Uscita uscita = null;
+        try {
+            while (resultset.next()) {
+                uscita = new Uscita(resultset.getInt("bolla"), new Date(resultset.getDate("dataUscita").getTime()), null, null, null);
+                //setto gli articoli usciti
+                uscita.setArticoli(Main.getDAO().getArticoloMagazzinoDAO().getArticoliMagazzinoByCodiceUscita(resultset.getInt("bolla")));
+                //setto l'ordine
+                uscita.setOrdine(Main.getDAO().getOrdineDAO().getOrdineByID(resultset.getInt("idOrdine")));
+                //setto lo spedizioniere
+                uscita.setSpedizioniere(Main.getDAO().getSpedizioniereDAO().getSpedizioniereByNome(resultset.getString("spedizioniere")));
+                uscite.add(uscita);
+            }
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return uscite;
     }
     
 }
