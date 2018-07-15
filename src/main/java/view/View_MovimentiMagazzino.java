@@ -68,10 +68,10 @@ public class View_MovimentiMagazzino extends JFrame{
         contentPane.add(head_panel, BorderLayout.NORTH);
         
         //ricavo da DAO la lista delle uscite
-        //ArrayList<Uscita> usc = DAO...;
-        //Uscita[] uscite = new Uscita[usc.size()];
-        //uscite = usc.toArray(uscite);
-        list = new JList(); //passare come parametro l'array uscite
+        ArrayList<Uscita> usc = DAO.getUscitaDAO().getUscite();
+        Uscita[] uscite = new Uscita[usc.size()];
+        uscite = usc.toArray(uscite);
+        list = new JList(uscite);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(10);

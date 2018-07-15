@@ -30,15 +30,14 @@ public class Listener_SpostaButton implements ActionListener{
         int scaffale = this.frame.getSelectedScaffale();
         int ripiano = this.frame.getSelectedRipiano();
         if(artmag != null){
-            //TO DO
             //cambiare da DAO la posizione
-            //if(DAO.getArticoloMagazzinoDAO().moveArticoloMagazzino(artmag, new Posizione(scaffale,ripiano))){
+            if(DAO.getArticoloMagazzinoDAO().moveArticoloMagazzino(artmag, new Posizione(scaffale,ripiano))){
                 Utente user = this.frame.getUser();
                 this.frame.dispose();
                 View_SpostaArticoli view_SpostaArticoli = new View_SpostaArticoli(user);
                 view_SpostaArticoli.setVisible(true);
                 System.out.println("Articolo spostato");
-            //}
+            }
         }
     }
 }

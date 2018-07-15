@@ -100,12 +100,11 @@ public class View_RegistraUscita extends JFrame{
         label_sel_articoli.setText("Seleziona articoli dell'uscita:");
         contentPane.add(label_sel_articoli);
         
-        //TO DO
         //ricavo da DAO (tramite query) la lista di tutti gli ArticoloMagazzino
-        //ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getAllArticoloMagazzino();
-        //ArticoloMagazzino[] articolimag = new ArticoloMagazzino[artmag.size()];
-        //articolimag = artmag.toArray(articolimag);
-        list_articoli_mag = new JList(); //passare come parametro l'array articolimag
+        ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getAllArticoliMagazzino();
+        ArticoloMagazzino[] articolimag = new ArticoloMagazzino[artmag.size()];
+        articolimag = artmag.toArray(articolimag);
+        list_articoli_mag = new JList(articolimag);
         list_articoli_mag.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list_articoli_mag.setLayoutOrientation(JList.VERTICAL);
         list_articoli_mag.setVisibleRowCount(10);
@@ -133,12 +132,11 @@ public class View_RegistraUscita extends JFrame{
         label_sel_spedizioniere.setText("Seleziona spedizioniere:");
         contentPane.add(label_sel_spedizioniere);
         
-        //TO DO
         //ricavo da DAO (tramite query) la lista di tutti i Spedizioniere
-        //ArrayList<Spedizioniere> sped = DAO.getSpedizioniereDAO().getAllSpedizioniere();
-        //Spedizioniere[] spedizionieri = new Spedizioniere[sped.size()];
-        //spedizionieri = sped.toArray(spedizionieri);
-        list_spedizionieri = new JList(); //passare come parametro l'array spedizionieri
+        ArrayList<Spedizioniere> sped = DAO.getSpedizioniereDAO().getSpedizionieri();
+        Spedizioniere[] spedizionieri = new Spedizioniere[sped.size()];
+        spedizionieri = sped.toArray(spedizionieri);
+        list_spedizionieri = new JList(spedizionieri); //passare come parametro l'array spedizionieri
         list_spedizionieri.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list_spedizionieri.setLayoutOrientation(JList.VERTICAL);
         list_spedizionieri.setVisibleRowCount(10);
