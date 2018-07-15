@@ -35,6 +35,9 @@ public class DAOSettings {
     private static final StatisticaDAO statisticaDAO = new StatisticaDAO();
     private static final UscitaDAO uscitaDAO = new UscitaDAO();
     private static final SpedizioniereDAO spedizioniereDAO = new SpedizioniereDAO();
+    private static final SportDAO sportDAO = new SportDAO();
+    private static final CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private static final MaterialiDAO materialiDAO = new MaterialiDAO();
 
     /*
     
@@ -117,5 +120,16 @@ public class DAOSettings {
     public SpedizioniereDAO getSpedizioniereDAO() {
         return spedizioniereDAO;
     }
-    
+
+    public SportDAO getSportDAO() {
+        return sportDAO;
+    }
+
+    public CategoriaDAO getCategoriaDAO() {
+        return categoriaDAO;
+    }
+
+    public MaterialiDAO getMaterialiDAO() {
+        return materialiDAO;
+    }
 }
