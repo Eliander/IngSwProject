@@ -151,9 +151,10 @@ public class ArticoloMagazzinoDAO {
             pst.setInt(3, articoloMagazzino.getPosizione().getScaffale());
             pst.setInt(4, articoloMagazzino.getPosizione().getRipiano());
             pst.setInt(5, codiceIngresso);
-            //to do: assicurarsi che sia 0
             pst.setInt(6, 0);
             pst.executeUpdate();
+            //setto la posizione dell'articolo come occupata
+            Main.getDAO().getPosizioneDAO().updateStatus(false, articoloMagazzino.getPosizione());
             //eseguita la query, restituisco l'oggetto salvato che ha anche l'ID
             pst = con.prepareStatement(SELECTLASTADDED);
             ResultSet resultset = pst.executeQuery();
