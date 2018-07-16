@@ -3,9 +3,9 @@ package view;
 import control.Listener_InserisciArticolo;
 import control.Listener_LogoutButton;
 import control.Listener_MovimentiMagazzinoButton;
+import control.Main;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -40,7 +40,7 @@ public class View_HomeSegretario extends JFrame{
                      
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 500));
+        setPreferredSize(Main.getWindowsSize());
         setResizable(false);
         
         head_panel = new JPanel();

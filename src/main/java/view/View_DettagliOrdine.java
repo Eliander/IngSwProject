@@ -52,7 +52,7 @@ public class View_DettagliOrdine extends JFrame{
     
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 500));
+        setPreferredSize(Main.getWindowsSize());
         setResizable(false);
         
         Container contentPane = this.getContentPane();

@@ -1,5 +1,6 @@
 package view;
 
+import control.Main;
 import control.Listener_CapsLock;
 import control.Listener_LoginButton;
 import java.awt.Color;
@@ -67,7 +68,7 @@ public class View_Login extends JFrame {
         label_capsLock.setVisible(Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK));
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 400));
+        setPreferredSize(Main.getWindowsSize());
         setResizable(false);
 
         panel.setPreferredSize(new Dimension(400, 400));
@@ -91,7 +92,7 @@ public class View_Login extends JFrame {
         label_loginError.setVisible(false);
 
         label_titolo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        label_titolo.setText("NOME APPLICAZIONE");
+        label_titolo.setText("MAGAZZINO");
         label_titolo.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panel);

@@ -1,6 +1,7 @@
 package view;
 
 import control.Listener_BackToMovimentiMagazzino;
+import control.Main;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -56,7 +57,7 @@ public class View_DettagliUscita extends JFrame{
                      
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 500));
+        setPreferredSize(Main.getWindowsSize());
         setResizable(false);
         
         Container contentPane = this.getContentPane();
