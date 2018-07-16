@@ -11,10 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_RegistraUscita;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_AddUscitaButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_AddUscitaButton.class);
     private View_RegistraUscita frame;
@@ -41,19 +37,19 @@ public class Listener_AddUscitaButton implements ActionListener{
                         this.frame.dispose();
                         View_RegistraUscita view_RegistraUscita = new View_RegistraUscita(user);
                         view_RegistraUscita.setVisible(true);
-                        System.out.println("Uscita creata");
+                        log.info("Uscita creata");
                     }
                 }
                 else{
-                    System.out.println("ERRORE: Gli articoli dell'uscita non rispettano l'ordine!");
+                    log.error("ERRORE: Gli articoli dell'uscita non rispettano l'ordine!");
                 }
             }
             else{
-                System.out.println("ERRORE: Selezionare un ordine ed uno spedizioniere!");
+                log.error("ERRORE: Selezionare un ordine ed uno spedizioniere!");
             }
         }
         else{
-            System.out.println("ERRORE: Selezionare gli articoli dell'uscita!");
+            log.error("ERRORE: Selezionare gli articoli dell'uscita!");
         }
     }
 }

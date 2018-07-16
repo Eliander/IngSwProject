@@ -6,10 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_InserisciArticolo;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_AddMaterialeButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_AddMaterialeButton.class);
     private View_InserisciArticolo frame;

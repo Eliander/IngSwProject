@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import model.Posizione;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class PosizioneDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(PosizioneDAO.class);

@@ -2,10 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Bosky
- */
 public class ArticoloOrdinato extends Articolo{
     
     private int quantita;

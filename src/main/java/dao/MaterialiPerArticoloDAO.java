@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import model.Articolo;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class MaterialiPerArticoloDAO {
     
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(MaterialiPerArticoloDAO.class);

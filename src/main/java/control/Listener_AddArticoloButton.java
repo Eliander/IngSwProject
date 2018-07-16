@@ -9,10 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_InserisciArticolo;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_AddArticoloButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_AddArticoloButton.class);
     private View_InserisciArticolo frame;
@@ -41,7 +37,7 @@ public class Listener_AddArticoloButton implements ActionListener{
         art.setPrezzo(prezzo);
         //controllo campi
         if(art.getNome().equals("") || art.getDescrizione().equals("") || art.getPrezzo()==-1){
-            System.out.println("ERRORE: Completa i campi correttamente!");
+            log.error("ERRORE: Completa i campi correttamente!");
         }
         else{
             //aggiungere da DAO l'articolo al catalogo
@@ -50,7 +46,7 @@ public class Listener_AddArticoloButton implements ActionListener{
                 this.frame.dispose();
                 View_InserisciArticolo view_InserisciArticolo = new View_InserisciArticolo(user);
                 view_InserisciArticolo.setVisible(true);
-                System.out.println("Articolo creato");
+                log.info("Articolo creato");
             }
         }
         

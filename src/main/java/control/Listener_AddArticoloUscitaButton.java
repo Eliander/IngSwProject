@@ -7,10 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_RegistraUscita;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_AddArticoloUscitaButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_AddArticoloUscitaButton.class);
     private View_RegistraUscita frame;

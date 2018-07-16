@@ -1,9 +1,5 @@
 package model;
 
-/**
- *
- * @author Eliander
- */
 public class Segretario extends Utente{
 
     public Segretario() {

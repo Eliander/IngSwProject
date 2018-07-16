@@ -8,10 +8,6 @@ import model.Indirizzo;
 import model.Spedizioniere;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class SpedizioniereDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(SpedizioniereDAO.class);

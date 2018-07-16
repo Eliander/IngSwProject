@@ -10,10 +10,6 @@ import view.View_HomeSegretario;
 import view.View_InserisciArticolo;
 import view.View_MovimentiMagazzino;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_BackToHomeSegretarioButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_BackToHomeSegretarioButton.class);
     private JFrame frame;

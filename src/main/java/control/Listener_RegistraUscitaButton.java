@@ -8,10 +8,6 @@ import org.apache.logging.log4j.Logger;
 import view.View_HomeMagazziniere;
 import view.View_RegistraUscita;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_RegistraUscitaButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_RegistraUscitaButton.class);
     private View_HomeMagazziniere frame;

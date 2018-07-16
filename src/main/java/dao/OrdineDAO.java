@@ -6,16 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
-import model.Articolo;
 import model.ArticoloOrdinato;
 import model.Negozio;
 import model.Ordine;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class OrdineDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(OrdineDAO.class);

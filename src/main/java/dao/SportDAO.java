@@ -6,10 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class SportDAO {
     
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(SportDAO.class);

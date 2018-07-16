@@ -1,9 +1,5 @@
 package model;
 
-/**
- *
- * @author Bosky
- */
 public class Negozio {
     
     private String codiceFiscale;

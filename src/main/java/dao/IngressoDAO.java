@@ -4,17 +4,11 @@ import control.Main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.TreeSet;
 import model.ArticoloMagazzino;
 import model.Ingresso;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class IngressoDAO {
     
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(IngressoDAO.class);

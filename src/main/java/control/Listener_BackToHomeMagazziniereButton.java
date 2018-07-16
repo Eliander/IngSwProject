@@ -11,10 +11,6 @@ import view.View_RegistraIngresso;
 import view.View_RegistraUscita;
 import view.View_SpostaArticoli;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_BackToHomeMagazziniereButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_BackToHomeMagazziniereButton.class);
     private JFrame frame;

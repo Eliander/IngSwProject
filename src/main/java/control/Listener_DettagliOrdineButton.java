@@ -8,10 +8,6 @@ import org.apache.logging.log4j.Logger;
 import view.View_DettagliOrdine;
 import view.View_OrdiniPassati;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_DettagliOrdineButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_DettagliOrdineButton.class);
     private View_OrdiniPassati frame;

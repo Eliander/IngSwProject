@@ -30,11 +30,9 @@ import model.Articolo;
 import model.ArticoloMagazzino;
 import model.Ingresso;
 import model.Utente;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-/**
- *
- * @author Bosky
- */
 public class View_RegistraIngresso extends JFrame{
     private Utente user = null;
     private Ingresso ingresso;
@@ -57,6 +55,7 @@ public class View_RegistraIngresso extends JFrame{
     private JButton button_addIngresso;
     private JPanel btn_panel3;
     
+    private final static Logger log = LogManager.getLogger(View_RegistraIngresso.class);
     private static DAOSettings DAO = Main.getDAO();
     
     public View_RegistraIngresso(Utente user) {
@@ -184,10 +183,10 @@ public class View_RegistraIngresso extends JFrame{
     public void addArticolo(ArticoloMagazzino artmag){
         if((!this.ingresso.getArticoli().contains(artmag)) && DAO.getPosizioneDAO().checkPosizioneLibera(artmag.getPosizione())){
             this.ingresso.addArticolo(artmag);
-            System.out.println("Articolo aggiunto");
+            log.info("Articolo aggiunto");
         }
         else{
-            System.out.println("ERRORE: E' già presente un articolo in questa posizione!");
+            log.error("ERRORE: E' già presente un articolo in questa posizione!");
         }
         //aggiorno la lista degli articoli aggiunti
         ArticoloMagazzino[] articoli_sel = new ArticoloMagazzino[this.ingresso.getArticoli().size()];

@@ -10,10 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_InserisciArticolo;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_SelectionArticolo implements ListSelectionListener{
     private final static Logger log = LogManager.getLogger(Listener_SelectionArticolo.class);
     private View_InserisciArticolo frame;

@@ -10,10 +10,6 @@ import view.View_CreaOrdine;
 import view.View_HomeResponsabile;
 import view.View_OrdiniPassati;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_BackToHomeResponsabileButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_BackToHomeResponsabileButton.class);
     private JFrame frame;

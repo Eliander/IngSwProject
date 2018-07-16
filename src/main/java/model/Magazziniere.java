@@ -1,9 +1,5 @@
 package model;
 
-/**
- *
- * @author Eliander
- */
 public class Magazziniere extends Utente{
 
     public Magazziniere() {

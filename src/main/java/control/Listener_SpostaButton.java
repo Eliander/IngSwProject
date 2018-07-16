@@ -10,10 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_SpostaArticoli;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_SpostaButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_SpostaButton.class);
     private View_SpostaArticoli frame;
@@ -36,14 +32,14 @@ public class Listener_SpostaButton implements ActionListener{
                 this.frame.dispose();
                 View_SpostaArticoli view_SpostaArticoli = new View_SpostaArticoli(user);
                 view_SpostaArticoli.setVisible(true);
-                System.out.println("Articolo spostato");
+                log.info("Articolo spostato");
             }
             else{
-                System.out.println("ERRORE: La posizione selezionata non è libera!");
+                log.error("ERRORE: La posizione selezionata non è libera!");
             }
         }
         else{
-            System.out.println("ERRORE: Selezionare un articolo!");
+            log.error("ERRORE: Selezionare un articolo!");
         }
     }
 }

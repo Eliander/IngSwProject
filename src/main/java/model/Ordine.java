@@ -3,10 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Bosky
- */
 public class Ordine {
     
     private int codice;

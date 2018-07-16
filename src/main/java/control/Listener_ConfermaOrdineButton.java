@@ -9,10 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_CreaOrdine;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_ConfermaOrdineButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_ConfermaOrdineButton.class);
     private View_CreaOrdine frame;
@@ -33,7 +29,7 @@ public class Listener_ConfermaOrdineButton implements ActionListener{
                 this.frame.dispose();
                 View_CreaOrdine view_CreaOrdine = new View_CreaOrdine(user);
                 view_CreaOrdine.setVisible(true);
-                System.out.println("Ordine creato");
+                log.info("Ordine creato");
             }
         }
     }

@@ -8,10 +8,6 @@ import org.apache.logging.log4j.Logger;
 import view.View_HomeMagazziniere;
 import view.View_SpostaArticoli;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_SpostaArticoliButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_SpostaArticoliButton.class);
     private View_HomeMagazziniere frame;

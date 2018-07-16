@@ -9,10 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_RegistraIngresso;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_AddIngressoButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_AddIngressoButton.class);
     private View_RegistraIngresso frame;
@@ -33,7 +29,7 @@ public class Listener_AddIngressoButton implements ActionListener{
                 this.frame.dispose();
                 View_RegistraIngresso view_RegistraIngresso = new View_RegistraIngresso(user);
                 view_RegistraIngresso.setVisible(true);
-                System.out.println("Ingresso creato");
+                log.info("Ingresso creato");
             }
         }
     }

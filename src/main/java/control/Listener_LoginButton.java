@@ -14,10 +14,6 @@ import view.View_HomeResponsabile;
 import view.View_HomeSegretario;
 import view.View_Login;
 
-/**
- *
- * @author Elia
- */
 public class Listener_LoginButton implements ActionListener {
 
     private final static Logger log = LogManager.getLogger(Listener_LoginButton.class);

@@ -23,10 +23,6 @@ import javax.swing.WindowConstants;
 import model.ArticoloMagazzino;
 import model.Utente;
 
-/**
- *
- * @author Bosky
- */
 public class View_SpostaArticoli extends JFrame{
     private Utente user = null;
     

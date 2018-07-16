@@ -9,10 +9,6 @@ import org.apache.logging.log4j.Logger;
 import view.View_DettagliUscita;
 import view.View_MovimentiMagazzino;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_DettagliUscitaButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_DettagliUscitaButton.class);
     private View_MovimentiMagazzino frame;

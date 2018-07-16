@@ -22,10 +22,6 @@ import model.Negozio;
 import model.Ordine;
 import model.Utente;
 
-/**
- *
- * @author Bosky
- */
 public class View_OrdiniPassati extends JFrame{
     private Utente user = null;
     private JPanel head_panel;

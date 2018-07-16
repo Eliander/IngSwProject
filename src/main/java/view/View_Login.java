@@ -19,10 +19,6 @@ import javax.swing.WindowConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- *
- * @author Eliander
- */
 public class View_Login extends JFrame {
 
     private JButton button_login;

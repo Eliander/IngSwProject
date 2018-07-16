@@ -8,10 +8,6 @@ import org.apache.logging.log4j.Logger;
 import view.View_DettagliUscita;
 import view.View_MovimentiMagazzino;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_BackToMovimentiMagazzino implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_BackToMovimentiMagazzino.class);
     private View_DettagliUscita frame;

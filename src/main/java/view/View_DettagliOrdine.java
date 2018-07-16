@@ -19,10 +19,6 @@ import model.ArticoloOrdinato;
 import model.Ordine;
 import model.Uscita;
 
-/**
- *
- * @author Bosky
- */
 public class View_DettagliOrdine extends JFrame{
     private Ordine ordine;
     

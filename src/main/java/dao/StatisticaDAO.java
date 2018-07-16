@@ -9,16 +9,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.TreeSet;
 import model.Articolo;
-import model.ArticoloMagazzino;
 import model.Statistica;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class StatisticaDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(StatisticaDAO.class);

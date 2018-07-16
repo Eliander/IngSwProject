@@ -1,9 +1,5 @@
 package model;
 
-/**
- *
- * @author Eliander
- */
 public class Responsabile extends Utente{
 
     public Responsabile() {

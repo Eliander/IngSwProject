@@ -9,10 +9,6 @@ import model.Segretario;
 import model.Utente;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class UtenteDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(UtenteDAO.class);

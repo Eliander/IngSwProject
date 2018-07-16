@@ -7,7 +7,6 @@ import control.Listener_SelectionArticolo;
 import control.Main;
 import dao.DAOSettings;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -26,10 +25,6 @@ import javax.swing.WindowConstants;
 import model.Articolo;
 import model.Utente;
 
-/**
- *
- * @author Bosky
- */
 public class View_InserisciArticolo extends JFrame{
     private Utente user = null;
     private Articolo articolo; //articolo da creare

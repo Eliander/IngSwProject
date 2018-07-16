@@ -3,10 +3,6 @@ package model;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- *
- * @author Eliander
- */
 public class Posizione {
 
     //Per semplicita, saffale, piano e assumiamo che un piano puo contenere un oggetto

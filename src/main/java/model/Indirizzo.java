@@ -1,9 +1,5 @@
 package model;
 
-/**
- *
- * @author Bosky
- */
 public class Indirizzo {
     
     private String citta;

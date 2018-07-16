@@ -16,10 +16,6 @@ import javax.swing.JButton;
 import javax.swing.WindowConstants;
 import model.Utente;
 
-/**
- *
- * @author Eliander
- */
 public class View_HomeMagazziniere extends JFrame{
     
     private JPanel head_panel;

@@ -19,10 +19,6 @@ import model.ArticoloOrdinato;
 import model.Uscita;
 import model.Utente;
 
-/**
- *
- * @author Bosky
- */
 public class View_DettagliUscita extends JFrame{
     private Utente user = null;
     private Uscita uscita;

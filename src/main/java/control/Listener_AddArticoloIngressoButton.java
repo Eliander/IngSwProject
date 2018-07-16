@@ -5,16 +5,11 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import model.Articolo;
 import model.ArticoloMagazzino;
-import model.ArticoloOrdinato;
 import model.Posizione;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_RegistraIngresso;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_AddArticoloIngressoButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_AddArticoloIngressoButton.class);
     private View_RegistraIngresso frame;

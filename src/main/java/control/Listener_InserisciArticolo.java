@@ -8,10 +8,6 @@ import org.apache.logging.log4j.Logger;
 import view.View_HomeSegretario;
 import view.View_InserisciArticolo;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_InserisciArticolo implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_InserisciArticolo.class);
     private View_HomeSegretario frame;

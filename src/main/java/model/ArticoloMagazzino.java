@@ -5,10 +5,6 @@ import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- *
- * @author Eliander
- */
 public class ArticoloMagazzino extends Articolo{
 
     private int codice;

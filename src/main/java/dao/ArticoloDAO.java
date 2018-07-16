@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import model.Articolo;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class ArticoloDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(ArticoloDAO.class);

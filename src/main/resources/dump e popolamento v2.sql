@@ -1,8 +1,3 @@
-/**
- * Author:  Elia
- * Created: Jul 15, 2018
- */
-
 /* CREAZIONE DB*/
 
 create table UTENTE(
@@ -146,6 +141,7 @@ create table POSTI(
 );
 
 /* POPOLAMENTO */
+
 /* POPOLAMENTO CATEGORIE */
 INSERT INTO CATEGORIA (nome) VALUES ('Scarpe');
 INSERT INTO CATEGORIA (nome) VALUES ('Abbigliamento');
@@ -182,8 +178,6 @@ INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da
 INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da baseball', 'Plastica');
 /* POPOLAMENTO NEGOZIO */
 INSERT INTO NEGOZIO (codiceFiscale, nome, via, numero, citta, responsabile) VALUES ('NGZ001', 'Masport', 'trota', 23, 'verona', 'responsabile2');
-/* POPOLAMENTO ORDINE */ 
-
 /* POPOLAMENTO SPEDIZIONIERE */
 INSERT INTO SPEDIZIONIERE (nome, telefono, via, numero, citta) VALUES ('Bartolini', '045963152', 'del pacco', 15, 'Verona');
 INSERT INTO SPEDIZIONIERE (nome, telefono, via, numero, citta) VALUES ('DHL', '045781236', 'della lettera', 92, 'Milano');
@@ -192,9 +186,9 @@ INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 1, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 2, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 3, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 4, true);
-INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 5, false);/*per dati*/
+INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 5, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 6, true);
-INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 7, false);/*per dati*/
+INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 7, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 8, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 9, true);
 INSERT INTO POSTI(scaffale, ripiano, libera) VALUES (1, 10, true);

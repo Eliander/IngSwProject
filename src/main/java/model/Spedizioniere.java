@@ -1,9 +1,5 @@
 package model;
 
-/**
- *
- * @author Bosky
- */
 public class Spedizioniere {
     
     private String nome;

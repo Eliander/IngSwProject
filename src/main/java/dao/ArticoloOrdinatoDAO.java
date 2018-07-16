@@ -9,10 +9,6 @@ import model.Articolo;
 import model.ArticoloOrdinato;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class ArticoloOrdinatoDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(ArticoloOrdinatoDAO.class);

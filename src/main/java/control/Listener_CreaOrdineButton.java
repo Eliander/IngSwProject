@@ -8,10 +8,6 @@ import org.apache.logging.log4j.Logger;
 import view.View_CreaOrdine;
 import view.View_HomeResponsabile;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_CreaOrdineButton implements ActionListener{
     private final static Logger log = LogManager.getLogger(Listener_CreaOrdineButton.class);
     private View_HomeResponsabile frame;

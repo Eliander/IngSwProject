@@ -9,10 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.View_CreaOrdine;
 
-/**
- *
- * @author Bosky
- */
 public class Listener_AddArticoloOrdineButton implements ActionListener {
 
     private final static Logger log = LogManager.getLogger(Listener_AddArticoloOrdineButton.class);
@@ -32,14 +28,14 @@ public class Listener_AddArticoloOrdineButton implements ActionListener {
             if ((qty + oldQty) <= qtyInMagazzino) {
                 ArticoloOrdinato artord = new ArticoloOrdinato(art, qty);
                 this.frame.addArticoloOrdine(artord);
-                System.out.println("Articolo aggiunto");
+                log.info("Articolo aggiunto");
             }
             else{
-                System.out.println("ERRORE: La quantità selezionata non è presente in magazzino!");
+                log.error("ERRORE: La quantità selezionata non è presente in magazzino!");
             }
         }
         else{
-            System.out.println("ERRORE: Selezionare un articolo e una quantità > 0");
+            log.error("ERRORE: Selezionare un articolo e una quantità > 0");
         }
     }
 

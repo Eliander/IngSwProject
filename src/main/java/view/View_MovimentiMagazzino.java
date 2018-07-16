@@ -21,10 +21,6 @@ import javax.swing.WindowConstants;
 import model.Uscita;
 import model.Utente;
 
-/**
- *
- * @author Bosky
- */
 public class View_MovimentiMagazzino extends JFrame{
     private Utente user = null;
     private JPanel head_panel;

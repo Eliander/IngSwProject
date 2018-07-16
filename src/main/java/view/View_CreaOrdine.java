@@ -29,10 +29,6 @@ import model.Negozio;
 import model.Ordine;
 import model.Utente;
 
-/**
- *
- * @author Bosky
- */
 public class View_CreaOrdine extends JFrame{
     private Utente user = null;
     private JLabel label_title;

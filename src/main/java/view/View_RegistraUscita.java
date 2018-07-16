@@ -26,11 +26,9 @@ import model.Ordine;
 import model.Spedizioniere;
 import model.Uscita;
 import model.Utente;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-/**
- *
- * @author Bosky
- */
 public class View_RegistraUscita extends JFrame{
     private Utente user = null;
     private Uscita uscita;
@@ -57,6 +55,7 @@ public class View_RegistraUscita extends JFrame{
     private JButton button_add_uscita;
     private JPanel btn_panel3;
     
+    private final static Logger log = LogManager.getLogger(View_RegistraUscita.class);
     private static DAOSettings DAO = Main.getDAO();
     
     public View_RegistraUscita(Utente user) {
@@ -189,7 +188,7 @@ public class View_RegistraUscita extends JFrame{
     public void addArticolo(ArticoloMagazzino artmag){
         if(!this.uscita.getArticoli().contains(artmag)){
             this.uscita.addArticolo(artmag);
-            System.out.println("Articolo aggiunto");
+            log.info("Articolo aggiunto");
         }
         //aggiorno la lista degli articoli aggiunti
         ArticoloMagazzino[] articoli_sel = new ArticoloMagazzino[this.uscita.getArticoli().size()];

@@ -15,10 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import model.Utente;
 
-/**
- *
- * @author Bosky
- */
 public class View_HomeSegretario extends JFrame{
     private JPanel head_panel;
     private JPanel buttons_panel;

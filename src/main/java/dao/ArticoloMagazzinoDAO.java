@@ -11,10 +11,6 @@ import model.ArticoloMagazzino;
 import model.Posizione;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class ArticoloMagazzinoDAO {
 
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(ArticoloMagazzinoDAO.class);

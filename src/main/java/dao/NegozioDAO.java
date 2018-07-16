@@ -10,10 +10,6 @@ import model.Responsabile;
 import model.Utente;
 import org.apache.logging.log4j.LogManager;
 
-/**
- *
- * @author Eliander
- */
 public class NegozioDAO {
     
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(NegozioDAO.class);
