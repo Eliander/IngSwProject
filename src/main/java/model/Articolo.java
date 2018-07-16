@@ -26,6 +26,24 @@ public class Articolo {
         this.materiali = materiali;
         this.prezzo = prezzo;
     }
+    
+    public Articolo(ArticoloOrdinato artord) {
+        this.nome = artord.getNome();
+        this.descrizione = artord.getDescrizione();
+        this.sport = artord.getSport();
+        this.categoria = artord.getCategoria();
+        this.materiali = artord.getMateriali();
+        this.prezzo = artord.getPrezzo();
+    }
+    
+    public Articolo(ArticoloMagazzino artmag) {
+        this.nome = artmag.getNome();
+        this.descrizione = artmag.getDescrizione();
+        this.sport = artmag.getSport();
+        this.categoria = artmag.getCategoria();
+        this.materiali = artmag.getMateriali();
+        this.prezzo = artmag.getPrezzo();
+    }
 
     public String getNome() {
         return nome;

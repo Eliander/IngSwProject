@@ -78,8 +78,10 @@ public class Uscita {
     public boolean checkUscita() {
         for(ArticoloOrdinato artord : this.ordine.getArticoli()){
             int qty = artord.getQuantita();
+            Articolo art1 = new Articolo(artord);
             for(ArticoloMagazzino artmag : this.articoli){
-                if(((Articolo)artmag).equals(((Articolo)artord))){
+                Articolo art2 = new Articolo(artmag);
+                if(art2.equals(art1)){
                     qty--;
                 }
             }
