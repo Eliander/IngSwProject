@@ -30,6 +30,12 @@ public class Main {
 
     public static void main(String[] args) {
         
+        if(DAO.getStatisticaDAO().popolate()){
+            System.out.println("Statistiche aggiornate");
+        }
+        else{
+            System.out.println("ERRORE: Impossibile aggiornare le statistiche!");
+        }
         View_Login login = new View_Login();
         login.setVisible(true);
         /*Negozio negozio = DAO.getNegozioDAO().getNegozioByCodiceFiscale("NGZ001");
