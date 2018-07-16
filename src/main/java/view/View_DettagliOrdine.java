@@ -33,6 +33,7 @@ public class View_DettagliOrdine extends JFrame{
     private JLabel label_articoliOrdinati;
     private JList list;
     private JScrollPane list_scroller;
+    private JLabel label_prezzoOrdine;
     private JLabel label_stato;
     private JLabel label_dettagli_uscita;
     private JLabel label_bolla;
@@ -52,7 +53,7 @@ public class View_DettagliOrdine extends JFrame{
         setResizable(false);
         
         Container contentPane = this.getContentPane();
-        contentPane.setLayout(new GridLayout(14,1));
+        contentPane.setLayout(new GridLayout(15,1));
         
         button_back = new JButton();
         button_back.setText("INDIETRO");
@@ -100,6 +101,10 @@ public class View_DettagliOrdine extends JFrame{
         list_scroller = new JScrollPane(list);
         list_scroller.setPreferredSize(new Dimension(100,100));
         contentPane.add(list_scroller);
+        
+        label_prezzoOrdine = new JLabel();
+        label_prezzoOrdine.setText("Prezzo totale: " + ordine.getPrezzoTot());
+        contentPane.add(label_prezzoOrdine);
         
         //ricavo l'uscita dell'ordine da DAO
         Uscita usc = DAO.getUscitaDAO().getUscitaByOrdine(ordine);
