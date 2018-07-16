@@ -3,6 +3,7 @@ package view;
 import control.Listener_AddArticoloUscitaButton;
 import control.Listener_AddUscitaButton;
 import control.Listener_BackToHomeMagazziniereButton;
+import control.Listener_SelectionOrdine;
 import control.Main;
 import dao.DAOSettings;
 import java.awt.Container;
@@ -20,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import model.ArticoloMagazzino;
+import model.ArticoloOrdinato;
 import model.Ordine;
 import model.Spedizioniere;
 import model.Uscita;
@@ -39,6 +41,9 @@ public class View_RegistraUscita extends JFrame{
     private JLabel label_sel_ordine;
     private JList list_ordini;
     private JScrollPane list_ordini_scroller;
+    private JLabel label_art_ordinati;
+    private JList list_art_ordinati;
+    private JScrollPane list_art_ordinati_scroller;
     private JLabel label_sel_articoli;
     private JList list_articoli_mag;
     private JScrollPane list_articoli_mag_scroller;
@@ -66,7 +71,7 @@ public class View_RegistraUscita extends JFrame{
         setResizable(false);
         
         Container contentPane = this.getContentPane();
-        contentPane.setLayout(new GridLayout(11,1));
+        contentPane.setLayout(new GridLayout(13,1));
 
         button_back = new JButton();
         button_back.setText("INDIETRO");
@@ -92,9 +97,23 @@ public class View_RegistraUscita extends JFrame{
         list_ordini.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list_ordini.setLayoutOrientation(JList.VERTICAL);
         list_ordini.setVisibleRowCount(10);
+        ListSelectionModel list_ordini_model = list_ordini.getSelectionModel();
+        list_ordini_model.addListSelectionListener(new Listener_SelectionOrdine(this));
         list_ordini_scroller = new JScrollPane(list_ordini);
         list_ordini_scroller.setPreferredSize(new Dimension(100,100));
         contentPane.add(list_ordini_scroller);
+        
+        label_art_ordinati = new JLabel();
+        label_art_ordinati.setText("Articoli ordinati:");
+        contentPane.add(label_art_ordinati);
+        
+        list_art_ordinati = new JList();
+        list_art_ordinati.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list_art_ordinati.setLayoutOrientation(JList.VERTICAL);
+        list_art_ordinati.setVisibleRowCount(10);
+        list_art_ordinati_scroller = new JScrollPane(list_art_ordinati);
+        list_art_ordinati_scroller.setPreferredSize(new Dimension(100,100));
+        contentPane.add(list_art_ordinati_scroller);
         
         label_sel_articoli = new JLabel();
         label_sel_articoli.setText("Seleziona articoli dell'uscita:");
@@ -184,5 +203,9 @@ public class View_RegistraUscita extends JFrame{
     
     public Spedizioniere getSelectedSpedizioniere(){
         return (Spedizioniere)this.list_spedizionieri.getSelectedValue();
+    }
+    
+    public void updateListArticoliOrdinati(ArticoloOrdinato[] art_ordinati){
+        this.list_art_ordinati.setListData(art_ordinati);
     }
 }

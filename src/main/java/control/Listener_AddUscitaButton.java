@@ -32,15 +32,28 @@ public class Listener_AddUscitaButton implements ActionListener{
         usc.setOrdine(ordine);
         Spedizioniere spedizioniere = this.frame.getSelectedSpedizioniere();
         usc.setSpedizioniere(spedizioniere);
-        if(usc.getArticoli().size()>0 && usc.getOrdine()!=null && usc.getSpedizioniere()!=null){
-            //aggiungere da DAO l'uscita alla lista uscite
-            if(DAO.getUscitaDAO().addUscita(usc) && DAO.getOrdineDAO().setCompletato(ordine)){
-                Utente user = this.frame.getUser();
-                this.frame.dispose();
-                View_RegistraUscita view_RegistraUscita = new View_RegistraUscita(user);
-                view_RegistraUscita.setVisible(true);
-                System.out.println("Uscita creata");
+        if(usc.getArticoli().size()>0){
+            if(usc.getOrdine()!=null && usc.getSpedizioniere()!=null){
+                if(usc.checkUscita()){
+                    //aggiungere da DAO l'uscita alla lista uscite
+                    if(DAO.getUscitaDAO().addUscita(usc) && DAO.getOrdineDAO().setCompletato(ordine)){
+                        Utente user = this.frame.getUser();
+                        this.frame.dispose();
+                        View_RegistraUscita view_RegistraUscita = new View_RegistraUscita(user);
+                        view_RegistraUscita.setVisible(true);
+                        System.out.println("Uscita creata");
+                    }
+                }
+                else{
+                    System.out.println("ERRORE: Gli articoli dell'uscita non rispettano l'ordine!");
+                }
             }
+            else{
+                System.out.println("ERRORE: Selezionare un ordine ed uno spedizioniere!");
+            }
+        }
+        else{
+            System.out.println("ERRORE: Selezionare gli articoli dell'uscita!");
         }
     }
 }

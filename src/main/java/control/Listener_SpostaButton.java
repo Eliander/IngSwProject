@@ -38,6 +38,12 @@ public class Listener_SpostaButton implements ActionListener{
                 view_SpostaArticoli.setVisible(true);
                 System.out.println("Articolo spostato");
             }
+            else{
+                System.out.println("ERRORE: La posizione selezionata non è libera!");
+            }
+        }
+        else{
+            System.out.println("ERRORE: Selezionare un articolo!");
         }
     }
 }

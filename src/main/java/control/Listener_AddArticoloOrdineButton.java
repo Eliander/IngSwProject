@@ -34,6 +34,12 @@ public class Listener_AddArticoloOrdineButton implements ActionListener {
                 this.frame.addArticoloOrdine(artord);
                 System.out.println("Articolo aggiunto");
             }
+            else{
+                System.out.println("ERRORE: La quantità selezionata non è presente in magazzino!");
+            }
+        }
+        else{
+            System.out.println("ERRORE: Selezionare un articolo e una quantità > 0");
         }
     }
 
