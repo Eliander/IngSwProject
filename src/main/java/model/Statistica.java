@@ -60,4 +60,9 @@ public class Statistica {
         this.quantitaOut = quantitaOut;
     }
     
+    @Override
+    public String toString(){
+        return this.mese + "/" + this.anno + ", Quantità ingressi:" + this.quantitaIn + ", Quantità uscite:" + this.quantitaOut;
+    }
+    
 }

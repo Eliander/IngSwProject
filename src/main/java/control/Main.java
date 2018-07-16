@@ -2,6 +2,7 @@ package control;
 
 import dao.DAOSettings;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -25,7 +26,7 @@ public class Main {
     private static Logger log = LogManager.getLogger(Main.class);
     private Properties config = new Properties();
     private static DAOSettings DAO = new DAOSettings();
-    private static Dimension windows_size = new Dimension(600, 500);
+    private static Dimension windows_size = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static void main(String[] args) {
         
