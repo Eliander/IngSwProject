@@ -120,7 +120,7 @@ public class View_RegistraUscita extends JFrame{
         contentPane.add(label_sel_articoli);
         
         //ricavo da DAO (tramite query) la lista di tutti gli ArticoloMagazzino
-        ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getAllArticoliMagazzino();
+        ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getArticoliMagazzino();
         ArticoloMagazzino[] articolimag = new ArticoloMagazzino[artmag.size()];
         articolimag = artmag.toArray(articolimag);
         list_articoli_mag = new JList(articolimag);

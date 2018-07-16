@@ -134,7 +134,7 @@ create table STATISTICA(
     anno int, 
     mese int, 
     quantitaIn int,
-    quantitOut int,
+    quantitaOut int,
     PRIMARY KEY(idArticolo, anno, mese),
     FOREIGN KEY (idArticolo) REFERENCES ARTICOLO(nome)
 );

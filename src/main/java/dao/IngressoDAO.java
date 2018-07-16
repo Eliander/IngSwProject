@@ -4,10 +4,11 @@ import control.Main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.TreeSet;
 import model.ArticoloMagazzino;
 import model.Ingresso;
-import model.Uscita;
 import org.apache.logging.log4j.LogManager;
 
 /**
@@ -36,7 +37,7 @@ public class IngressoDAO {
         }
         return ingresso;
     }
-    
+        
     public boolean addIngresso(Ingresso ingresso) {
         boolean esito = true;
         try {

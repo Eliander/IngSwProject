@@ -75,7 +75,7 @@ public class View_SpostaArticoli extends JFrame{
         contentPane.add(label_sel_articolo);
         
         //ricavo da DAO (tramite query) la lista di tutti gli ArticoloMagazzino
-        ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getAllArticoliMagazzino();
+        ArrayList<ArticoloMagazzino> artmag = DAO.getArticoloMagazzinoDAO().getArticoliMagazzino();
         ArticoloMagazzino[] articoli_mag = new ArticoloMagazzino[artmag.size()];
         articoli_mag = artmag.toArray(articoli_mag);
         list_articoli = new JList(articoli_mag);
