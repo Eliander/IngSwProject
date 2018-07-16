@@ -90,6 +90,6 @@ public class Uscita {
     
     @Override
     public String toString(){
-        return this.numBolla + " - " + this.data.toString() + " - " + this.ordine.getCodice() + " - " + this.ordine.getNegozio().getNome();
+        return this.numBolla + " - " + this.data.toString() + " - Ordine:" + this.ordine.getCodice() + " - " + this.ordine.getNegozio().getNome();
     }
 }

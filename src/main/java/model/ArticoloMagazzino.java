@@ -75,6 +75,6 @@ public class ArticoloMagazzino extends Articolo{
     
     @Override
     public String toString(){
-        return nome + ", " + descrizione + ", " + sport + ", " + categoria + ", " + prezzo + " euro, " + codice + ", " + data.toString() + ", " + posizione.toString();
+        return codice + ", " + nome + ", " + descrizione + ", " + sport + ", " + categoria + ", " + prezzo + " euro, " + codice + ", " + data.toString() + ", " + posizione.toString();
     }
 }
