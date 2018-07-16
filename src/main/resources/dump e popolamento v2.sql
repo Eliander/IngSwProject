@@ -122,10 +122,10 @@ create table ARTICOLOMAGAZZINO(
 create table ARTICOLOORDINATO(
     nome varchar(100),
     quantita int,
-    idOrdine int,
-    PRIMARY KEY (nome),
-    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome)
-    /*, FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)*/
+    idOrdine int, 
+    PRIMARY KEY (nome, idOrdine), 
+    FOREIGN KEY (nome) REFERENCES ARTICOLO(nome),
+    FOREIGN KEY (idOrdine) REFERENCES ORDINE(id)
     /* RICORDA: se ripristinare devi ripristinare il checkDaily*/
 );
 
