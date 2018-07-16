@@ -173,6 +173,7 @@ public class ArticoloMagazzinoDAO {
             PreparedStatement pst = con.prepareStatement(COUNT);
             pst.setString(1, articolo.getNome());
             ResultSet resultset = pst.executeQuery();
+            resultset.next();
             count = resultset.getInt("COUNT");
             con.close();
         } catch (Exception ex) {

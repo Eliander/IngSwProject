@@ -87,6 +87,7 @@ create table ORDINE(
     id int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     dataOrdine date,
     negozio varchar(11),
+    completato boolean,
     PRIMARY KEY (id, negozio),
     FOREIGN KEY (negozio) REFERENCES NEGOZIO(codiceFiscale) 
 );

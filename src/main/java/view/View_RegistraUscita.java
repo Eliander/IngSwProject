@@ -85,7 +85,7 @@ public class View_RegistraUscita extends JFrame{
         contentPane.add(label_sel_ordine);
         
         //ricavo da DAO (tramite query) la lista di tutti gli Ordini
-        ArrayList<Ordine> ord = DAO.getOrdineDAO().getOrdini();
+        ArrayList<Ordine> ord = DAO.getOrdineDAO().getOrdiniDaCompletare();
         Ordine[] ordini = new Ordine[ord.size()];
         ordini = ord.toArray(ordini);
         list_ordini = new JList(ordini);

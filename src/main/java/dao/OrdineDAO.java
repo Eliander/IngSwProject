@@ -24,7 +24,9 @@ public class OrdineDAO {
     private final String SELECTBYNEGOZIO = "SELECT * FROM ORDINE WHERE NEGOZIO = ?";
     private final String SELECTCODICE = "SELECT ID FROM ORDINE WHERE DATAORDINE = ? AND NEGOZIO = ?";
     private final String SELECT = "SELECT * FROM ORDINE";
-    private final String INSERT = "INSERT INTO ORDINE(dataOrdine, negozio) values (?, ?)";
+    private final String SELECTDACOMPLETARE = "SELECT * FROM ORDINE WHERE completato = false";
+    private final String INSERT = "INSERT INTO ORDINE(dataOrdine, negozio, completato) values (?, ?, ?)";
+    private final String UPDATE = "UPDATE ORDINE SET completato = true WHERE ID = ?";
     private final String CHECKDAILY = "SELECT * FROM ORDINE WHERE DATAORDINE = ? AND NEGOZIO = ?";
 
     public Ordine getOrdineByID(int id) {
@@ -55,6 +57,20 @@ public class OrdineDAO {
         }
         return ordini;
     }
+    
+    public ArrayList<Ordine> getOrdiniDaCompletare() {
+        ArrayList<Ordine> ordini = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECTDACOMPLETARE);
+            ResultSet resultset = pst.executeQuery();
+            ordini = mapRowToArrayListOrdine(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return ordini;
+    }
 
     public ArrayList<Ordine> getOrdiniByNegozio(Negozio negozio) {
         ArrayList<Ordine> ordini = null;
@@ -72,17 +88,14 @@ public class OrdineDAO {
     }
 
     public boolean addOrdine(Ordine ordine) {
-        //devo controllare che non esista un ordine con la stessa data, non 
-        //posso farlo da db per un problema su chiavi referenziate
         boolean esito = false;
         try {
-            //controllo se e il primo ordine della giornata
-            //con le chiavi referenziate era necessario
-            //if (checkDailyOrder(ordine)) {
             Connection con = DAOSettings.getConnection();
             PreparedStatement pst = con.prepareStatement(INSERT);
             pst.setDate(1, new java.sql.Date(ordine.getData().getTime()));
             pst.setString(2, ordine.getNegozio().getCodiceFiscale());
+            //setto che non e completato
+            pst.setBoolean(3, false);
             pst.executeUpdate();
             con.close();
             //mi prendo il codice appena generato
@@ -130,6 +143,21 @@ public class OrdineDAO {
             if (resultset.next()) {
                 esito = false;
             }
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+            esito = false;
+        }
+        return esito;
+    }
+    
+    public boolean setCompletato(Ordine ordine) {
+        boolean esito = true;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(UPDATE);
+            pst.setInt(1, ordine.getCodice());
+            pst.executeUpdate();
             con.close();
         } catch (Exception ex) {
             log.error(ex);

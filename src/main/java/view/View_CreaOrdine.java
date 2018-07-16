@@ -168,4 +168,8 @@ public class View_CreaOrdine extends JFrame{
     public int getQuantity(){
         return (Integer)this.spinner_qty.getValue();
     }
+    
+    public JList getListSelArticoli(){
+        return this.list_sel_articoli;
+    }
 }
