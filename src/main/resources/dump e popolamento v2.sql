@@ -88,7 +88,7 @@ create table ORDINE(
     dataOrdine date,
     negozio varchar(11),
     completato boolean,
-    PRIMARY KEY (id, negozio),
+    PRIMARY KEY (id),
     FOREIGN KEY (negozio) REFERENCES NEGOZIO(codiceFiscale) 
 );
 
@@ -183,8 +183,7 @@ INSERT INTO MATERIALIPERARTICOLO (nomeArticolo, nomeMateriale) VALUES ('Mazza da
 /* POPOLAMENTO NEGOZIO */
 INSERT INTO NEGOZIO (codiceFiscale, nome, via, numero, citta, responsabile) VALUES ('NGZ001', 'Masport', 'trota', 23, 'verona', 'responsabile2');
 /* POPOLAMENTO ORDINE */ 
-INSERT INTO ORDINE (dataOrdine, negozio) VALUES ('2018-07-13', 'NGZ001');
-INSERT INTO ORDINE (dataOrdine, negozio) VALUES ('2018-05-10', 'NGZ001');
+
 /* POPOLAMENTO SPEDIZIONIERE */
 INSERT INTO SPEDIZIONIERE (nome, telefono, via, numero, citta) VALUES ('Bartolini', '045963152', 'del pacco', 15, 'Verona');
 INSERT INTO SPEDIZIONIERE (nome, telefono, via, numero, citta) VALUES ('DHL', '045781236', 'della lettera', 92, 'Milano');
