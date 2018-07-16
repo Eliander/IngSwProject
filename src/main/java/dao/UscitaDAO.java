@@ -82,6 +82,7 @@ public class UscitaDAO {
             //aggiorno campo in articoloMagazzino
             for (ArticoloMagazzino articolo : uscita.getArticoli()){
                 Main.getDAO().getArticoloMagazzinoDAO().updateUscita(articolo, codiceUscita);
+                Main.getDAO().getPosizioneDAO().updateStatus(true, articolo.getPosizione());
             }
             con.close();
         } catch (Exception ex) {
