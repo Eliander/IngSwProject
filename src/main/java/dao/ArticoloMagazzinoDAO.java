@@ -20,6 +20,7 @@ public class ArticoloMagazzinoDAO {
     private static org.apache.logging.log4j.Logger log = LogManager.getLogger(ArticoloMagazzinoDAO.class);
 
     private final String SELECT = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICEUSCITA = 0";
+    private final String SELECTALL = "SELECT * FROM ARTICOLOMAGAZZINO";
     private final String SELECTBYNOME = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ?";
     private final String SELECTBYNOMEINMAGAZZINO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE NOME = ? AND CODICEUSCITA = 0";
     private final String SELECTBYCODICE = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
@@ -33,12 +34,25 @@ public class ArticoloMagazzinoDAO {
     private final String ISINMAGAZZINO = "SELECT * FROM ARTICOLOMAGAZZINO WHERE CODICE = ? AND CODICEUSCITA = 0";
     private final String DELETE = "DELETE FROM ARTICOLOMAGAZZINO WHERE CODICE = ?";
     private final String MOVE = "UPDATE ARTICOLOMAGAZZINO SET scaffale = ?, ripiano = ? WHERE codice = ?";
-
-    public ArrayList<ArticoloMagazzino> getAllArticoliMagazzino() {
+    
+    public ArrayList<ArticoloMagazzino> getArticoliMagazzino() {
         ArrayList<ArticoloMagazzino> articoli = null;
         try {
             Connection con = DAOSettings.getConnection();
             PreparedStatement pst = con.prepareStatement(SELECT);
+            ResultSet resultset = pst.executeQuery();
+            articoli = mapRowToArrayListArticoloMagazzino(resultset);
+            con.close();
+        } catch (Exception ex) {
+            log.error(ex);
+        }
+        return articoli;
+    }
+    public ArrayList<ArticoloMagazzino> getAllArticoliMagazzino() {
+        ArrayList<ArticoloMagazzino> articoli = null;
+        try {
+            Connection con = DAOSettings.getConnection();
+            PreparedStatement pst = con.prepareStatement(SELECTALL);
             ResultSet resultset = pst.executeQuery();
             articoli = mapRowToArrayListArticoloMagazzino(resultset);
             con.close();
