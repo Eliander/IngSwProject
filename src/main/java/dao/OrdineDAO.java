@@ -17,7 +17,7 @@ public class OrdineDAO {
 
     private final String SELECTBYID = "SELECT * FROM ORDINE WHERE ID = ?";
     private final String SELECTBYNEGOZIO = "SELECT * FROM ORDINE WHERE NEGOZIO = ?";
-    private final String SELECTCODICE = "SELECT ID FROM ORDINE WHERE DATAORDINE = ? AND NEGOZIO = ?";
+    private final String SELECTCODICE = "SELECT MAX(ID) AS ID FROM ORDINE WHERE DATAORDINE = ? AND NEGOZIO = ?";
     private final String SELECT = "SELECT * FROM ORDINE";
     private final String SELECTDACOMPLETARE = "SELECT * FROM ORDINE WHERE completato = false";
     private final String INSERT = "INSERT INTO ORDINE(dataOrdine, negozio, completato) values (?, ?, ?)";
