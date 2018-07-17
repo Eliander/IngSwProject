@@ -2,7 +2,6 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JList;
 import model.Articolo;
 import model.ArticoloOrdinato;
 import org.apache.logging.log4j.LogManager;
@@ -23,22 +22,24 @@ public class Listener_AddArticoloOrdineButton implements ActionListener {
         Articolo art = this.frame.getSelectedArticolo();
         int qty = this.frame.getQuantity();
         if (art != null && qty > 0) {
+            /*//Controllo per far sì che il responsabile non può ordinare una quantità di articoli non presente in magazzino
             int qtyInMagazzino = Main.getDAO().getArticoloMagazzinoDAO().countArticoloMagazzino(art);
             int oldQty = getQuantity(art);
-            if ((qty + oldQty) <= qtyInMagazzino) {
+            if ((qty + oldQty) <= qtyInMagazzino) {*/
                 ArticoloOrdinato artord = new ArticoloOrdinato(art, qty);
                 this.frame.addArticoloOrdine(artord);
                 log.info("Articolo aggiunto");
-            }
+            /*}
             else{
                 log.error("ERRORE: La quantità selezionata non è presente in magazzino!");
-            }
+            }*/
         }
         else{
             log.error("ERRORE: Selezionare un articolo e una quantità > 0");
         }
     }
 
+    /*//Dato un articolo, ritorna la quantità da ordinare di quell'articolo presente nella lista degli articoli dell'ordine
     private int getQuantity(Articolo a) {
         JList listSelArticoli = frame.getListSelArticoli();
         for (int i = 0; i < listSelArticoli.getModel().getSize(); i++) {
@@ -48,5 +49,5 @@ public class Listener_AddArticoloOrdineButton implements ActionListener {
             }
         }
         return 0;
-    }
+    }*/
 }
