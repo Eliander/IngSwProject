@@ -184,9 +184,11 @@ public class View_RegistraIngresso extends JFrame{
         if((!this.ingresso.getArticoli().contains(artmag)) && DAO.getPosizioneDAO().checkPosizioneLibera(artmag.getPosizione())){
             this.ingresso.addArticolo(artmag);
             log.info("Articolo aggiunto");
+            Main.showPopup(this, "Articolo aggiunto");
         }
         else{
             log.error("ERRORE: E' già presente un articolo in questa posizione!");
+            Main.showPopup(this, "ERRORE: E' già presente un articolo in questa posizione!");
         }
         //aggiorno la lista degli articoli aggiunti
         ArticoloMagazzino[] articoli_sel = new ArticoloMagazzino[this.ingresso.getArticoli().size()];

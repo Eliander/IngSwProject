@@ -38,6 +38,7 @@ public class Listener_AddArticoloButton implements ActionListener{
         //controllo campi
         if(art.getNome().equals("") || art.getDescrizione().equals("") || art.getPrezzo()==-1){
             log.error("ERRORE: Completa i campi correttamente!");
+            Main.showPopup(frame, "ERRORE: Completa i campi correttamente!");
         }
         else{
             //aggiungere da DAO l'articolo al catalogo
@@ -47,6 +48,7 @@ public class Listener_AddArticoloButton implements ActionListener{
                 View_InserisciArticolo view_InserisciArticolo = new View_InserisciArticolo(user);
                 view_InserisciArticolo.setVisible(true);
                 log.info("Articolo creato");
+                Main.showPopup(view_InserisciArticolo, "Articolo creato");
             }
         }
         

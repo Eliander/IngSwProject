@@ -33,13 +33,16 @@ public class Listener_SpostaButton implements ActionListener{
                 View_SpostaArticoli view_SpostaArticoli = new View_SpostaArticoli(user);
                 view_SpostaArticoli.setVisible(true);
                 log.info("Articolo spostato");
+                Main.showPopup(view_SpostaArticoli, "Articolo spostato");
             }
             else{
                 log.error("ERRORE: La posizione selezionata non è libera!");
+                Main.showPopup(frame, "ERRORE: La posizione selezionata non è libera!");
             }
         }
         else{
             log.error("ERRORE: Selezionare un articolo!");
+            Main.showPopup(frame, "ERRORE: Selezionare un articolo!");
         }
     }
 }

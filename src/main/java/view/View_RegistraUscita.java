@@ -189,6 +189,7 @@ public class View_RegistraUscita extends JFrame{
         if(!this.uscita.getArticoli().contains(artmag)){
             this.uscita.addArticolo(artmag);
             log.info("Articolo aggiunto");
+            Main.showPopup(this, "Articolo aggiunto");
         }
         //aggiorno la lista degli articoli aggiunti
         ArticoloMagazzino[] articoli_sel = new ArticoloMagazzino[this.uscita.getArticoli().size()];

@@ -1,7 +1,14 @@
 package control;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.Timer;
 import model.Articolo;
 import model.ArticoloOrdinato;
 import org.apache.logging.log4j.LogManager;
@@ -29,6 +36,7 @@ public class Listener_AddArticoloOrdineButton implements ActionListener {
                 ArticoloOrdinato artord = new ArticoloOrdinato(art, qty);
                 this.frame.addArticoloOrdine(artord);
                 log.info("Articolo aggiunto");
+                Main.showPopup(this.frame, "Articolo aggiunto");
             /*}
             else{
                 log.error("ERRORE: La quantità selezionata non è presente in magazzino!");
@@ -36,6 +44,7 @@ public class Listener_AddArticoloOrdineButton implements ActionListener {
         }
         else{
             log.error("ERRORE: Selezionare un articolo e una quantità > 0");
+            Main.showPopup(this.frame, "ERRORE: Selezionare un articolo e una quantità > 0");
         }
     }
 

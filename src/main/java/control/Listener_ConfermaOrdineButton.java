@@ -30,6 +30,7 @@ public class Listener_ConfermaOrdineButton implements ActionListener{
                 View_CreaOrdine view_CreaOrdine = new View_CreaOrdine(user);
                 view_CreaOrdine.setVisible(true);
                 log.info("Ordine creato");
+                Main.showPopup(view_CreaOrdine, "Ordine creato");
             }
         }
     }

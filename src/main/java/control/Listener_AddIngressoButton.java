@@ -30,6 +30,7 @@ public class Listener_AddIngressoButton implements ActionListener{
                 View_RegistraIngresso view_RegistraIngresso = new View_RegistraIngresso(user);
                 view_RegistraIngresso.setVisible(true);
                 log.info("Ingresso creato");
+                Main.showPopup(view_RegistraIngresso, "Ingresso creato");
             }
         }
     }
