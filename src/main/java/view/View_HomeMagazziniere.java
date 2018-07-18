@@ -7,8 +7,9 @@ import control.Listener_SpostaArticoliButton;
 import control.Main;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -17,6 +18,8 @@ import javax.swing.WindowConstants;
 import model.Utente;
 
 public class View_HomeMagazziniere extends JFrame{
+    
+    private Utente user = null;
     
     private JPanel head_panel;
     private JPanel buttons_panel;
@@ -29,8 +32,7 @@ public class View_HomeMagazziniere extends JFrame{
     private JButton button_spostaArticoli;
     //bottone per il logout
     private JButton button_logout;
-    //nome preso da db
-    private Utente user = null;
+    private Box head_box;
     
     public View_HomeMagazziniere(Utente user) {
         this.user = user;
@@ -67,10 +69,13 @@ public class View_HomeMagazziniere extends JFrame{
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BorderLayout());
         
-        head_panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 5));
-        head_panel.add(label_nome);
-        head_panel.add(button_logout);
-        contentPane.add(head_panel, BorderLayout.NORTH);
+        head_box = Box.createHorizontalBox();
+        head_box.add(Box.createRigidArea(new Dimension(10,50)));
+        head_box.add(label_nome);
+        head_box.add(Box.createHorizontalGlue());
+        head_box.add(button_logout);
+        head_box.add(Box.createRigidArea(new Dimension(10,50)));
+        contentPane.add(head_box, BorderLayout.NORTH);
         
         buttons_panel.setLayout(new GridLayout(3,1));
         buttons_panel.add(button_registraIngresso);

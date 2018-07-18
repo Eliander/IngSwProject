@@ -6,9 +6,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 
 public class View_Login extends JFrame {
 
+    private Box central_box;
     private JButton button_login;
     private JLabel label_username;
     private JLabel label_password;
@@ -62,7 +63,8 @@ public class View_Login extends JFrame {
         contentPane.add(north_panel, BorderLayout.NORTH);
 
         central_panel = new JPanel();
-        central_panel.setLayout(new GridLayout(5,1));
+        central_panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        central_box = Box.createVerticalBox();
 
         username_panel = new JPanel();
         username_panel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -72,7 +74,7 @@ public class View_Login extends JFrame {
         textField_username = new JTextField(10);
         textField_username.setText("");
         username_panel.add(textField_username);
-        central_panel.add(username_panel);
+        central_box.add(username_panel);
         
         password_panel = new JPanel();
         password_panel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -82,14 +84,14 @@ public class View_Login extends JFrame {
         passwordField_password = new JPasswordField(10);
         passwordField_password.setText("");
         password_panel.add(passwordField_password);
-        central_panel.add(password_panel);
+        central_box.add(password_panel);
         
         caps_lock_panel = new JPanel();
         caps_lock_panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         label_capsLock = new JLabel("Attenzione: Bloc Maiusc attivato");
         label_capsLock.setVisible(Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK));
         caps_lock_panel.add(label_capsLock);
-        central_panel.add(caps_lock_panel);
+        central_box.add(caps_lock_panel);
         
         login_error_panel = new JPanel();
         login_error_panel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -98,7 +100,7 @@ public class View_Login extends JFrame {
         label_loginError.setForeground(Color.red);
         label_loginError.setVisible(false);
         login_error_panel.add(label_loginError);
-        central_panel.add(login_error_panel);
+        central_box.add(login_error_panel);
         
         btn_panel = new JPanel();
         btn_panel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -106,8 +108,9 @@ public class View_Login extends JFrame {
         button_login.setText("Login");
         button_login.addActionListener(new Listener_LoginButton(this));
         btn_panel.add(button_login);
-        central_panel.add(btn_panel);
+        central_box.add(btn_panel);
         
+        central_panel.add(central_box);
         contentPane.add(central_panel, BorderLayout.CENTER);
 
         this.pack();

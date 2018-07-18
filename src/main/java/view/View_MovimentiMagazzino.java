@@ -7,14 +7,12 @@ import dao.DAOSettings;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
@@ -22,12 +20,13 @@ import model.Uscita;
 import model.Utente;
 
 public class View_MovimentiMagazzino extends JFrame{
+    
     private Utente user = null;
-    private JPanel head_panel;
+    
+    private Box south_box;
+    private Box north_box;
     private JLabel label_title;
-    private JPanel btn_panel;
     private JButton button_back;
-    private JPanel btn_panel2;
     private JButton button_details;
     private JList list;
     private JScrollPane list_scroller;
@@ -47,21 +46,13 @@ public class View_MovimentiMagazzino extends JFrame{
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BorderLayout());
 
+        north_box = Box.createHorizontalBox();
+        north_box.add(Box.createRigidArea(new Dimension(10,50)));
         label_title = new JLabel();
         label_title.setText("Lista uscite:");
-
-        button_back = new JButton();
-        button_back.setText("INDIETRO");
-        button_back.addActionListener(new Listener_BackToHomeSegretarioButton(this));
+        north_box.add(label_title);
         
-        head_panel = new JPanel();
-        head_panel.setLayout(new GridLayout(2,1));
-        btn_panel = new JPanel();
-        btn_panel.add(button_back);
-        btn_panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        head_panel.add(btn_panel);
-        head_panel.add(label_title);
-        contentPane.add(head_panel, BorderLayout.NORTH);
+        contentPane.add(north_box, BorderLayout.NORTH);
         
         //ricavo da DAO la lista delle uscite
         ArrayList<Uscita> usc = DAO.getUscitaDAO().getUscite();
@@ -75,14 +66,20 @@ public class View_MovimentiMagazzino extends JFrame{
         list_scroller.setPreferredSize(new Dimension(100,100));
         contentPane.add(list_scroller, BorderLayout.CENTER);
         
+        south_box = Box.createHorizontalBox();
+        south_box.add(Box.createRigidArea(new Dimension(10,50)));
+        button_back = new JButton();
+        button_back.setText("INDIETRO");
+        button_back.addActionListener(new Listener_BackToHomeSegretarioButton(this));
+        south_box.add(button_back);
+        south_box.add(Box.createHorizontalGlue());
         button_details = new JButton();
         button_details.setText("Dettagli uscita");
         button_details.addActionListener(new Listener_DettagliUscitaButton(this));
+        south_box.add(button_details);
+        south_box.add(Box.createRigidArea(new Dimension(10,50)));
         
-        btn_panel2 = new JPanel();
-        btn_panel2.add(button_details);
-        btn_panel2.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        contentPane.add(btn_panel2, BorderLayout.SOUTH);
+        contentPane.add(south_box, BorderLayout.SOUTH);
         
         this.pack();
     }

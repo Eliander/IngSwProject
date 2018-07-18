@@ -3,10 +3,12 @@ package view;
 import control.Listener_BackToOrdiniPassati;
 import control.Main;
 import dao.DAOSettings;
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +24,9 @@ import model.Uscita;
 public class View_DettagliOrdine extends JFrame{
     private Ordine ordine;
     
-    private JPanel btn_panel;
+    private Box north_box;
+    private Box central_box;
+    private Box south_box;
     private JButton button_back;
     private JLabel label_title;
     private JLabel label_codice;
@@ -53,43 +57,42 @@ public class View_DettagliOrdine extends JFrame{
         setResizable(false);
         
         Container contentPane = this.getContentPane();
-        contentPane.setLayout(new GridLayout(15,1));
+        contentPane.setLayout(new BorderLayout());
         
-        button_back = new JButton();
-        button_back.setText("INDIETRO");
-        button_back.addActionListener(new Listener_BackToOrdiniPassati(this));
-        btn_panel = new JPanel();
-        btn_panel.add(button_back);
-        btn_panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        contentPane.add(btn_panel);
-        
+        north_box = Box.createHorizontalBox();
+        north_box.add(Box.createRigidArea(new Dimension(10,50)));
         label_title = new JLabel();
         label_title.setText("DETTAGLI ORDINE");
-        contentPane.add(label_title);
+        north_box.add(label_title);
+        
+        contentPane.add(north_box, BorderLayout.NORTH);
+        
+        central_box = Box.createVerticalBox();
         
         label_codice = new JLabel();
         label_codice.setText("Codice: " + ordine.getCodice());
-        contentPane.add(label_codice);
+        central_box.add(label_codice);
         
         label_data = new JLabel();
         label_data.setText("Data dell'ordine: " + ordine.getData().toString());
-        contentPane.add(label_data);
+        central_box.add(label_data);
         
         label_codFiscale = new JLabel();
         label_codFiscale.setText("Codice fiscale negozio: " + ordine.getNegozio().getCodiceFiscale());
-        contentPane.add(label_codFiscale);
+        central_box.add(label_codFiscale);
         
         label_nomeNegozio = new JLabel();
         label_nomeNegozio.setText("Nome negozio: " + ordine.getNegozio().getNome());
-        contentPane.add(label_nomeNegozio);
+        central_box.add(label_nomeNegozio);
         
         label_indirizzoNegozio = new JLabel();
         label_indirizzoNegozio.setText("Indirizzo negozio: " + ordine.getNegozio().getIndirizzo().toString());
-        contentPane.add(label_indirizzoNegozio);
+        central_box.add(label_indirizzoNegozio);
+        central_box.add(Box.createRigidArea(new Dimension(0,10)));
 
         label_articoliOrdinati = new JLabel();
-        label_articoliOrdinati.setText("Articoli ordinati:");
-        contentPane.add(label_articoliOrdinati);
+        label_articoliOrdinati.setText("Articoli ordinati");
+        central_box.add(label_articoliOrdinati);
         
         //ottengo la lista di ArticoloOrdinato
         ArticoloOrdinato[] articoli = new ArticoloOrdinato[ordine.getArticoli().size()];
@@ -99,12 +102,11 @@ public class View_DettagliOrdine extends JFrame{
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(10);
         list_scroller = new JScrollPane(list);
-        list_scroller.setPreferredSize(new Dimension(100,100));
-        contentPane.add(list_scroller);
+        central_box.add(list_scroller);
         
         label_prezzoOrdine = new JLabel();
         label_prezzoOrdine.setText("Prezzo totale: " + ordine.getPrezzoTot());
-        contentPane.add(label_prezzoOrdine);
+        central_box.add(label_prezzoOrdine);
         
         //ricavo l'uscita dell'ordine da DAO
         Uscita usc = DAO.getUscitaDAO().getUscitaByOrdine(ordine);
@@ -113,29 +115,40 @@ public class View_DettagliOrdine extends JFrame{
             
             label_stato = new JLabel();
             label_stato.setText("Stato ordine: Uscito");
-            contentPane.add(label_stato);
+            central_box.add(label_stato);
             
             label_dettagli_uscita = new JLabel();
             label_dettagli_uscita.setText("DETTAGLI USCITA");
-            contentPane.add(label_dettagli_uscita);
+            central_box.add(label_dettagli_uscita);
             
             label_bolla = new JLabel();
             label_bolla.setText("Numero di bolla: " + usc.getNumBolla());
-            contentPane.add(label_bolla);
+            central_box.add(label_bolla);
 
             label_data_uscita = new JLabel();
             label_data_uscita.setText("Data uscita: " + usc.getData().toString());
-            contentPane.add(label_data_uscita);
+            central_box.add(label_data_uscita);
 
             label_spedizioniere = new JLabel();
             label_spedizioniere.setText("Spedizioniere: " + usc.getSpedizioniere().toString());
-            contentPane.add(label_spedizioniere);
+            central_box.add(label_spedizioniere);
         }
         else{
             label_stato = new JLabel();
             label_stato.setText("Stato ordine: In elaborazione");
-            contentPane.add(label_stato);
+            central_box.add(label_stato);
         }
+        
+        contentPane.add(central_box, BorderLayout.CENTER);
+        
+        south_box = Box.createHorizontalBox();
+        south_box.add(Box.createRigidArea(new Dimension(10,50)));
+        button_back = new JButton();
+        button_back.setText("INDIETRO");
+        button_back.addActionListener(new Listener_BackToOrdiniPassati(this));
+        south_box.add(button_back);
+        
+        contentPane.add(south_box, BorderLayout.SOUTH);
         
         this.pack();
     }
