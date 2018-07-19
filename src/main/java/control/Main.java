@@ -36,6 +36,10 @@ public class Main {
     
     public static void main(String[] args) {
         
+        int height = windows_size.getSize().height - 100;
+        int width = windows_size.getSize().width - 100;
+        windows_size.setSize(new Dimension(width, height));
+        
         if(DAO.getStatisticaDAO().popolate()){
             log.info("Statistiche aggiornate");
         }
