@@ -19,7 +19,7 @@ public class UscitaDAO {
     private final String SELECTBYID = "SELECT * FROM USCITA WHERE ID = ?";
     private final String SELECTBYORDINE = "SELECT * FROM USCITA WHERE IDORDINE = ?";
     private final String INSERT = "INSERT INTO USCITA(dataUscita, spedizioniere, idOrdine) VALUES (?, ?, ?)";
-    private final String SELECTBOLLALASTADDED = "SELECT * FROM INGRESSO WHERE bolla =(SELECT MAX(bolla) FROM USCITA)";
+    private final String SELECTBOLLALASTADDED = "SELECT * FROM USCITA WHERE bolla =(SELECT MAX(bolla) FROM USCITA)";
     
 
     public ArrayList<Uscita> getUscite() {
