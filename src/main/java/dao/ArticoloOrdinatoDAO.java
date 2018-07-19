@@ -40,7 +40,7 @@ public class ArticoloOrdinatoDAO {
             PreparedStatement pst = con.prepareStatement(SELECTBYORDINE);
             pst.setInt(1, ordine);
             ResultSet resultset = pst.executeQuery();
-            articoli = mapRowToArrayListArticoloOrdinato(resultset);
+            articoli = mapRowToArrayList(resultset);
             con.close();
         } catch (Exception ex) {
             log.error(ex);
@@ -91,26 +91,6 @@ public class ArticoloOrdinatoDAO {
             log.error(ex);
         }
         return articolo;
-    }
-
-    //per limitare accessi a db
-    private ArrayList<ArticoloOrdinato> mapRowToArrayListArticoloOrdinato(ResultSet resultset) {
-        ArrayList<ArticoloOrdinato> articoli = new ArrayList();
-        ArticoloOrdinato artMagazzino = null;
-        try {
-            if (resultset.next()) {
-                //mi genero l'articolo
-                Articolo articolo = Main.getDAO().getArticoloDAO().getArticolo(resultset.getString("nome"));
-                articoli.add(getArticoloOrdinato(articolo, resultset));
-                while (resultset.next()) {
-                    artMagazzino = getArticoloOrdinato(articolo, resultset);
-                    articoli.add(artMagazzino);
-                }
-            }
-        } catch (Exception ex) {
-            log.error(ex);
-        }
-        return articoli;
     }
 
     //non ho sempre lo stesso articolo, devo cambairlo qui
