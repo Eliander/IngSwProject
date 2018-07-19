@@ -28,7 +28,7 @@ public class Listener_SelectionArticolo implements ListSelectionListener{
             //ricavo le statistiche dell'articolo
             ArrayList<Statistica> stats = DAO.getStatisticaDAO().getStatisticheByArticolo(art);
             for(Statistica sta : stats){
-                s += sta.toString()+"\n";
+                s += sta.toString()+"   ";
             }
             this.frame.setLabelStatistiche(s);
         }

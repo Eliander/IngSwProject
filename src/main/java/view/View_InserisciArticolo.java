@@ -194,7 +194,7 @@ public class View_InserisciArticolo extends JFrame{
         central_box.add(list_articoli_scroller);
         
         label_statistiche = new JLabel();
-        label_statistiche.setText("Statistiche:\n");
+        label_statistiche.setText("Statistiche: ");
         stat_panel = new JPanel();
         stat_panel.add(label_statistiche);
         stat_panel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -266,6 +266,6 @@ public class View_InserisciArticolo extends JFrame{
     }
     
     public void setLabelStatistiche(String s){
-        this.label_statistiche.setText("Statistiche:\n" + s);
+        this.label_statistiche.setText("Statistiche: " + s);
     }
 }
