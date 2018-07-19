@@ -3,6 +3,8 @@ package control;
 import dao.DAOSettings;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +24,8 @@ public class Main {
     private Properties config = new Properties();
     private static DAOSettings DAO = new DAOSettings();
     private static Dimension windows_size = Toolkit.getDefaultToolkit().getScreenSize();
+    private static Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration());
+    private static int taskBarSize = scnMax.bottom;
     
     //variabili per il Popup dell'applicazione
     private static JLabel label = new JLabel();
@@ -36,8 +40,8 @@ public class Main {
     
     public static void main(String[] args) {
         
-        int height = windows_size.getSize().height - 100;
-        int width = windows_size.getSize().width - 100;
+        int height = windows_size.getSize().height - taskBarSize;
+        int width = windows_size.getSize().width;
         windows_size.setSize(new Dimension(width, height));
         
         if(DAO.getStatisticaDAO().popolate()){
