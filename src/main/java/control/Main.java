@@ -40,7 +40,7 @@ public class Main {
     
     public static void main(String[] args) {
         
-        int height = windows_size.getSize().height - taskBarSize;
+        int height = windows_size.getSize().height - taskBarSize - 50;
         int width = windows_size.getSize().width;
         windows_size.setSize(new Dimension(width, height));
         
